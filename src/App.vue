@@ -15,16 +15,16 @@
           </div>
         </div>
 
+
         <div class="ml-auto" v-if="user.username">
-          <a href="/logut" class="btn btn-primary">Logout</a>
+          <router-link to="/profile" class="btn">{{ user.username }}</router-link>
+          <a class="btn btn-primary" v-on:click="logout">Logout</a>
         </div>
 
         <div class="ml-auto" v-else>
           <a href="/register" class="btn">Register</a>
           <a href="/login" class="btn btn-primary">Login</a>
         </div>
-
-        <router-link to="/profile">{{ user.username }}</router-link>
 
 
       </div>
@@ -59,6 +59,19 @@ export default {
     return{
       'user': ''
     }
+  },
+  methods: {
+    logout: async function () {
+      let refreshToken = localStorage.getItem("refresh_token");
+      await axios.post(BASE_API_URL + "users/logout", {
+        refreshToken: refreshToken,
+      });
+      localStorage.setItem("refresh_token", "");
+      localStorage.setItem("access_token", "");
+      
+      window.location.reload();
+
+    },
   }
 }
 </script>
