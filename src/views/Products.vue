@@ -24,6 +24,9 @@ const BASE_API_URL = "https://nsy-03-sunscreen.herokuapp.com/api/";
 export default{
   name: 'Products',
   created: async function(){
+
+      // localStorage.setItem("product_id", "");
+
     let response = await axios.get(BASE_API_URL + 'products');
     this.products = response.data.reverse();
     console.log(this.products)

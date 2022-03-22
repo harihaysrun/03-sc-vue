@@ -73,7 +73,8 @@ export default {
       localStorage.setItem("refresh_token", "");
       localStorage.setItem("access_token", "");
       
-      window.location.reload();
+      // window.location.reload();
+      window.location.href="/"
 
     },
   }
