@@ -7,21 +7,21 @@ const store = new Vuex.Store({
   state: {
     // data that we want to share across components must be inside here
     customers: [
-      {
-        id: 1,
-        name: "Bob",
-        email: "bob@bobsburgers.com"
-      },
-      {
-        id: 2,
-        name: "Tina",
-        email: "tina@bobsburgers.com"
-      },
-      {
-        id: 3,
-        name: "Eugene",
-        email: "eugene@bobsburgers.com"
-      }
+      // {
+      //   id: 1,
+      //   username: "Bob",
+      //   email: "bob@bobsburgers.com"
+      // },
+      // {
+      //   id: 2,
+      //   username: "Tina",
+      //   email: "tina@bobsburgers.com"
+      // },
+      // {
+      //   id: 3,
+      //   username: "Eugene",
+      //   email: "eugene@bobsburgers.com"
+      // }
     ]
   },
   getters: {
@@ -38,8 +38,7 @@ const store = new Vuex.Store({
     addNewCustomer: function (state, newCustomer) {
       state.customers.push({
         id: Math.floor(Math.random() * 10000) + 1,
-        name: newCustomer.name,
-        email: newCustomer.email
+        username: newCustomer.username
       });
     }
   }

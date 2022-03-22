@@ -15,10 +15,16 @@
           </div>
         </div>
 
-        <div class="ml-auto">
+        <div class="ml-auto" v-if="user.username">
+          <a href="/logut" class="btn btn-primary">Logout</a>
+        </div>
+
+        <div class="ml-auto" v-else>
           <a href="/register" class="btn">Register</a>
           <a href="/login" class="btn btn-primary">Login</a>
         </div>
+
+        <router-link to="/profile">{{ user.username }}</router-link>
 
 
       </div>
@@ -32,9 +38,28 @@
 </template>
 
 <script>
+import axios from 'axios';
+const BASE_API_URL = "https://nsy-03-sunscreen.herokuapp.com/api/";
 
 export default {
-  name: 'App'
+  name: 'App',
+  mounted: async function(){
+
+    let accessToken = localStorage.getItem("access_token");
+    let response = await axios.get(
+                                BASE_API_URL + 'users/profile',
+                                { headers: {"Authorization" : `Bearer ${accessToken}`}}
+                                );
+    console.log(response.data)
+    this.user = response.data;
+    // console.log(this.user.message)
+
+  },
+  data: function(){
+    return{
+      'user': ''
+    }
+  }
 }
 </script>
 

@@ -56,7 +56,7 @@ import axios from 'axios';
 const BASE_API_URL = "https://nsy-03-sunscreen.herokuapp.com/api/";
 
 export default {
-  name: "Add",
+  name: "Register",
   // components: {
   //   CustomerForm,
   // },
@@ -78,9 +78,6 @@ export default {
   },
   methods: {
     submit: async function () {
-      // // first arg: name of mutation
-      // // second arg: data we want to send over
-      // this.$store.commit("addNewCustomer", data);
 
       await axios.post(BASE_API_URL + 'users/register',{
         'username': this.username,
@@ -96,6 +93,6 @@ export default {
 
       this.$router.push("/login"); // set current route
     },
-  },
+  }
 };
 </script>

@@ -7,8 +7,7 @@
                 v-for="eachCustomer in $store.getters.customers"
                 v-bind:key="eachCustomer.id"
               >
-                {{ eachCustomer.name }}
-                ( {{ eachCustomer.email }} )
+                {{ eachCustomer.username }}
                 <router-link
                   v-bind:to="{ name: 'Edit', params: { userid: eachCustomer.id } }"
                   class="btn btn-primary"

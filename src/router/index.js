@@ -7,6 +7,7 @@ import Products from "@/views/Products";
 import Contact from "@/views/Contact";
 import Login from "@/views/Login";
 import Register from "@/views/Register";
+import Profile from "@/views/Profile";
 
 Vue.use(VueRouter);
 
@@ -40,6 +41,11 @@ const routes = [
     path: "/register",
     name: "Register",
     component: Register
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: Profile
   }
 ];
 
