@@ -9,7 +9,7 @@
               <h5>{{ p.name }}</h5>
             </a>
             <p class="card-text">${{ p.cost }}</p>
-            <a href="#" class="btn btn-primary" v-if="">Add to cart</a>
+            <a href="#" class="btn btn-primary">Add to cart</a>
           </div>
         </div>
         

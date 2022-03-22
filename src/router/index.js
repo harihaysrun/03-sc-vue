@@ -10,6 +10,7 @@ import Register from "@/views/Register";
 import Profile from "@/views/Profile";
 import ProductInfo from "@/views/ProductInfo";
 // import ProductInfo from "@/components/product-info";
+import Cart from "@/views/Cart";
 
 Vue.use(VueRouter);
 
@@ -54,6 +55,11 @@ const routes = [
     name: "ProductInfo",
     component: ProductInfo,
     // props: true
+  },
+  {
+    path: "/cart",
+    name: "Cart",
+    component: Cart
   }
 ];
 

@@ -21,7 +21,15 @@
         {{stock}}
         <br>
         <img v-bind:src="image_url" alt="">
+
+        <p>
+        ID: {{id}}
+        </p>
         
+        <p>
+          <a href="#" class="btn btn-primary" v-on:click="addToCart(id)">Add to cart</a>
+        </p>
+
     </div>
 </template>
 
@@ -41,6 +49,7 @@ export default{
     // console.log(response.data.product)
 
     let product = response.data.product;
+    this.id = product.id;
     this.brand = product.brand.name;
     this.name = product.name;
     this.country = product.country.name;
@@ -56,9 +65,13 @@ export default{
 
     
     document.title = this.product_brand + ' ' + this.product_name;
+
+    this.accessToken = localStorage.getItem("access_token");
+    console.log(this.accessToken)
   },
   data: function(){
     return{
+      'id':'',
       'brand': '',
       'name': '',
       'country': '',
@@ -71,17 +84,35 @@ export default{
       'status': '',
       'stock': '',
       'image_url': '',
+      'accessToken':''
     }
   },
   // props:[
   //   'productId'
   // ],
   methods:{
-    viewThisProduct: function(productId){
-      // this.$emit('view-product', productId);
-      this.$store.commit("addProductId", productId);
-      console.log(productId)
-      console.log(this.$store.state.product)
+    // viewThisProduct: function(productId){
+    //   // this.$emit('view-product', productId);
+    //   this.$store.commit("addProductId", productId);
+    //   console.log(productId)
+    //   console.log(this.$store.state.product)
+    // },
+    addToCart: async function(productId){
+      if(this.accessToken){
+        console.log("user is logged in")
+
+        this.user_id = localStorage.getItem("user_id"); 
+        console.log(this.user_id)
+
+        let response = await axios.post(BASE_API_URL + 'cart/' + productId + '/add', {
+          'user_id': this.user_id
+        });
+        console.log(response.data)
+        
+      } else{
+          localStorage.setItem("danger_message", "Please log in or register to add to cart");
+          window.location.href="/login"
+      }
     }
   }
 }
