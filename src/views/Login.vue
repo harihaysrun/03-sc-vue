@@ -1,5 +1,11 @@
 <template>
     <div>
+
+      <div v-if="message">
+        <div class="alert alert-warning" role="alert">
+          Please log in or register to add to cart
+        </div>
+      </div>
         <h1>Login</h1>
 
         <div>
@@ -28,12 +34,16 @@ const BASE_API_URL = "https://nsy-03-sunscreen.herokuapp.com/api/";
 export default{
   name: 'Login',
   mounted: function(){
-    document.title = "Register"
+    document.title = "Login";
+
+    this.message = localStorage.getItem("danger_message");
+    console.log(this.message)
   },
   data: function(){
     return {
       'username': '',
-      'password': ''
+      'password': '',
+      'message': 'Please log in or register to add to cart'
     }
   },
   methods: {

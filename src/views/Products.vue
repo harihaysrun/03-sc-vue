@@ -9,7 +9,7 @@
               <h5>{{ p.name }}</h5>
             </a>
             <p class="card-text">${{ p.cost }}</p>
-            <a href="#" class="btn btn-primary">Add to cart</a>
+            <a href="#" class="btn btn-primary" v-on:click="addToCart">Add to cart</a>
           </div>
         </div>
         
@@ -27,13 +27,18 @@ export default{
 
       // localStorage.setItem("product_id", "");
 
+
+    this.accessToken = localStorage.getItem("access_token");
+    console.log(this.accessToken)
+
     let response = await axios.get(BASE_API_URL + 'products');
     this.products = response.data.reverse();
     console.log(this.products)
   },
   data: function(){
     return{
-      'products': []
+      'products': [],
+      'accessToken': 'yes'
     }
   },
   methods:{
@@ -47,6 +52,14 @@ export default{
       localStorage.setItem("product_id", productId);
 
       this.$router.push({ path: `/products/${productId}`}); // set current route
+    },
+    addToCart: function(){
+      if(this.accessToken){
+        console.log("user is logged in")
+      } else{
+          localStorage.setItem("danger_message", "Please log in or register to add to cart");
+          this.$router.push("/login");
+      }
     }
   }
 }

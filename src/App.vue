@@ -46,6 +46,8 @@ export default {
   mounted: async function(){
 
 
+    localStorage.setItem("danger_message", "");
+
     let accessToken = localStorage.getItem("access_token");
 
     if(accessToken){

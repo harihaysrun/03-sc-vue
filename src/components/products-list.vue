@@ -9,7 +9,7 @@
               <h5>{{ p.name }}</h5>
             </a>
             <p class="card-text">${{ p.cost }}</p>
-            <a href="#" class="btn btn-primary">Add to cart</a>
+            <a href="#" class="btn btn-primary" v-if="">Add to cart</a>
           </div>
         </div>
         
@@ -24,13 +24,18 @@ const BASE_API_URL = "https://nsy-03-sunscreen.herokuapp.com/api/";
 export default{
   name: 'Products',
   created: async function(){
+
+    let accessToken = localStorage.getItem("access_token");
+    console.log(accessToken)
+
     let response = await axios.get(BASE_API_URL + 'products');
     this.products = response.data.reverse();
     console.log(this.products)
   },
   data: function(){
     return{
-      'products': []
+      'products': [],
+      'accessToken':''
     }
   },
   methods:{
