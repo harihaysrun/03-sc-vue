@@ -8,8 +8,9 @@
             <a class="card-title" v-on:click="viewThisProduct(p.id)">
               <h5>{{ p.name }}</h5>
             </a>
+            <p class="card-text">In stock: {{ p.stock_no }}</p>
             <p class="card-text">${{ p.cost }}</p>
-            <a href="#" class="btn btn-primary" v-on:click="addToCart(p.id)">Add to cart</a>
+            <a href="#" class="btn btn-primary" v-on:click="addToCart(p.id, p.stock_no)">Add to cart</a>
           </div>
         </div>
         
@@ -56,6 +57,7 @@ export default{
       if(this.accessToken){
         console.log("user is logged in")
 
+        // localStorage.setItem("stock_no", stockNo); 
         this.user_id = localStorage.getItem("user_id"); 
         console.log(this.user_id)
         

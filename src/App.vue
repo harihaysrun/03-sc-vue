@@ -12,7 +12,6 @@
             <router-link class="nav-link" to="/about">About Us</router-link>
             <router-link class="nav-link" to="/products">Products</router-link>
             <router-link class="nav-link" to="/contact">Contact</router-link>
-            <router-link class="nav-link" to="/cart">Cart</router-link>
           </div>
         </div>
 

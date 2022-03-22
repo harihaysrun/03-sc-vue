@@ -8,10 +8,15 @@
             <h5 class="card-title">{{ item.product.name }}</h5>
             <ul>
               <li class="card-text">Price: ${{ item.product.cost }}</li>
-              <li class="card-text">Quantity: {{ item.quantity }}</li>
             </ul>
+            <p class="card-text">
+              Quantity: <input type="text" v-model="item.quantity">
+              <a href="#" class="btn btn-primary" v-on:click="updateQuantity(item.product.stock_no, item.id, item.quantity)">Update</a>
+            </p>
             <!-- <a href="#" class="btn btn-primary" v-on:click="addToCart(p.id)">Add to cart</a> -->
           </div>
+
+          {{item.quantity}}
         </div>
         
     </div>
@@ -25,6 +30,8 @@ const BASE_API_URL = "https://nsy-03-sunscreen.herokuapp.com/api/";
 export default{
   name: 'Cart',
   created: async function(){
+    this.accessToken = localStorage.getItem("access_token");
+    // console.log(this.accessToken)
 
     this.user_id = localStorage.getItem("user_id"); 
     let response = await axios.post(BASE_API_URL + 'cart/', {
@@ -39,42 +46,39 @@ export default{
     return{
       'cartItems': [],
       'accessToken': '',
-      'user_id':''
+      'user_id':'',
     }
   },
   methods:{
-    viewThisProduct: function(productId){
-      // this.$emit('view-product', productId);
-      // this.$store.commit("addProductId", productId);
-      // console.log(productId)
-      // console.log(this.$store.state.product)
+    updateQuantity: async function(stockNo, productId, newQuantity){
+      if(this.accessToken){
 
-      localStorage.setItem("product_id", productId);
+        // let stockNo = localStorage.getItem("stock_no"); 
+        console.log(Number.isInteger(newQuantity))
 
-      this.$router.push({ path: `/products/${productId}`}); // set current route
+        let response = await axios.post(BASE_API_URL + 'cart/' + productId + '/update', {
+          'user_id': this.user_id,
+          'quantity': stockNo,
+          'newQuantity': newQuantity
+        });
+        console.log(response);
+
+        // console.log('this.user_id: ' + this.user_id)
+        // console.log('productId: ' + productId)
+        // console.log('newQuantity: ' + newQuantity)
+        
+
+      } else{
+          localStorage.setItem("danger_message", "Please log in or register to add to cart");
+          window.location.href="/login"
+      }
     },
     addToCart: async function(productId){
       if(this.accessToken){
-        console.log("user is logged in")
-
         this.user_id = localStorage.getItem("user_id"); 
-        console.log(this.user_id)
-        
-        // let response = await axios.post(BASE_API_URL + productId + '/add',{
-        //   'user_id': this.user_id
-        // });
         let response = await axios.post(BASE_API_URL + 'cart/' + productId + '/add', {
           'user_id': this.user_id
         });
-
-        // let response = await axios.post( BASE_API_URL + 'cart/' + productId + '/add', {
-        //                                   headers: {"Authorization" : `Bearer ${this.accessToken}`}
-        //                                 });
-        
-
-        console.log("getted")
-        
-        // this.products = response.data.reverse();
         console.log(response.data)
       } else{
           localStorage.setItem("danger_message", "Please log in or register to add to cart");
