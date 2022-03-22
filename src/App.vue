@@ -72,8 +72,9 @@ export default {
       await axios.post(BASE_API_URL + "users/logout", {
         refreshToken: refreshToken,
       });
-      localStorage.setItem("refresh_token", "");
-      localStorage.setItem("access_token", "");
+      // localStorage.setItem("refresh_token", "");
+      // localStorage.setItem("access_token", "");
+      localStorage.clear();
       
       // window.location.reload();
       window.location.href="/"

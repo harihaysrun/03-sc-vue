@@ -9,7 +9,7 @@
               <h5>{{ p.name }}</h5>
             </a>
             <p class="card-text">${{ p.cost }}</p>
-            <a href="#" class="btn btn-primary" v-on:click="addToCart">Add to cart</a>
+            <a href="#" class="btn btn-primary" v-on:click="addToCart(p.id)">Add to cart</a>
           </div>
         </div>
         
@@ -27,7 +27,6 @@ export default{
 
       // localStorage.setItem("product_id", "");
 
-
     this.accessToken = localStorage.getItem("access_token");
     console.log(this.accessToken)
 
@@ -38,27 +37,47 @@ export default{
   data: function(){
     return{
       'products': [],
-      'accessToken': 'yes'
+      'accessToken': 'yes',
+      'user_id':''
     }
   },
   methods:{
     viewThisProduct: function(productId){
       // this.$emit('view-product', productId);
-      this.$store.commit("addProductId", productId);
-      console.log(productId)
-      console.log(this.$store.state.product)
-
+      // this.$store.commit("addProductId", productId);
+      // console.log(productId)
+      // console.log(this.$store.state.product)
 
       localStorage.setItem("product_id", productId);
 
       this.$router.push({ path: `/products/${productId}`}); // set current route
     },
-    addToCart: function(){
+    addToCart: async function(productId){
       if(this.accessToken){
         console.log("user is logged in")
+
+        this.user_id = localStorage.getItem("user_id"); 
+        console.log(this.user_id)
+        
+        // let response = await axios.post(BASE_API_URL + productId + '/add',{
+        //   'user_id': this.user_id
+        // });
+        let response = await axios.post(BASE_API_URL + 'cart/' + productId + '/add', {
+          'user_id': this.user_id
+        });
+
+        // let response = await axios.post( BASE_API_URL + 'cart/' + productId + '/add', {
+        //                                   headers: {"Authorization" : `Bearer ${this.accessToken}`}
+        //                                 });
+        
+
+        console.log("getted")
+        
+        // this.products = response.data.reverse();
+        console.log(response.data)
       } else{
           localStorage.setItem("danger_message", "Please log in or register to add to cart");
-          this.$router.push("/login");
+          window.location.href="/login"
       }
     }
   }

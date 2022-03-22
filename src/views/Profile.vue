@@ -32,6 +32,8 @@ export default{
     console.log(response.data.user)
     this.user = response.data.user;
 
+    localStorage.setItem("user_id", response.data.user.id);
+
   },
   data: function(){
     return{
