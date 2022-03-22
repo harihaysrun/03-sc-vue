@@ -36,14 +36,13 @@ export default{
   methods:{
     viewThisProduct: function(productId){
       // this.$emit('view-product', productId);
-      this.$store.commit("addProductId", productId);
-      console.log(productId)
-      console.log(this.$store.state.product)
+      // this.$store.commit("addProductId", productId);
+      // console.log(productId)
+      // console.log(this.$store.state.product)
 
+      // this.$router.push({ path: `/products/${productId}`,  replace: true });
 
-      localStorage.setItem("product_id", productId);
-
-      this.$router.push({ path: `/products/${productId}`}); // set current route
+      this.$router.push({ name: 'ProductInfo', params:{ productId } });
     }
   }
 }

@@ -8,6 +8,8 @@ import Contact from "@/views/Contact";
 import Login from "@/views/Login";
 import Register from "@/views/Register";
 import Profile from "@/views/Profile";
+import ProductInfo from "@/views/ProductInfo";
+// import ProductInfo from "@/components/product-info";
 
 Vue.use(VueRouter);
 
@@ -46,6 +48,12 @@ const routes = [
     path: "/profile",
     name: "Profile",
     component: Profile
+  },
+  {
+    path: "/products/:product_id",
+    name: "ProductInfo",
+    component: ProductInfo,
+    // props: true
   }
 ];
 

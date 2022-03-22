@@ -22,7 +22,8 @@ const store = new Vuex.Store({
       //   username: "Eugene",
       //   email: "eugene@bobsburgers.com"
       // }
-    ]
+    ],
+    product:[]
   },
   getters: {
     customers: function (state) {
@@ -39,6 +40,12 @@ const store = new Vuex.Store({
       state.customers.push({
         id: Math.floor(Math.random() * 10000) + 1,
         username: newCustomer.username
+      });
+    },
+    addProductId: function (state, productId) {
+      state.product.push({
+        // id: Math.floor(Math.random() * 10000) + 1,
+        productId: productId
       });
     }
   }
