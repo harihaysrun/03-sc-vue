@@ -1,10 +1,17 @@
 <template>
     <div>
-        <h1>Profile</h1>
+        <h1>Hi, {{user.username}}!</h1>
 
-        {{user.username}}
+        {{user.first_name}} {{user.last_name}}
         <br>
         {{user.email}}
+        <br>
+        {{user.address_line_1}}, {{user.address_line_2}}
+        <br>
+        Singapore {{user.postal_code}}
+        <br>
+        {{user.phone_number}}
+
     </div>
 </template>
 
@@ -15,15 +22,15 @@ const BASE_API_URL = "https://nsy-03-sunscreen.herokuapp.com/api/";
 
 export default{
   name: 'Profile',
-  created: async function(){
+  mounted: async function(){
 
     let accessToken = localStorage.getItem("access_token");
     let response = await axios.get(
                                 BASE_API_URL + 'users/profile',
                                 { headers: {"Authorization" : `Bearer ${accessToken}`}}
                                 );
-    console.log(response.data)
-    this.user = response.data;
+    console.log(response.data.user)
+    this.user = response.data.user;
 
   },
   data: function(){

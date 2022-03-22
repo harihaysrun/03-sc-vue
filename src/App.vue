@@ -16,7 +16,7 @@
         </div>
 
 
-        <div class="ml-auto" v-if="user.username">
+        <div class="ml-auto" v-if="user">
           <router-link to="/profile" class="btn">{{ user.username }}</router-link>
           <a class="btn btn-primary" v-on:click="logout">Logout</a>
         </div>
@@ -45,14 +45,18 @@ export default {
   name: 'App',
   mounted: async function(){
 
+
     let accessToken = localStorage.getItem("access_token");
-    let response = await axios.get(
-                                BASE_API_URL + 'users/profile',
-                                { headers: {"Authorization" : `Bearer ${accessToken}`}}
-                                );
-    console.log(response.data)
-    this.user = response.data;
-    // console.log(this.user.message)
+
+    if(accessToken){
+      let response = await axios.get(
+                                  BASE_API_URL + 'users/profile',
+                                  { headers: {"Authorization" : `Bearer ${accessToken}`}}
+                                  );
+      console.log(response.data.user)
+      this.user = response.data.user;
+      // console.log(this.user.message)
+    }
 
   },
   data: function(){
