@@ -18,25 +18,33 @@
             Only {{stockNo}} left in stock for {{itemName}}
           </div>
         </div>
+
+        <p v-if="emptyCart === 'yes'">
+          Your cart is empty
+        </p>
         
-        <div class="card" style="width: 18rem;" v-for="item in cartItems" v-bind:key="item.id">
-          <img v-bind:src="item.product.image_url" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">{{ item.product.name }}</h5>
-            <ul>
-              <li class="card-text">Price: ${{ item.product.cost }}</li>
-            </ul>
-            <p class="card-text">
-              Left in stock: {{item.product.stock_no}}
-              <br>
-              Quantity: <input type="text" v-model="item.quantity">
-              <a href="#" class="btn btn-primary" v-on:click="updateQuantity(item.product.stock_no, item.product_id, item.quantity, item.product.name)">Update</a>
-              <a href="#" class="btn btn-danger" v-on:click="removeItem(item.product_id, item.product.name)">Remove</a>
-            </p>
-            <!-- <a href="#" class="btn btn-primary" v-on:click="addToCart(p.id)">Add to cart</a> -->
+        <div v-else>
+
+          <div class="card" style="width: 18rem;" v-for="item in cartItems" v-bind:key="item.id">
+            <img v-bind:src="item.product.image_url" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.product.name }}</h5>
+              <ul>
+                <li class="card-text">Price: ${{ item.product.cost }}</li>
+              </ul>
+              <p class="card-text">
+                Left in stock: {{item.product.stock_no}}
+                <br>
+                Quantity: <input type="text" v-model="item.quantity">
+                <a href="#" class="btn btn-primary" v-on:click="updateQuantity(item.product.stock_no, item.product_id, item.quantity, item.product.name)">Update</a>
+                <a href="#" class="btn btn-danger" v-on:click="removeItem(item.product_id, item.product.name)">Remove</a>
+              </p>
+              <!-- <a href="#" class="btn btn-primary" v-on:click="addToCart(p.id)">Add to cart</a> -->
+            </div>
+
+            {{item.quantity}}
           </div>
 
-          {{item.quantity}}
         </div>
         
     </div>
@@ -61,9 +69,16 @@ export default{
 
     this.cartItems = response.data.cartItems;
 
+    if (this.cartItems.length === 0){
+      this.emptyCart = "yes";
+    } else{
+      this.cartItems.length = "no"
+    }
+
   },
   data: function(){
     return{
+      'emptyCart':'',
       'cartItems': [],
       'accessToken': '',
       'user_id':'',
