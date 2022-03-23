@@ -25,25 +25,29 @@
         
         <div v-else>
 
-          <div class="card" style="width: 18rem;" v-for="item in cartItems" v-bind:key="item.id">
-            <img v-bind:src="item.product.image_url" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{ item.product.name }}</h5>
-              <ul>
-                <li class="card-text">Price: ${{ item.product.cost }}</li>
-              </ul>
-              <p class="card-text">
-                Left in stock: {{item.product.stock_no}}
-                <br>
-                Quantity: <input type="text" v-model="item.quantity">
-                <a href="#" class="btn btn-primary" v-on:click="updateQuantity(item.product.stock_no, item.product_id, item.quantity, item.product.name)">Update</a>
-                <a href="#" class="btn btn-danger" v-on:click="removeItem(item.product_id, item.product.name)">Remove</a>
-              </p>
-              <!-- <a href="#" class="btn btn-primary" v-on:click="addToCart(p.id)">Add to cart</a> -->
-            </div>
+          <div class="d-flex flex-row">
 
-            {{item.quantity}}
+            <div class="card" style="width: 18rem;" v-for="item in cartItems" v-bind:key="item.id">
+              <img v-bind:src="item.product.image_url" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{ item.product.name }}</h5>
+                <ul>
+                  <li class="card-text">Price: ${{ item.product.cost }}</li>
+                </ul>
+                <p class="card-text">
+                  Left in stock: {{item.product.stock_no}}
+                  <br>
+                  Quantity: <input type="text" v-model="item.quantity">
+                  <a href="#" class="btn btn-primary" v-on:click="updateQuantity(item.product.stock_no, item.product_id, item.quantity, item.product.name)">Update</a>
+                  <a href="#" class="btn btn-danger" v-on:click="removeItem(item.product_id, item.product.name)">Remove</a>
+                </p>
+              </div>
+
+              {{item.quantity}}
+            </div>
           </div>
+
+          <a class="btn btn-success" v-on:click="checkout">Checkout</a>
 
         </div>
         
@@ -72,7 +76,7 @@ export default{
     if (this.cartItems.length === 0){
       this.emptyCart = "yes";
     } else{
-      this.cartItems.length = "no"
+      this.emptyCart = "no"
     }
 
   },
@@ -152,16 +156,26 @@ export default{
           window.location.href="/login"
       }
     },
-    addToCart: async function(productId){
+    checkout: async function(){
       if(this.accessToken){
         this.user_id = localStorage.getItem("user_id"); 
-        let response = await axios.post(BASE_API_URL + 'cart/' + productId + '/add', {
+        let response = await axios.post(BASE_API_URL + 'checkout', {
           'user_id': this.user_id
         });
+
+        // let response = await axios.get(BASE_API_URL + 'checkout');
         console.log(response.data)
+
+        let stripeSession = response.data.url;
+
+        console.log(stripeSession)
+
+        window.location.href = response.data.url;
+
+        // this.$router.push("/checkout");
       } else{
           localStorage.setItem("danger_message", "Please log in or register to add to cart");
-          window.location.href="/login"
+          window.location.href="/cart"
       }
     }
   }

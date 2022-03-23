@@ -11,6 +11,7 @@ import Profile from "@/views/Profile";
 import ProductInfo from "@/views/ProductInfo";
 // import ProductInfo from "@/components/product-info";
 import Cart from "@/views/Cart";
+import Checkout from "@/views/Checkout";
 
 Vue.use(VueRouter);
 
@@ -60,6 +61,11 @@ const routes = [
     path: "/cart",
     name: "Cart",
     component: Cart
+  },
+  {
+    path: "/checkout/success/:id",
+    name: "Checkout",
+    component: Checkout
   }
 ];
 
