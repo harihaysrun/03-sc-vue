@@ -11,7 +11,7 @@
             </ul>
             <p class="card-text">
               Quantity: <input type="text" v-model="item.quantity">
-              <a href="#" class="btn btn-primary" v-on:click="updateQuantity(item.product.stock_no, item.id, item.quantity)">Update</a>
+              <a href="#" class="btn btn-primary" v-on:click="updateQuantity(item.product.stock_no, item.product_id, item.quantity)">Update</a>
             </p>
             <!-- <a href="#" class="btn btn-primary" v-on:click="addToCart(p.id)">Add to cart</a> -->
           </div>
@@ -53,8 +53,8 @@ export default{
     updateQuantity: async function(stockNo, productId, newQuantity){
       if(this.accessToken){
 
-        // let stockNo = localStorage.getItem("stock_no"); 
-        console.log(Number.isInteger(newQuantity))
+        newQuantity = parseInt(newQuantity);
+        console.log(productId)
 
         let response = await axios.post(BASE_API_URL + 'cart/' + productId + '/update', {
           'user_id': this.user_id,
@@ -62,11 +62,6 @@ export default{
           'newQuantity': newQuantity
         });
         console.log(response);
-
-        // console.log('this.user_id: ' + this.user_id)
-        // console.log('productId: ' + productId)
-        // console.log('newQuantity: ' + newQuantity)
-        
 
       } else{
           localStorage.setItem("danger_message", "Please log in or register to add to cart");
