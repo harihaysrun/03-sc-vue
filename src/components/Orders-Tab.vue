@@ -2,7 +2,11 @@
     <div>
       <h1>Orders</h1>
 
-      <table class="table">
+      <span v-if="haveOrders === 'no'">
+        No orders found
+      </span>
+
+      <table class="table" v-else>
         <thead>
           <tr>
             <th>Order No.</th>
@@ -43,15 +47,18 @@ export default{
       'user_id': this.user_id
     });
 
-    // console.log(response.data)
+    console.log(response.data.length)
     this.orders = response.data.reverse();
 
-    // console.log(this.products)
+    if(response.data.length === 0){
+      this.haveOrders = "no";
+    }
 
   },
   data: function(){
     return{
-      'orders': []
+      'orders': [],
+      'haveOrders': ''
     }
   }
 }
