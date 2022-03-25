@@ -46,25 +46,37 @@ export default {
   name: 'App',
   mounted: async function(){
 
-
-    localStorage.setItem("danger_message", "");
+    // localStorage.setItem("danger_message", "");
 
     let accessToken = localStorage.getItem("access_token");
 
-    if(accessToken){
+    if(accessToken || localStorage.getItem("success")){
       let response = await axios.get(
                                   BASE_API_URL + 'users/profile',
                                   { headers: {"Authorization" : `Bearer ${accessToken}`}}
                                   );
       console.log(response.data.user)
+
       this.user = response.data.user;
       // console.log(this.user.message)
+
+      // if(response.data.user === undefined){
+      //   console.log('undefined')
+      //   this.user = ""
+      // }
     }
+
+      // let user = this.$store.state.profile[0];
+      // console.log(user)
+      // if (user){
+      //   this.username = user.username;
+      // }
 
   },
   data: function(){
     return{
       'user': ''
+      // 'username': ''
     }
   },
   methods: {

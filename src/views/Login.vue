@@ -6,6 +6,13 @@
           Please log in or register to add to cart
         </div>
       </div>
+
+      <div v-if="dangerMessage">
+        <div class="alert alert-danger" role="alert">
+          Incorrect username or password
+        </div>
+      </div>
+
         <h1>Login</h1>
 
         <div>
@@ -43,7 +50,8 @@ export default{
     return {
       'username': '',
       'password': '',
-      'message': 'Please log in or register to add to cart'
+      'message': 'Please log in or register to add to cart',
+      'dangerMessage' : ''
     }
   },
   methods: {
@@ -59,7 +67,14 @@ export default{
 
       // this.$router.push("/profile");
       // window.location.reload()
-      window.location.href="/profile"
+      console.log(response.data.error)
+      if (response.data.error){
+        // this.$router.push('/login');
+        this.dangerMessage = true;
+      } else{
+        window.location.href="/profile";
+        // this.$router.push("/profile")
+      }
     },
   }
 };

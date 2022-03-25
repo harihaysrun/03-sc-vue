@@ -1,28 +1,32 @@
 <template>
     <div>
-        <h1>Hi, {{user.username}}!</h1>
 
-        {{user.first_name}} {{user.last_name}}
-        <br>
-        {{user.email}}
-        <br>
-        {{user.address_line_1}}, {{user.address_line_2}}
-        <br>
-        Singapore {{user.postal_code}}
-        <br>
-        {{user.phone_number}}
+      <div v-if="updateMessage">
+        <div class="alert alert-success" role="alert">
+          Successfully updated your profile
+        </div>
+      </div>
+
+      <div v-if="view === 'private'">
+        Please log in
+      </div>
+
+      <div v-else-if="view === 'loggedin'">
+        <h1>Hi, {{username}}!</h1>
 
         <p class="mt-5">
-          <a class="btn btn-primary" v-if="tab === 'profile'">Profile details</a>
-          <a class="btn" v-else v-on:click="viewProfile">Profile details</a>
-          <a class="btn btn-primary" v-if="tab === 'address'">Address</a>
-          <a class="btn" v-else v-on:click="viewAddress">Address</a>
+          <a class="btn btn-primary" v-if="tab === 'profile'">Profile</a>
+          <a class="btn" v-else v-on:click="viewProfile">Profile</a>
+          <a class="btn btn-primary" v-if="tab === 'address'">Address Book</a>
+          <a class="btn" v-else v-on:click="viewAddress">Address Book</a>
           <a class="btn btn-primary" v-if="tab === 'orders'">Orders</a>
           <a class="btn" v-else v-on:click="viewOrders">Orders</a>
         </p>
 
         <ProfileTab class="mb-5" v-if="tab === 'profile'" />
-
+        <AddressBook class="mb-5" v-if="tab === 'address'" />
+        <OrdersTab class="mb-5" v-if="tab === 'orders'" />
+      </div>
 
     </div>
 </template>
@@ -32,31 +36,27 @@ import axios from 'axios';
 const BASE_API_URL = "https://nsy-03-sunscreen.herokuapp.com/api/";
 
 import ProfileTab from "@/components/Profile-Tab";
-// import ProductsList from "@/components/products-list";
-// import ProductInfo from "@/components/product-info";
+import AddressBook from "@/components/Address-Tab";
+import OrdersTab from "@/components/Orders-Tab";
 
 export default{
   name: 'Profile',
   mounted: async function(){
-
-    let accessToken = localStorage.getItem("access_token");
-    let response = await axios.get(
-                                BASE_API_URL + 'users/profile',
-                                { headers: {"Authorization" : `Bearer ${accessToken}`}}
-                                );
-    console.log(response.data.user)
-    this.user = response.data.user;
-
-    localStorage.setItem("user_id", response.data.user.id);
+    
+    let response = await axios.get(BASE_API_URL + 'products');
+    this.products = response.data.reverse();
 
   },
   components:{
-    ProfileTab,
+    ProfileTab, AddressBook, OrdersTab
   },
   data: function(){
     return{
+      'username': '',
       'user': [],
-      'tab':'profile'
+      'tab':'profile',
+      'view':'private',
+      'updateMessage': ''
     }
   },
   methods:{

@@ -3,28 +3,27 @@
     <div class="row">
 
       <div>
-        <div>
-          <small>Username</small>
-          <h3>{{user.username}}</h3>
-        </div>
-        
-        <div class="row mt-3">
-          <div class="col-6">
-            <small>First Name</small>
-            <h3>{{user.first_name}}</h3>
-          </div>
-          <div class="col-6">
-            <small>Last Name</small>
-            <h3>{{user.last_name}}</h3>
-          </div>
+
+        <div class="mt-3">
+          <small>Address Line 1</small>
+          <h3>{{user.address_line_1}}</h3>
         </div>
 
         <div class="mt-3">
-          <small>Email Address</small>
-          <h3>{{user.email}}</h3>
+          <small>Address Line 2</small>
+          <h3>{{user.address_line_2}}</h3>
         </div>
 
-        <a class="btn btn-primary col-2 mt-3" v-on:click="editProfile">Edit</a>
+        <div class="mt-3">
+          <small>Postal Code</small>
+          <h3>{{user.postal_code}}</h3>
+        </div>
+        <div class="mt-3">
+          <small>Phone Number</small>
+          <h3>{{user.phone_number}}</h3>
+        </div>
+
+        <a class="btn btn-primary col-2 mt-3" v-on:click="editAddress">Edit</a>
 
       </div>
 
@@ -54,7 +53,7 @@ export default{
     //   localStorage.setItem("user_id", response.data.user.id);
     // }
 
-    this.user = this.$store.state.profile[0];
+    this.user = this.$store.state.address[0];
     // console.log(this.user)
 
   },
@@ -64,8 +63,8 @@ export default{
     }
   },
   methods:{
-    editProfile: function(){
-      this.$router.push("/profile/edit")
+    editAddress: function(){
+      this.$router.push("/profile/address/edit")
       // window.location.href="/profile/edit"
     }
   }

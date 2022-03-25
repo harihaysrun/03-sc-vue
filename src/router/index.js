@@ -8,6 +8,8 @@ import Contact from "@/views/Contact";
 import Login from "@/views/Login";
 import Register from "@/views/Register";
 import Profile from "@/views/Profile";
+import ProfileEdit from "@/views/ProfileEdit";
+import AddressEdit from "@/views/AddressEdit";
 import ProductInfo from "@/views/ProductInfo";
 // import ProductInfo from "@/components/product-info";
 import Cart from "@/views/Cart";
@@ -50,6 +52,16 @@ const routes = [
     path: "/profile",
     name: "Profile",
     component: Profile
+  },
+  {
+    path: "/profile/edit",
+    name: "ProfileEdit",
+    component: ProfileEdit
+  },
+  {
+    path: "/profile/address/edit",
+    name: "AddressEdit",
+    component: AddressEdit
   },
   {
     path: "/products/:product_id",

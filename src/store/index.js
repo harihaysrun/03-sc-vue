@@ -23,7 +23,9 @@ const store = new Vuex.Store({
       //   email: "eugene@bobsburgers.com"
       // }
     ],
-    product:[]
+    product:[],
+    profile: [],
+    address:[]
   },
   getters: {
     customers: function (state) {
@@ -33,7 +35,13 @@ const store = new Vuex.Store({
       return state.customers.find(function (eachCustomer) {
         return eachCustomer.id === userId;
       });
-    }
+    },
+    getProfile: function (state) {
+      return state.profile;
+    },
+    getAddress: function (state) {
+      return state.address;
+    },
   },
   mutations: {
     addNewCustomer: function (state, newCustomer) {
@@ -47,6 +55,29 @@ const store = new Vuex.Store({
         // id: Math.floor(Math.random() * 10000) + 1,
         productId: productId
       });
+    },
+    saveProfile: function(state, profile){
+      state.profile.push({
+        'username': profile.username,
+        'email': profile.email,
+        'first_name': profile.first_name,
+        'last_name': profile.last_name
+      })
+    },
+    updateProfile: function(state, profile){
+      state.profile[0] = profile;
+    },
+    saveAddress: function(state, profile){
+      state.address.push({
+        'address_line_1': profile.address_line_1,
+        'address_line_2': profile.address_line_2,
+        'postal_code': profile.postal_code,
+        'phone_number': profile.phone_number,
+        'password': profile.password
+      })
+    },
+    updateAddress: function(state, address){
+      state.address[0] = address;
     }
   }
 });
