@@ -42,9 +42,61 @@ import OrdersTab from "@/components/Orders-Tab";
 export default{
   name: 'Profile',
   mounted: async function(){
-    
-    let response = await axios.get(BASE_API_URL + 'products');
-    this.products = response.data.reverse();
+
+    let accessToken = localStorage.getItem("access_token");
+    let response = await axios.get(
+                                BASE_API_URL + 'users/profile',
+                                { headers: {"Authorization" : `Bearer ${accessToken}`}}
+                                );
+    // console.log(response.data.user)
+
+    if(response.data.message === 'Forbidden'){
+      this.view = "private"
+      this.user = "";
+    } else{
+      console.log(response.data.user)
+      this.view = "loggedin";
+      this.user = response.data.user;
+
+      localStorage.setItem("user_id", response.data.user.id);
+
+      let profileUpdateSuccess = localStorage.getItem("success");
+
+      if (profileUpdateSuccess === 'Profile Updated'){
+          // localStorage.setItem("success", "Profile Updated");
+          this.updateMessage = true;
+          localStorage.removeItem("success");
+      } else{
+          this.updateMessage = '';
+      }
+
+      let user = this.user;
+
+      let profile = {
+        'username': user.username,
+        'email': user.email,
+        'first_name': user.first_name,
+        'last_name': user.last_name
+      };
+
+      let address = {
+        'address_line_1': user.address_line_1,
+        'address_line_2': user.address_line_2,
+        'postal_code': user.postal_code,
+        'phone_number': user.phone_number,
+        'password': user.password
+      };
+
+      this.$store.commit("saveProfile", profile);
+      this.$store.commit("saveAddress", address);
+      // console.log(productId)
+      // console.log(this.$store.state.profile[0])
+      console.log(this.$store.state.address[0])
+      // console.log(this.$store.getters.getProfile)
+
+      this.username = this.$store.state.profile[0].username;
+
+    }
 
   },
   components:{

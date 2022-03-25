@@ -1,71 +1,57 @@
 <template>
-  <div class="container">
-    <div class="row">
+    <div>
+      <h1>Orders</h1>
 
-      <div>
-
-        <div class="mt-3">
-          <small>Address Line 1</small>
-          <h3>{{user.address_line_1}}</h3>
-        </div>
-
-        <div class="mt-3">
-          <small>Address Line 2</small>
-          <h3>{{user.address_line_2}}</h3>
-        </div>
-
-        <div class="mt-3">
-          <small>Postal Code</small>
-          <h3>{{user.postal_code}}</h3>
-        </div>
-        <div class="mt-3">
-          <small>Phone Number</small>
-          <h3>{{user.phone_number}}</h3>
-        </div>
-
-        <a class="btn btn-primary col-2 mt-3" v-on:click="editAddress">Edit</a>
-
-      </div>
-
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Order No.</th>
+            <th>Date</th>
+            <th>Items</th>
+            <th>Amount</th>
+            <th>Payment Status</th>
+            <th>Shipping Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="o in orders" v-bind:key="o.id">
+            <td>{{o.id}}</td>
+            <td>{{o.date}}</td>
+            <td>{{o.items_text}}</td>
+            <td>{{o.amount}}</td>
+            <td>{{o.payment_status}}</td>
+            <td>{{o.shipping.name}}</td>
+          </tr>
+        </tbody>
+      </table>
 
     </div>
-  </div>
 </template>
 
 <script>
-// import axios from 'axios';
-// const BASE_API_URL = "https://nsy-03-sunscreen.herokuapp.com/api/";
+import axios from 'axios';
+const BASE_API_URL = "https://nsy-03-sunscreen.herokuapp.com/api/";
 
 
 export default{
   name: 'ProfileTab',
   mounted: async function(){
 
-    // let accessToken = localStorage.getItem("access_token");
-    // let response = await axios.get(
-    //                             BASE_API_URL + 'users/profile',
-    //                             { headers: {"Authorization" : `Bearer ${accessToken}`}}
-    //                             );
-    // console.log(response.data.user)
+    this.user_id = localStorage.getItem("user_id"); 
+    let response = await axios.post(BASE_API_URL + 'orders',{
+      'user_id': this.user_id
+    });
 
-    // if(response.data.message != 'Forbidden'){
-    //   this.user = response.data.user;
-    //   localStorage.setItem("user_id", response.data.user.id);
-    // }
+    // console.log(response.data)
+    this.orders = response.data.reverse();
 
-    this.user = this.$store.state.address[0];
-    // console.log(this.user)
+    // console.log(this.products)
 
   },
   data: function(){
     return{
-      'user': []
-    }
-  },
-  methods:{
-    editAddress: function(){
-      this.$router.push("/profile/address/edit")
-      // window.location.href="/profile/edit"
+      'orders': []
     }
   }
 }
