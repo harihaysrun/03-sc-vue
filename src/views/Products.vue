@@ -1,5 +1,12 @@
 <template>
     <div>
+
+      <div v-if="dangerMessage">
+        <div class="alert alert-danger" role="alert">
+          0 left in stock
+        </div>
+      </div>
+
         <h1>Products</h1>
         
         <div class="card" style="width: 18rem;" v-for="p in products" v-bind:key="p.id">
@@ -26,7 +33,7 @@ export default{
   name: 'Products',
   created: async function(){
 
-      // localStorage.setItem("product_id", "");
+    this.dangerMessage = false;
 
     this.accessToken = localStorage.getItem("access_token");
     console.log(this.accessToken)
@@ -39,7 +46,8 @@ export default{
     return{
       'products': [],
       'accessToken': 'yes',
-      'user_id':''
+      'user_id':'',
+      'dangerMessage':false
     }
   },
   methods:{
@@ -53,7 +61,7 @@ export default{
 
       this.$router.push({ path: `/products/${productId}`}); // set current route
     },
-    addToCart: async function(productId){
+    addToCart: async function(productId, stockNo){
       if(this.accessToken){
         console.log("user is logged in")
 
@@ -64,19 +72,19 @@ export default{
         // let response = await axios.post(BASE_API_URL + productId + '/add',{
         //   'user_id': this.user_id
         // });
-        let response = await axios.post(BASE_API_URL + 'cart/' + productId + '/add', {
-          'user_id': this.user_id
-        });
 
-        // let response = await axios.post( BASE_API_URL + 'cart/' + productId + '/add', {
-        //                                   headers: {"Authorization" : `Bearer ${this.accessToken}`}
-        //                                 });
-        
+        if (stockNo != 0){
+          let response = await axios.post(BASE_API_URL + 'cart/' + productId + '/add', {
+            'user_id': this.user_id
+          });
+          console.log("added to cart")
+          console.log(response.data)
+        } else{
+          console.log("0 in stock")
+          this.dangerMessage = true;
+        }
 
-        console.log("getted")
-        
-        // this.products = response.data.reverse();
-        console.log(response.data)
+
       } else{
           localStorage.setItem("danger_message", "Please log in or register to add to cart");
           window.location.href="/login"
