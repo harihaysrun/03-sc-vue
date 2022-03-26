@@ -10,6 +10,7 @@ import Register from "@/views/Register";
 import Profile from "@/views/Profile";
 import ProfileEdit from "@/views/ProfileEdit";
 import AddressEdit from "@/views/AddressEdit";
+import PasswordEdit from "@/views/PasswordEdit";
 import ProductInfo from "@/views/ProductInfo";
 // import ProductInfo from "@/components/product-info";
 import Cart from "@/views/Cart";
@@ -62,6 +63,11 @@ const routes = [
     path: "/profile/address/edit",
     name: "AddressEdit",
     component: AddressEdit
+  },
+  {
+    path: "/profile/password/edit",
+    name: "PasswordEdit",
+    component: PasswordEdit
   },
   {
     path: "/products/:product_id",

@@ -28,6 +28,8 @@
 
       </div>
 
+      <a class="btn btn-success col-3 mt-5" v-on:click="editPassword">Change Password</a>
+
 
     </div>
   </div>
@@ -66,6 +68,10 @@ export default{
   methods:{
     editProfile: function(){
       this.$router.push("/profile/edit")
+      // window.location.href="/profile/edit"
+    },
+    editPassword: function(){
+      this.$router.push("/profile/password/edit")
       // window.location.href="/profile/edit"
     }
   }

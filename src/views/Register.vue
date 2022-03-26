@@ -28,6 +28,10 @@
       <input type="text" v-model="address_line_2" class="form-control" />
     </div>
     <div>
+      <label for="">Country</label>
+      <input type="text" v-model="country" class="form-control" />
+    </div>
+    <div>
       <label for="">Postal Code</label>
       <input type="text" v-model="postal_code" class="form-control" />
     </div>
@@ -71,6 +75,7 @@ export default {
       'last_name': '',
       'address_line_1': '',
       'address_line_2': '',
+      'country':'',
       'postal_code': '',
       'phone_number': '',
       'password': ''
@@ -86,6 +91,7 @@ export default {
         'last_name': this.last_name,
         'address_line_1': this.address_line_1,
         'address_line_2': this.address_line_2,
+        'country': this.country,
         'postal_code': this.postal_code,
         'phone_number': this.phone_number,
         'password': this.password,

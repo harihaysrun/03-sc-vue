@@ -71,9 +71,9 @@ const store = new Vuex.Store({
       state.address.push({
         'address_line_1': profile.address_line_1,
         'address_line_2': profile.address_line_2,
+        'country': profile.country,
         'postal_code': profile.postal_code,
-        'phone_number': profile.phone_number,
-        'password': profile.password
+        'phone_number': profile.phone_number
       })
     },
     updateAddress: function(state, address){

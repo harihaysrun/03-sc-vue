@@ -15,6 +15,11 @@
         </div>
 
         <div class="mt-3">
+          <small>Country</small>
+          <h3>{{user.country}}</h3>
+        </div>
+
+        <div class="mt-3">
           <small>Postal Code</small>
           <h3>{{user.postal_code}}</h3>
         </div>

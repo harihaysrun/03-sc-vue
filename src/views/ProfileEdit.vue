@@ -25,30 +25,6 @@
           <input class="form-control" v-model="user.email" id="email" type="email" />
         </div>
 
-        <div class="mt-3">
-          <label for="line-1" class="form-label">Address Line 1</label>
-          <input class="form-control" v-model="user.address_line_1" id="line-1" />
-        </div>
-
-        <div class="mt-3">
-          <label for="line-2" class="form-label">Address Line 2</label>
-          <input class="form-control" v-model="user.address_line_2" id="line-2" />
-        </div>
-
-        <div class="mt-3">
-          <label for="postal-code" class="form-label">Postal Code</label>
-          <input class="form-control" v-model="user.postal_code" id="postal-code"/>
-        </div>
-        <div class="mt-3">
-          <label for="phone-number" class="form-label">Phone Number</label>
-          <input class="form-control" v-model="user.phone_number" id="phone-number"/>
-        </div>
-
-        <!-- <div class="mt-3">
-          <label for="password" class="form-label">Password</label>
-          <input class="form-control" v-model="user.password" id="password"/>
-        </div> -->
-
         <div class="mt-4 d-flex justify-content-end">
           <a class="btn btn-danger mx-2 col-2" v-on:click="backToProfile">Cancel</a>
           <a class="btn btn-success col-2" v-on:click="updateProfile">Update</a>

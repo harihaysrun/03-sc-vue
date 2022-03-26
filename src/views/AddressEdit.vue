@@ -15,9 +15,15 @@
         </div>
 
         <div class="mt-3">
+          <label for="country" class="form-label">Country</label>
+          <input class="form-control" v-model="user.country" id="country"/>
+        </div>
+
+        <div class="mt-3">
           <label for="postal-code" class="form-label">Postal Code</label>
           <input class="form-control" v-model="user.postal_code" id="postal-code"/>
         </div>
+
         <div class="mt-3">
           <label for="phone-number" class="form-label">Phone Number</label>
           <input class="form-control" v-model="user.phone_number" id="phone-number"/>
@@ -74,9 +80,9 @@ export default{
         'user_id': this.user_id,
         'address_line_1': user.address_line_1,
         'address_line_2': user.address_line_2,
+        'country': user.country,
         'postal_code': user.postal_code,
         'phone_number': user.phone_number,
-        // 'password': user.password
       });
 
       console.log(response);
@@ -92,6 +98,7 @@ export default{
       let address = {
         'address_line_1': updatedProfile.address_line_1,
         'address_line_2': updatedProfile.address_line_2,
+        'country': updatedProfile.country, 
         'postal_code': updatedProfile.postal_code, 
         'phone_number': updatedProfile.phone_number
       };
