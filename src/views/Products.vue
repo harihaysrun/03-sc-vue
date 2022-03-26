@@ -15,9 +15,10 @@
             <a class="card-title" v-on:click="viewThisProduct(p.id)">
               <h5>{{ p.name }}</h5>
             </a>
-            <p class="card-text">In stock: {{ p.stock_no }}</p>
+            <p class="card-text">{{p.status.name}} {{ p.stock_no }}</p>
             <p class="card-text">${{ p.cost }}</p>
-            <a href="#" class="btn btn-primary" v-on:click="addToCart(p.id, p.stock_no)">Add to cart</a>
+            <a class="btn btn-primary" v-on:click="addToCart(p.id, p.stock_no)" v-if="p.status_id != 2">Add to cart</a>
+            <a class="btn btn-danger" v-else>Out of stock</a>
           </div>
         </div>
         
