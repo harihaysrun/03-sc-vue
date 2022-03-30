@@ -1,36 +1,78 @@
 <template>
-    <div>
-        <h1>Product Info</h1>
 
-        {{brand}}
-        {{name}}
-        {{country}}
-        {{type}}
-        {{cost}}
-        {{description}}
-      
-        <ul>
-          <li v-for="type in skin_types" v-bind:key="type.id">
-            {{type.name}}
-          </li>
-        </ul>
+  <div class="mt-lg-5">
 
-        {{ingredients}}
-        {{expiry}}
-        {{status}}
-        {{stock}}
-        <br>
-        <img v-bind:src="image_url" alt="">
+    <a v-on:click="goBack" class="back-btn mt-3">
+      <i class="fa-solid fa-arrow-left"></i> Back
+    </a>
 
-        <p>
-        ID: {{id}}
-        </p>
+    <div class="d-flex flex-column flex-lg-row mt-3">
+
+      <div class="product-image mb-3 mb-lg-0" style="flex:1">
+        <img v-bind:src="image_url" alt="" style="width:100%;">
+      </div>
+
+      <div class="product-info ps-lg-5" style="flex:1">
+
+        <h4>{{brand}}</h4>
+        <h1>{{name}}</h1>
+        <h2>${{cost}}</h2>
+
+        <div class="mt-4">
+
+          <div class="mb-3"><i class="fa-solid fa-earth-asia me-2"></i> Imported from {{country}}</div>
+          
+          <div class="mb-3"><i class="bi bi-info-circle me-2"></i> Type of sunscreen: {{type}}</div>
+          
+          <div class="mb-3"><i class="bi bi-calendar2-x me-2"></i> Batch expiry: {{expiry}}</div>
+          
+          <div class="mb-3">
+            <i class="fa-solid fa-check me-2"></i> Suitable for:
+            <ul class="ms-2">
+              <li v-for="type in skin_types" v-bind:key="type.id">
+                {{type.name}}
+              </li>
+            </ul>
+          </div>
+
+        </div>
         
-        <p>
-          <a href="#" class="btn btn-primary" v-on:click="addToCart(id)">Add to cart</a>
-        </p>
+        <div class="mt-5 mb-5">
+
+          <div class="tab-container">
+            <a class="current-tab" v-if="tab === 'description'">Description</a>
+            <a class="inactive-tab" v-on:click="switchToDescription" v-else>Description</a>
+
+            <a class="current-tab" v-if="tab === 'filters'">Filters</a>
+            <a class="inactive-tab" v-on:click="switchToFilters" v-else>Filters</a>
+          </div>
+
+          <div class="mt-3 tab-body" v-if="tab === 'description'">
+            {{description}}
+          </div>
+          <div class="mt-3 tab-body" v-if="tab === 'filters'">
+          {{ingredients}}
+          </div>
+
+        </div>
+        
+        <div class="mt-3">
+          <div class="mb-3 text-muted" v-if="stock != 0">{{stock}} {{status}}</div>
+          <div class="mb-3 text-danger" v-else>{{status}}</div>
+          <div class="mb-3" v-if="stock != 0">
+            <div class="d-flex flex-row">
+              <button v-on:click="minus" class="btn-quantity left">-</button>
+              <input type="text" v-model="quantity_to_add" class="form-control" disabled>
+              <button v-on:click="plus" class="btn-quantity right">+</button>
+            </div>
+            <a class="btn btn-primary mt-3 addtocart-btn" v-on:click="addToCart(id, quantity_to_add)">Add to cart</a>
+          </div>
+        </div>
+        
+      </div>
 
     </div>
+  </div>
 </template>
 
 <script>
@@ -71,6 +113,7 @@ export default{
   },
   data: function(){
     return{
+      'tab': 'description',
       'id':'',
       'brand': '',
       'name': '',
@@ -84,28 +127,63 @@ export default{
       'status': '',
       'stock': '',
       'image_url': '',
-      'accessToken':''
+      'accessToken':'',
+      'quantity_to_add': 1
     }
   },
   // props:[
   //   'productId'
   // ],
   methods:{
-    // viewThisProduct: function(productId){
-    //   // this.$emit('view-product', productId);
-    //   this.$store.commit("addProductId", productId);
-    //   console.log(productId)
-    //   console.log(this.$store.state.product)
-    // },
-    addToCart: async function(productId){
+    goBack: function(){
+      this.$router.push("/products");
+    },
+    switchToDescription: function(){
+      this.tab = "description"
+    },
+    switchToFilters: function(){
+      this.tab = "filters"
+    },
+    plus: function(){
+      if(this.quantity_to_add === this.stock){
+        return
+      } else{
+        this.quantity_to_add += 1
+      }
+    },
+    minus: function(){
+      if(this.quantity_to_add === 1){
+        return;
+      } else{
+        this.quantity_to_add -= 1
+      }
+    },
+    addToCart: async function(productId, quantityToAdd){
+      
       if(this.accessToken){
-        console.log("user is logged in")
+        // console.log("user is logged in")
+
+        if(this.$store.getters.getCartLength){
+          let prevCartLength = parseInt(this.$store.getters.getCartLength);
+          this.$store.commit("updateCartLength", prevCartLength + quantityToAdd);
+          console.log('updated cart length from store: ' + this.$store.getters.getCartLength)
+        }
+        // localStorage.setItem("cart_length", prevCartLength + 1);
+
+        else {
+          this.$store.commit("updateCartLength", 1);
+          console.log('updated cart length from store: ' + this.$store.getters.getCartLength)
+        }
+
+        this.$emit("cart", this.$store.getters.getCartLength)
+
 
         this.user_id = localStorage.getItem("user_id"); 
         console.log(this.user_id)
 
         let response = await axios.post(BASE_API_URL + 'cart/' + productId + '/add', {
-          'user_id': this.user_id
+          'user_id': this.user_id,
+          'quantity_to_add': quantityToAdd
         });
         console.log(response.data)
         
@@ -117,3 +195,88 @@ export default{
   }
 }
 </script>
+
+<style scoped>
+
+h1, i{
+    color:#1050ff;
+    font-weight:700;
+}
+
+h1,h2,h4{
+  margin:0;
+}
+
+button{
+  border:0;
+  border-radius:50%;
+}
+
+.btn-quantity{
+  width:50px !important;
+  background-color:#1050ff;
+  color:white;
+  /* border:1px solid #1050ff; */
+}
+
+.back-btn{
+  /* border:1px solid #1050ff; */
+  color:#1050ff;
+  cursor:pointer;
+}
+
+.back-btn i{
+  margin-right:10px;
+}
+
+/* .left{
+  border-radius:15px 0 0 15px;
+}
+
+.right{
+  border-radius:0 15px 15px 0;
+} */
+
+.form-control{
+  width:100px;
+  text-align:center;
+  /* border-radius:0 !important; */
+  /* border:1px solid black !important; */
+  margin: 0 5px;
+}
+
+.addtocart-btn{
+  width:100%;
+}
+
+.tab-container{
+  border-bottom: 1px solid #e3e3e3;
+  padding: 10px 0;
+}
+
+.tab-container a{
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.tab-body{
+  padding: 0 15px;
+}
+
+.current-tab{
+  border-radius:0 !important;
+  font-weight:700;
+  color:#1050ff;
+  border-bottom: 3px solid #1050ff;
+}
+
+.inactive-tab{
+  color:gray;
+}
+
+@media only screen and (min-width:768px){
+  .addtocart-btn{
+    width:250px;
+  }
+}
+</style>

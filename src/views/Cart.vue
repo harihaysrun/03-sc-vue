@@ -156,6 +156,23 @@ export default{
 
         this.cartItems = refreshResponse.data.cartItems;
 
+
+        let cartResponse = await axios.post(BASE_API_URL + 'cart', {
+          'user_id': this.user_id
+        })
+
+        let cartItems = cartResponse.data.cartItems;
+        let updatedQuantity = 0;
+
+        for (let i=0; i<cartItems.length; i++){
+          console.log(cartItems[i].quantity)
+          updatedQuantity += cartItems[i].quantity;
+        }
+
+        this.$store.commit("updateCartLength", updatedQuantity);
+        this.$emit("cart", this.$store.getters.getCartLength)
+
+
         this.updateMessage = "";
         this.warningMessage = "";
         this.itemName = itemName;
