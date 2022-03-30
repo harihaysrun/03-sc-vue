@@ -1,19 +1,37 @@
 <template>
   <div>
 
+    <div class="hamburger-menu d-lg-none" v-if="hmOpen">
+      <router-link class="hm-nav-link" to="/" v-on:click.native="closeHm">Home</router-link>
+      <router-link class="hm-nav-link" to="/about" v-on:click.native="closeHm">About Us</router-link>
+      <router-link class="hm-nav-link" to="/products" v-on:click.native="closeHm">Products</router-link>
+      <router-link class="hm-nav-link" to="/contact" v-on:click.native="closeHm">Contact</router-link>
+    </div>
+
     <nav class="navbar navbar-expand-lg navbar-light position-sticky top-0" style="z-index:10">
       <div class="container">
-        <router-link class="navbar-brand" to="/">Home</router-link>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <router-link class="nav-link" to="/about">About Us</router-link>
-            <router-link class="nav-link" to="/products">Products</router-link>
-            <router-link class="nav-link" to="/contact">Contact</router-link>
-          </div>
+
+        <div class="navbar-nav d-block d-lg-none hm-menu-icon">
+          <a v-on:click="openMenu">
+            <!-- <img src="@/assets/images/hm-menu.png" alt=""> -->
+            <i class="fa-solid fa-bars" v-if="!hmOpen"></i>
+            <i class="fa-solid fa-xmark" v-else></i>
+          </a>
         </div>
+
+        <div class="navbar-nav d-none d-lg-flex">
+          <router-link class="navbar-brand" to="/">Home</router-link>
+          <router-link class="nav-link" to="/about">About Us</router-link>
+          <router-link class="nav-link" to="/products">Products</router-link>
+          <router-link class="nav-link" to="/contact">Contact</router-link>
+        </div>
+        <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button> -->
+        <!-- <div class="collapse navbar-collapse" id="navbarNavAltMarkup"> -->
+          
+          
+        <!-- </div> -->
 
 
         <div class="ml-auto" v-if="user">
@@ -83,11 +101,24 @@ export default {
   },
   data: function(){
     return{
+      'hmOpen': false,
       'user': ''
       // 'username': ''
     }
   },
   methods: {
+    openMenu: function(){
+      if(!this.hmOpen){
+        this.hmOpen = true;
+      } else{
+        this.hmOpen = false;
+      }
+    },
+    closeHm: function(){
+      if(this.hmOpen){
+        this.hmOpen = false;
+      }
+    },
     logout: async function () {
       let refreshToken = localStorage.getItem("refresh_token");
       await axios.post(BASE_API_URL + "users/logout", {
@@ -113,6 +144,37 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.hm-menu-icon{
+  color:white !important;
+  font-size:25px;
+  /* width:25px; */
+}
+
+.hamburger-menu{
+  position:fixed;
+  top:50px;
+  left:0;
+  width:100vw;
+  height:calc(100vh - 50px);
+  background-color:#1050ff;
+  z-index:10;
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content: center;
+  /* padding:50px 0; */
+}
+
+a{
+  text-decoration:none !important;
+}
+
+.hm-nav-link{
+  font-size:25px;
+  margin-bottom:10px;
+  color:white;
 }
 
 footer{
