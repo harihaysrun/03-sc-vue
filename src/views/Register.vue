@@ -172,9 +172,50 @@ export default {
       this.emptyPw = false;
       this.invalidEm = false;
       this.invalidPw = false;
+
+      if (!this.username){
+        this.emptyUn = true;
+      } 
+      if (!this.email){
+        this.emptyEm = true;
+      }
+      if (this.email && !this.email.includes("@")){
+        this.emptyEm = true;
+        this.invalidEm = true;
+      }
+      if (!this.first_name){
+        this.emptyFn = true;
+      }
+      if (!this.last_name){
+        this.emptyLn = true;
+      }
+      if (!this.address_line_1){
+        this.emptyA1 = true;
+      }
+      if (!this.address_line_2){
+        this.emptyA2 = true;
+      }
+      if (!this.country){
+        this.emptyCtry = true;
+      }
+      if (!this.postal_code){
+        this.emptyPc = true;
+      }
+      if (!this.phone_number){
+        this.emptyPn = true;
+      }
+      if (!this.password){
+        this.emptyPw = true;
+      }
+      if (this.password && this.password.length < 8){
+        this.emptyPw = true;
+        this.invalidPw = true;
+      }
+
       
       if (this.username &&
           this.email &&
+          !this.invalidPw &&
           this.first_name &&
           this.last_name &&
           this.address_line_1 &&
@@ -182,7 +223,8 @@ export default {
           this.country &&
           this.postal_code &&
           this.phone_number &&
-          this.password){
+          this.password &&
+          !this.invalidPw){
           await axios.post(BASE_API_URL + 'users/register',{
             'username': this.username,
             'email': this.email,
@@ -198,47 +240,7 @@ export default {
 
           this.$router.push("/login");
       } else{
-
         this.message = true;
-        if (!this.username){
-          this.emptyUn = true;
-        } 
-        if (!this.email){
-          this.emptyEm = true;
-        }
-        if (this.email && !this.email.includes("@")){
-          this.emptyEm = true;
-          this.invalidEm = true;
-        }
-        if (!this.first_name){
-          this.emptyFn = true;
-        }
-        if (!this.last_name){
-          this.emptyLn = true;
-        }
-        if (!this.address_line_1){
-          this.emptyA1 = true;
-        }
-        if (!this.address_line_2){
-          this.emptyA2 = true;
-        }
-        if (!this.country){
-          this.emptyCtry = true;
-        }
-        if (!this.postal_code){
-          this.emptyPc = true;
-        }
-        if (!this.phone_number){
-          this.emptyPn = true;
-        }
-        if (!this.password){
-          this.emptyPw = true;
-        }
-        if (this.password && this.password.length < 8){
-          this.emptyPw = true;
-          this.invalidPw = true;
-        }
-
       }
 
     },
