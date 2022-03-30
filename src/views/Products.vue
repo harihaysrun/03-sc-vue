@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mt-5">
 
       <div v-if="dangerMessage">
         <div class="alert alert-danger" role="alert">
@@ -8,17 +8,87 @@
       </div>
 
         <h1>Products</h1>
+
+        <!-- <div class="container"> -->
+          <!-- <div class="row"> -->
+
+            <div class="search-form d-flex flex-column flex-lg-row align-items-lg-end">
+
+              <div class="mb-2 m-lg-2">
+                <label for="">Name</label>
+                <input type="text" v-model="name" class="form-control" />
+              </div>
+
+              <div class="mb-2 m-lg-2">
+                <label for="">Brand</label>
+                <select name="brand" v-model="brand" class="form-control"  id="brand">
+                  <option value="0" disabled>Choose one</option>
+                  <option :value="b[0]" v-for="b in brands" v-bind:key="b.id">
+                    {{b[1]}}
+                  </option>
+                </select>
+              </div>
+
+              <div class="mb-2 m-lg-2">
+                <label for="">Country</label>
+                <!-- <input type="text" v-model="country" class="form-control" /> -->
+                <select name="country" v-model="country" class="form-control"  id="country">
+                  <option value="0" disabled>Choose one</option>
+                  <option :value="c[0]" v-for="c in countries" v-bind:key="c.id">
+                    {{c[1]}}
+                  </option>
+                </select>
+              </div>
+
+              <div class="mb-2 m-lg-2">
+                <label for="">Sunscreen Type</label>
+                <select name="type" v-model="type" class="form-control"  id="type">
+                  <option value="0" disabled>Choose one</option>
+                  <option :value="t[0]" v-for="t in types" v-bind:key="t.id">
+                    {{t[1]}}
+                  </option>
+                  <!-- <option value="1">Physical</option>
+                  <option value="2">Hybrid</option>
+                  <option value="3">Chemical</option> -->
+                </select>
+              </div>
+
+              <div class="my-3 m-lg-2">
+                <button v-on:click="search" class="btn btn-primary">Submit</button>
+              </div>
+
+            </div>
+
+          <!-- </div> -->
+        <!-- </div> -->
         
-        <div class="card" style="width: 18rem;" v-for="p in products" v-bind:key="p.id">
-          <img v-bind:src="p.image_url" class="card-img-top" alt="...">
-          <div class="card-body">
-            <a class="card-title" v-on:click="viewThisProduct(p.id)">
-              <h5>{{ p.name }}</h5>
-            </a>
-            <p class="card-text">{{p.status.name}} {{ p.stock_no }}</p>
-            <p class="card-text">${{ p.cost }}</p>
-            <a class="btn btn-primary" v-on:click="addToCart(p.id, p.stock_no)" v-if="p.status_id != 2">Add to cart</a>
-            <a class="btn btn-danger" v-else>Out of stock</a>
+        <div class="container">
+          <div class="row">
+
+            <div class="col-12 col-md-6 col-lg-3 p-2" v-for="p in products" v-bind:key="p.id">
+
+              <div class="card h-100">
+                <a class="card-title" v-on:click="viewThisProduct(p.id)">
+
+                  <div class="name-cost-box d-flex flex-row justify-content-between">
+                      <h5>{{p.brand.name}}<br>{{ p.name }}</h5>
+                      <h5 class="cost">${{ p.cost }}</h5>
+                  </div>
+
+                  <div class="image-box">
+                    <img v-bind:src="p.image_url" alt="...">
+                  </div>
+                
+                </a>
+              
+                <div class="buttons-box mt-auto">
+                  <a class="btn btn-primary" v-on:click="addToCart(p.id, p.stock_no)" v-if="p.status_id != 2">Add to cart</a>
+                  <a class="btn btn-danger" v-else>Out of stock</a>
+                </div>
+              </div>
+              
+            </div>
+            
           </div>
         </div>
         
@@ -39,12 +109,37 @@ export default{
     this.accessToken = localStorage.getItem("access_token");
     console.log(this.accessToken)
 
+    // brands list
+    let search = await axios.get(BASE_API_URL + 'products/search');
+    // this.brands = brandsList.data;
+    console.log(search.data);
+
+    this.brands = search.data.brands;
+    this.countries = search.data.countries;
+    this.types = search.data.allTypes;
+
+    console.log(this.brands)
+    console.log(this.countries)
+
+    // countries list
+    // let countriesList = await axios.get(BASE_API_URL + 'products/countries');
+    // this.countries = countriesList.data;
+
+    // products list
     let response = await axios.get(BASE_API_URL + 'products');
     this.products = response.data.reverse();
-    console.log(this.products)
+    console.log(this.products);
+
   },
   data: function(){
     return{
+      'name': '',
+      'brand': '',
+      'brands': [],
+      'country': '',
+      'countries': [],
+      'type': '',
+      'types': [],
       'products': [],
       'accessToken': 'yes',
       'user_id':'',
@@ -90,7 +185,86 @@ export default{
           localStorage.setItem("danger_message", "Please log in or register to add to cart");
           window.location.href="/login"
       }
+    },
+    search: async function(){
+      console.log(this.brand, this.country, this.type)
+
+      // let response = await axios.post(BASE_API_URL + 'products/search', {
+      //   'name': this.name,
+      //   'brand': this.brand,
+      //   'country': this.country,
+      //   'type': this.type,
+      // })
+
+      // console.log(response);
+
+      // this.products = response;
     }
   }
 }
 </script>
+
+<style scoped>
+
+h1{
+    color:#1050ff;
+    font-weight:700;
+}
+
+.card{
+  /* border:0; */
+  padding:0;
+  border:3px solid #1050ff;
+  border-radius:25px;
+  /* padding:20px; */
+  /* box-shadow: 3px 3px 0 #1050ff; */
+  overflow:hidden;
+}
+
+.card:hover{
+  cursor: pointer;
+  box-shadow: 0 3px 15px rgb(16, 80, 255, 0.1);
+}
+
+.card img{
+  width:100%;
+  /* border:3px solid #1050ff; */
+  border-radius:25px;
+}
+
+.image-box{
+  width:100%;
+  box-sizing: border-box;
+  padding:20px 20px 10px 20px;
+}
+
+.buttons-box{
+  width:100%;
+  box-sizing: border-box;
+  padding:0 20px 20px 20px;
+}
+
+.name-cost-box{
+  background-color:#ffdf29;
+  color: #1050ff;
+  padding:15px 20px;
+  border-bottom:3px solid #1050ff;
+}
+
+h5{
+  margin:0;
+}
+
+.cost{
+  font-weight:700;
+}
+
+.btn{
+  width:100%;
+}
+
+.search-form div{
+  flex:1;
+}
+
+</style>

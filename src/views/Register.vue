@@ -3,13 +3,12 @@
 
     <div v-if="message">
       <div class="alert alert-danger d-flex flex-row justify-content-between align-items-center" role="alert">
-        Please fill in all fields
+        Please fill in all fields correctly
         <i class="fa-solid fa-circle-xmark" v-on:click="closeMessage"></i>
       </div>
     </div>
       
     <h1 class="text-center">Register</h1>
-    <!-- <CustomerForm v-on:on-submit="register"></CustomerForm> -->
 
     <div class="empty-field" v-if="emptyUn">
       <label for="">Username: </label>
