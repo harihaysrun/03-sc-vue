@@ -51,3 +51,10 @@ label{
     text-transform: uppercase;
     color:#1050ff;
 }
+
+select{
+    background-image: url('images/dropdown-arrow.svg');
+    background-size: 15px;
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+}

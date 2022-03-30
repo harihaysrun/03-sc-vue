@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-5">
+    <div class="mt-lg-5">
 
       <div v-if="dangerMessage">
         <div class="alert alert-danger" role="alert">
@@ -9,58 +9,51 @@
 
         <h1>Products</h1>
 
-        <!-- <div class="container"> -->
-          <!-- <div class="row"> -->
+        <div class="search-form d-flex flex-column flex-lg-row align-items-lg-end mb-4">
 
-            <div class="search-form d-flex flex-column flex-lg-row align-items-lg-end">
+          <div class="mb-2 m-lg-2">
+            <label for="">Name</label>
+            <input type="text" v-model="name" class="form-control" />
+          </div>
 
-              <div class="mb-2 m-lg-2">
-                <label for="">Name</label>
-                <input type="text" v-model="name" class="form-control" />
-              </div>
+          <div class="mb-2 m-lg-2">
+            <label for="">Brand</label>
+            <select name="brand" v-model="brand" class="form-control"  id="brand">
+              <option value="0" disabled>Choose one</option>
+              <option :value="b[0]" v-for="b in brands" v-bind:key="b.id">
+                {{b[1]}}
+              </option>
+            </select>
+          </div>
 
-              <div class="mb-2 m-lg-2">
-                <label for="">Brand</label>
-                <select name="brand" v-model="brand" class="form-control"  id="brand">
-                  <option value="0" disabled>Choose one</option>
-                  <option :value="b[0]" v-for="b in brands" v-bind:key="b.id">
-                    {{b[1]}}
-                  </option>
-                </select>
-              </div>
+          <div class="mb-2 m-lg-2">
+            <label for="">Country</label>
+            <select name="country" v-model="country" class="form-control"  id="country">
+              <option value="0" disabled>Choose one</option>
+              <option :value="c[0]" v-for="c in countries" v-bind:key="c.id">
+                {{c[1]}}
+              </option>
+            </select>
+          </div>
 
-              <div class="mb-2 m-lg-2">
-                <label for="">Country</label>
-                <!-- <input type="text" v-model="country" class="form-control" /> -->
-                <select name="country" v-model="country" class="form-control"  id="country">
-                  <option value="0" disabled>Choose one</option>
-                  <option :value="c[0]" v-for="c in countries" v-bind:key="c.id">
-                    {{c[1]}}
-                  </option>
-                </select>
-              </div>
+          <div class="mb-2 m-lg-2">
+            <label for="">Sunscreen Type</label>
+            <select name="type" v-model="type" class="form-control"  id="type">
+              <option value="0" disabled>Choose one</option>
+              <option :value="t[0]" v-for="t in types" v-bind:key="t.id">
+                {{t[1]}}
+              </option>
+            </select>
+          </div>
 
-              <div class="mb-2 m-lg-2">
-                <label for="">Sunscreen Type</label>
-                <select name="type" v-model="type" class="form-control"  id="type">
-                  <option value="0" disabled>Choose one</option>
-                  <option :value="t[0]" v-for="t in types" v-bind:key="t.id">
-                    {{t[1]}}
-                  </option>
-                  <!-- <option value="1">Physical</option>
-                  <option value="2">Hybrid</option>
-                  <option value="3">Chemical</option> -->
-                </select>
-              </div>
+          <div class="my-3 m-lg-2">
+            <button v-on:click="search" class="btn btn-primary">
+              <i class="fa-solid fa-magnifying-glass"></i> Search
+            </button>
+          </div>
 
-              <div class="my-3 m-lg-2">
-                <button v-on:click="search" class="btn btn-primary">Submit</button>
-              </div>
+        </div>
 
-            </div>
-
-          <!-- </div> -->
-        <!-- </div> -->
         
         <div class="container">
           <div class="row">
@@ -110,35 +103,35 @@ export default{
     console.log(this.accessToken)
 
     // brands list
-    let search = await axios.get(BASE_API_URL + 'products/search');
+    let search = await axios.get(BASE_API_URL + 'products');
     // this.brands = brandsList.data;
     console.log(search.data);
 
+    this.products = search.data.products.reverse();
     this.brands = search.data.brands;
     this.countries = search.data.countries;
-    this.types = search.data.allTypes;
-
-    console.log(this.brands)
-    console.log(this.countries)
+    this.types = search.data.types;
+// 
+    // console.log(this.products)
 
     // countries list
     // let countriesList = await axios.get(BASE_API_URL + 'products/countries');
     // this.countries = countriesList.data;
 
     // products list
-    let response = await axios.get(BASE_API_URL + 'products');
-    this.products = response.data.reverse();
-    console.log(this.products);
+    // let response = await axios.get(BASE_API_URL + 'products');
+    // this.products = response.data.reverse();
+    // console.log(this.products);
 
   },
   data: function(){
     return{
       'name': '',
-      'brand': '',
+      'brand': 0,
       'brands': [],
-      'country': '',
+      'country': 0,
       'countries': [],
-      'type': '',
+      'type': 0,
       'types': [],
       'products': [],
       'accessToken': 'yes',
@@ -187,18 +180,24 @@ export default{
       }
     },
     search: async function(){
-      console.log(this.brand, this.country, this.type)
+      // console.log(this.brand, this.country, this.type)
 
-      // let response = await axios.post(BASE_API_URL + 'products/search', {
-      //   'name': this.name,
-      //   'brand': this.brand,
-      //   'country': this.country,
-      //   'type': this.type,
-      // })
+      let response = await axios.post(BASE_API_URL + 'products/search', {
+        'name': this.name,
+        'brand_id': this.brand,
+        'country_id': this.country,
+        'type_id': this.type,
+      })
 
-      // console.log(response);
+      console.log(response);
 
-      // this.products = response;
+      this.products = response.data.products;
+
+      this.name = "";
+      this.brand = 0;
+      this.country = 0;
+      this.type = 0;
+
     }
   }
 }
