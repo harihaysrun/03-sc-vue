@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light position-sticky top-0" style="z-index:10">
+    <nav class="navbar navbar-expand-lg navbar-light position-sticky top-0" style="z-index:10">
       <div class="container">
         <router-link class="navbar-brand" to="/">Home</router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,10 +35,18 @@
       <router-view></router-view>
     </div>
 
+    <footer>
+      <div class="container text-center">
+        Syahirah 2022
+      </div>
+    </footer>
+
   </div>
 </template>
 
 <script>
+
+import "@/assets/style.css";
 import axios from 'axios';
 const BASE_API_URL = "https://nsy-03-sunscreen.herokuapp.com/api/";
 
@@ -106,4 +114,21 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+footer{
+  background-color:black;
+  margin-top:50px;
+  box-sizing: border-box;
+  padding:50px 0;
+  color:white;
+}
+
+@media only screen and (min-width:992px){
+
+  footer{
+    margin-top:120px;
+  }
+}
+
+
 </style>
