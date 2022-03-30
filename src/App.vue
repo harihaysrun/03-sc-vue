@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-container">
 
     <div class="hamburger-menu d-lg-none" v-if="hmOpen">
       <router-link class="hm-nav-link" to="/" v-on:click.native="closeHm">Home</router-link>
@@ -37,12 +37,12 @@
         <div class="ml-auto" v-if="user">
           <router-link to="/cart" class="btn">Cart</router-link>
           <router-link to="/profile" class="btn">{{ user.username }}</router-link>
-          <a class="btn btn-primary" v-on:click="logout">Logout</a>
+          <a class="btn btn-logout" v-on:click="logout">Logout</a>
         </div>
 
         <div class="ml-auto" v-else>
           <a href="/register" class="btn">Register</a>
-          <a href="/login" class="btn btn-primary">Login</a>
+          <a href="/login" class="btn btn-login">Login</a>
         </div>
 
 
@@ -146,6 +146,14 @@ export default {
   margin-top: 60px;
 }
 
+.main-container{
+  /* background-color:pink; */
+  min-height:100vh;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .hm-menu-icon{
   color:white !important;
   font-size:25px;
@@ -178,6 +186,9 @@ a{
 }
 
 footer{
+  /* position:absolute; */
+  /* top:75vh; */
+  /* width:100%; */
   background-color:black;
   margin-top:50px;
   box-sizing: border-box;

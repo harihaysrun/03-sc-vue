@@ -20,9 +20,6 @@
           <input class="form-control" v-model="confirmPassword" id="confirmPassword" type="password" />
         </div>
 
-        {{this.password}}
-        {{this.confirmPassword}}
-
         <div class="mt-4 d-flex justify-content-end">
           <a class="btn btn-danger mx-2 col-2" v-on:click="backToProfile">Cancel</a>
           <a class="btn btn-success col-2" v-on:click="updateProfile">Update</a>

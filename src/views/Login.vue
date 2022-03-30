@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="login-container mt-5">
 
       <div v-if="message">
         <div class="alert alert-warning" role="alert">
@@ -13,28 +13,25 @@
         </div>
       </div>
 
-        <h1>Login</h1>
+        <h1 class="text-center">Login</h1>
 
-        <div>
+        <div class="mb-3">
           <label for="">Username: </label>
           <input type="text" v-model="username" class="form-control" />
         </div>
-        <div>
+        <div class="mb-3">
           <label for="">Password: </label>
           <input type="password" v-model="password" class="form-control" />
         </div>
-        <div>
-          <button v-on:click="submit" class="btn btn-primary mt-3">Submit</button>
+        <div class="mt-4">
+          <button v-on:click="submit" class="btn btn-primary">Submit</button>
         </div>
-
-        <span>{{username}}</span>
-        <br>
-        <span>{{password}}</span>
 
     </div>
 </template>
 
 <script>
+
 import axios from 'axios';
 const BASE_API_URL = "https://nsy-03-sunscreen.herokuapp.com/api/";
 
@@ -80,3 +77,33 @@ export default{
 };
 
 </script>
+
+<style scoped>
+
+.login-container{
+  width:80%;
+  margin:auto;
+}
+
+.btn{
+  width:100%;
+}
+
+/* .form-control{
+  margin-bottom:15px;
+} */
+
+h1{
+    color:#1050ff;
+    font-weight:700;
+}
+
+@media only screen and (min-width:992px){
+
+  .login-container{
+    width:500px;
+  }
+  
+}
+
+</style>

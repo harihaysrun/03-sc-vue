@@ -11,3 +11,43 @@ nav{
 .nav-link, nav a{
     color:white !important;
 }
+
+.btn, .form-control{
+    /* min-width:100% !important; */
+    padding:10px 40px !important;
+    border-radius: 100px !important;
+}
+
+.btn-cancel{
+    border:1px solid #1050ff;
+    color:#1050ff;
+}
+
+.btn-cancel:hover{
+    background-color: #1050ff;
+    color:#ffffff;
+}
+
+.btn-login, .btn-logout{
+    background-color:white !important;
+    color:#1050ff !important;
+}
+
+.btn-primary{
+    background-color:#1050ff !important;
+}
+
+.btn-primary:hover{
+    background-color:#0035c7 !important;
+}
+
+.form-control{
+    border:1px solid #1050ff !important;
+}
+
+label{
+    margin-top:15px;
+    font-size:12px;
+    text-transform: uppercase;
+    color:#1050ff;
+}
