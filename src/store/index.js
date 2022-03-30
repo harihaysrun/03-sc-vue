@@ -25,7 +25,8 @@ const store = new Vuex.Store({
     ],
     product:[],
     profile: [],
-    address:[]
+    address:[],
+    cart:''
   },
   getters: {
     customers: function (state) {
@@ -41,6 +42,9 @@ const store = new Vuex.Store({
     },
     getAddress: function (state) {
       return state.address;
+    },
+    getCartLength: function (state) {
+      return state.cart;
     },
   },
   mutations: {
@@ -78,6 +82,9 @@ const store = new Vuex.Store({
     },
     updateAddress: function(state, address){
       state.address[0] = address;
+    },
+    updateCartLength: function(state, noOfItems){
+      state.cart = noOfItems;
     }
   }
 });

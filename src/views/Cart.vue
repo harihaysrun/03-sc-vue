@@ -38,8 +38,8 @@
                   Left in stock: {{item.product.stock_no}}
                   <br>
                   Quantity: <input type="text" v-model="item.quantity">
-                  <a href="#" class="btn btn-primary" v-on:click="updateQuantity(item.product.stock_no, item.product_id, item.quantity, item.product.name)">Update</a>
-                  <a href="#" class="btn btn-danger" v-on:click="removeItem(item.product_id, item.product.name)">Remove</a>
+                  <a class="btn btn-primary" v-on:click="updateQuantity(item.product.stock_no, item.product_id, item.quantity, item.product.name)">Update</a>
+                  <a class="btn btn-danger" v-on:click="removeItem(item.product_id, item.product.name)">Remove</a>
                 </p>
               </div>
 
@@ -106,11 +106,21 @@ export default{
         });
         console.log(response);
 
-        // let refreshResponse = await axios.post(BASE_API_URL + 'cart/', {
-        //           'user_id': this.user_id
-        //         });
+        let cartResponse = await axios.post(BASE_API_URL + 'cart', {
+          'user_id': this.user_id
+        })
 
-        // this.cartItems = refreshResponse.data.cartItems;
+        let cartItems = cartResponse.data.cartItems;
+        let updatedQuantity = 0;
+
+        for (let i=0; i<cartItems.length; i++){
+          console.log(cartItems[i].quantity)
+          updatedQuantity += cartItems[i].quantity;
+        }
+
+        this.$store.commit("updateCartLength", updatedQuantity);
+        this.$emit("cart", this.$store.getters.getCartLength)
+
 
         this.deleteMessage = "";
         this.warningMessage = "";

@@ -54,6 +54,7 @@ export default{
       this.view = "private"
       this.user = "";
     } else{
+
       console.log(response.data.user)
       this.view = "loggedin";
       this.user = response.data.user;
@@ -90,12 +91,30 @@ export default{
 
       this.$store.commit("saveProfile", profile);
       this.$store.commit("saveAddress", address);
-      // console.log(productId)
-      // console.log(this.$store.state.profile[0])
+
       console.log(this.$store.state.address[0])
-      // console.log(this.$store.getters.getProfile)
 
       this.username = this.$store.state.profile[0].username;
+
+      // get number of items in cart
+      let userId = localStorage.getItem("user_id")
+      console.log(userId)
+
+      let cartResponse = await axios.post(BASE_API_URL + 'cart', {
+        'user_id': userId
+      })
+
+      let cartItems = cartResponse.data.cartItems;
+      let totalQuantity = 0;
+
+      for (let i=0; i<cartItems.length; i++){
+        console.log(cartItems[i].quantity)
+        totalQuantity += cartItems[i].quantity;
+      }
+
+      this.$store.commit("updateCartLength", totalQuantity);
+      console.log('cart length from store: ' + this.$store.getters.getCartLength)
+      this.$emit("cart", this.$store.getters.getCartLength);
 
     }
 

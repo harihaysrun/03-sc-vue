@@ -151,6 +151,24 @@ export default{
       this.$router.push({ path: `/products/${productId}`}); // set current route
     },
     addToCart: async function(productId, stockNo){
+
+      // let prevCartLength = parseInt(localStorage.getItem("cart_length"));
+      // localStorage.setItem("cart_length", prevCartLength + 1);
+
+      if(this.$store.getters.getCartLength){
+        let prevCartLength = parseInt(this.$store.getters.getCartLength);
+        this.$store.commit("updateCartLength", prevCartLength + 1);
+        console.log('updated cart length from store: ' + this.$store.getters.getCartLength)
+      }
+      // localStorage.setItem("cart_length", prevCartLength + 1);
+
+      else {
+        this.$store.commit("updateCartLength", 1);
+        console.log('updated cart length from store: ' + this.$store.getters.getCartLength)
+      }
+
+      this.$emit("cart", this.$store.getters.getCartLength)
+
       if(this.accessToken){
         console.log("user is logged in")
 
@@ -178,6 +196,7 @@ export default{
           localStorage.setItem("danger_message", "Please log in or register to add to cart");
           window.location.href="/login"
       }
+
     },
     search: async function(){
       // console.log(this.brand, this.country, this.type)

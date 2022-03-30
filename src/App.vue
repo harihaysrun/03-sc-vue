@@ -34,9 +34,14 @@
         <!-- </div> -->
 
 
-        <div class="ml-auto" v-if="user">
-          <router-link to="/cart" class="btn">Cart</router-link>
-          <router-link to="/profile" class="btn">{{ user.username }}</router-link>
+        <div class="ml-auto d-flex flex-row align-items-center" v-if="user">
+          <router-link to="/cart">
+            <i class="bi bi-bag"></i>
+            <span> {{cart}}</span>
+          </router-link>
+          <router-link to="/profile" class="mx-4">
+            <i class="bi bi-person" style="font-size:20px"></i>
+          </router-link>
           <a class="btn btn-logout" v-on:click="logout">Logout</a>
         </div>
 
@@ -49,8 +54,8 @@
       </div>
     </nav>
 
-    <div class="container mt-4">
-      <router-view></router-view>
+    <div class="container router-container mt-3">
+      <router-view v-on:cart="updateCartLength"></router-view>
     </div>
 
     <footer>
@@ -72,11 +77,10 @@ export default {
   name: 'App',
   mounted: async function(){
 
-    // localStorage.setItem("danger_message", "");
-
     let accessToken = localStorage.getItem("access_token");
 
     if(accessToken || localStorage.getItem("success")){
+
       let response = await axios.get(
                                   BASE_API_URL + 'users/profile',
                                   { headers: {"Authorization" : `Bearer ${accessToken}`}}
@@ -84,29 +88,43 @@ export default {
       console.log(response.data.user)
 
       this.user = response.data.user;
-      // console.log(this.user.message)
 
-      // if(response.data.user === undefined){
-      //   console.log('undefined')
-      //   this.user = ""
-      // }
+      // get number of items in cart upon refresh
+      let userId = localStorage.getItem("user_id")
+      console.log(userId)
+
+      let cartResponse = await axios.post(BASE_API_URL + 'cart', {
+        'user_id': userId
+      })
+
+      let cartItems = cartResponse.data.cartItems;
+      let totalQuantity = 0;
+
+      for (let i=0; i<cartItems.length; i++){
+        console.log(cartItems[i].quantity)
+        totalQuantity += cartItems[i].quantity;
+      }
+
+      this.$store.commit("updateCartLength", totalQuantity);
+      console.log('cart length from store: ' + this.$store.getters.getCartLength)
+      this.cart = this.$store.getters.getCartLength;
+      
     }
-
-      // let user = this.$store.state.profile[0];
-      // console.log(user)
-      // if (user){
-      //   this.username = user.username;
-      // }
 
   },
   data: function(){
     return{
       'hmOpen': false,
-      'user': ''
+      'user': '',
+      'cart':''
       // 'username': ''
     }
   },
   methods: {
+    updateCartLength:function(updatedLength){
+      this.cart = updatedLength;
+      console.log("updatecartlength triggered: " + updatedLength)
+    },
     openMenu: function(){
       if(!this.hmOpen){
         this.hmOpen = true;
@@ -154,6 +172,10 @@ export default {
   justify-content: space-between;
 }
 
+.router-container{
+  min-height:60vh;
+}
+
 .hm-menu-icon{
   color:white !important;
   font-size:25px;
@@ -190,7 +212,7 @@ footer{
   /* top:75vh; */
   /* width:100%; */
   background-color:black;
-  margin-top:50px;
+  /* margin-top:50px; */
   box-sizing: border-box;
   padding:50px 0;
   color:white;
