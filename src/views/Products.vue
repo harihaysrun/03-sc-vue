@@ -75,7 +75,8 @@
                 </a>
               
                 <div class="buttons-box mt-auto">
-                  <a class="btn btn-primary" v-on:click="addToCart(p.id, p.stock_no)" v-if="p.status_id != 2">Add to cart</a>
+                  <a class="btn btn-primary" v-on:click="addToCart(p.id, p.stock_no)" v-if="p.status_id === 1 && p.stock_no != 0">Add to cart</a>
+                  <a class="btn btn-primary" v-on:click="addToCart(p.id, p.stock_no)" v-else-if="p.status_id === 3">Pre-order</a>
                   <a class="btn btn-danger" v-else>Out of stock</a>
                 </div>
               </div>
@@ -152,21 +153,18 @@ export default{
     },
     addToCart: async function(productId, stockNo){
 
-      // let prevCartLength = parseInt(localStorage.getItem("cart_length"));
-      // localStorage.setItem("cart_length", prevCartLength + 1);
-
 
       if(this.accessToken){
         // console.log("user is logged in")
 
-        if(this.$store.getters.getCartLength){
+        if(this.$store.getters.getCartLength && stockNo != 0){
           let prevCartLength = parseInt(this.$store.getters.getCartLength);
           this.$store.commit("updateCartLength", prevCartLength + 1);
           console.log('updated cart length from store: ' + this.$store.getters.getCartLength)
         }
         // localStorage.setItem("cart_length", prevCartLength + 1);
 
-        else {
+        else if (stockNo != 0) {
           this.$store.commit("updateCartLength", 1);
           console.log('updated cart length from store: ' + this.$store.getters.getCartLength)
         }
