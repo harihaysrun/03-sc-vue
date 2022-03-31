@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-img">
+    <div class="bg-container">
 
       <div class="uv-index">
         <h4>{{this.uv_timestamp}}</h4>
@@ -57,7 +57,7 @@ export default{
 
 <style scoped>
 
-.bg-img{
+.bg-container{
   /* background-color:pink; */
   position:relative;
   /* margin-top:100px; */
@@ -66,7 +66,7 @@ export default{
   /* background-size:contain; */
 }
 
-.bg-img img{
+.bg-container img{
   width:100%;
   pointer-events:none;
 }
@@ -168,8 +168,9 @@ export default{
 
 @media only screen and (min-width:992px){
 
-  .bg-img{
-    margin-top:100px;
+  .bg-container{
+    margin-top:70px;
+    margin-bottom:70px;
   }
 
   .sun{
