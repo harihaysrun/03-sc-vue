@@ -22,7 +22,7 @@
           <tbody>
             <tr v-for="o in orders" v-bind:key="o.id">
               <td class="align-middle">
-                #{{o.id}}
+                <b>#{{o.id}}</b>
                 <br>{{o.date}}
                 </td>
               <td class="align-middle">
@@ -36,7 +36,7 @@
         </table>
 
         <table class="table d-none d-lg-block">
-          <thead class="bg-lights">
+          <thead>
             <tr>
               <th class="p-4">Order</th>
               <th class="p-4">Date</th>
@@ -46,9 +46,9 @@
               <th class="p-4">Status</th>
             </tr>
           </thead>
-          <tbody class="bg-lights">
+          <tbody>
             <tr v-for="o in orders" v-bind:key="o.id">
-              <td class="p-4">#{{o.id}}</td>
+              <td class="p-4"><b>#{{o.id}}</b></td>
               <td class="p-4">{{o.date}}</td>
               <td class="p-4">{{o.items_text}}</td>
               <td class="p-4">${{o.amount}}</td>
@@ -99,4 +99,10 @@ export default{
 small{
   opacity:0.5;
 }
+
+thead{
+  color:#1050ff;
+  border-bottom:2px solid #1050ff;
+}
+
 </style>
