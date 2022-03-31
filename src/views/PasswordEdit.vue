@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mt-lg-5">
     <div class="row">
 
       <div v-if="updateMessage">
@@ -8,7 +8,7 @@
         </div>
       </div>
 
-      <h1>Edit Profile Details</h1>
+      <h1>Change Password</h1>
       <div class="mt-3">
         <div>
           <label for="password" class="form-label">Password</label>
@@ -20,9 +20,9 @@
           <input class="form-control" v-model="confirmPassword" id="confirmPassword" type="password" />
         </div>
 
-        <div class="mt-4 d-flex justify-content-end">
-          <a class="btn btn-danger mx-2 col-2" v-on:click="backToProfile">Cancel</a>
-          <a class="btn btn-success col-2" v-on:click="updateProfile">Update</a>
+        <div class="mt-4 d-flex flex-column flex-md-row justify-content-md-end">
+          <a class="btn btn-danger my-2 my-md-0 mx-md-2" v-on:click="backToProfile">Cancel</a>
+          <a class="btn btn-success" v-on:click="updateProfile">Update</a>
         </div>
 
       </div>
@@ -86,3 +86,19 @@ export default{
   }
 }
 </script>
+
+<style scoped>
+
+.btn{
+  width:100% !important;
+}
+
+@media only screen and (min-width:768px){
+ 
+  .btn{
+    width:auto !important;
+  }
+  
+}
+
+</style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-lg-5">
+    <div>
 
       <div v-if="dangerMessage">
         <div class="alert alert-danger" role="alert">

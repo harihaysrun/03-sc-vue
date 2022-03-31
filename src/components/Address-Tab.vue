@@ -4,31 +4,31 @@
 
       <div>
 
-        <div class="mt-3">
+        <div class="col-12 col-md-4">
           <small>Address Line 1</small>
           <h3>{{user.address_line_1}}</h3>
         </div>
 
-        <div class="mt-3">
+        <div class="col-12 col-md-4 mt-4">
           <small>Address Line 2</small>
           <h3>{{user.address_line_2}}</h3>
         </div>
 
-        <div class="mt-3">
+        <div class="col-12 col-md-4 mt-4">
           <small>Country</small>
           <h3>{{user.country}}</h3>
         </div>
 
-        <div class="mt-3">
+        <div class="col-12 col-md-4 mt-4">
           <small>Postal Code</small>
           <h3>{{user.postal_code}}</h3>
         </div>
-        <div class="mt-3">
+        <div class="col-12 col-md-4 mt-4">
           <small>Phone Number</small>
           <h3>{{user.phone_number}}</h3>
         </div>
 
-        <a class="btn btn-primary col-2 mt-3" v-on:click="editAddress">Edit</a>
+        <a class="btn btn-primary my-3 me-md-3" v-on:click="editAddress">Edit</a>
 
       </div>
 
@@ -77,7 +77,20 @@ export default{
 </script>
 
 <style scoped>
+
 small{
   opacity:0.5;
+}
+
+.btn{
+  width:100% !important;
+}
+
+@media only screen and (min-width:768px){
+ 
+  .btn{
+    width: auto !important;
+  }
+  
 }
 </style>

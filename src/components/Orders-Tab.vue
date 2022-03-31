@@ -1,34 +1,63 @@
 <template>
     <div>
-      <h1>Orders</h1>
 
-      <span v-if="haveOrders === 'no'">
+      <span v-if="!haveOrders">
         No orders found
       </span>
 
-      <table class="table" v-else>
-        <thead>
-          <tr>
-            <th>Order No.</th>
-            <th>Date</th>
-            <th>Items</th>
-            <th>Amount</th>
-            <th>Payment Status</th>
-            <th>Shipping Status</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="o in orders" v-bind:key="o.id">
-            <td>{{o.id}}</td>
-            <td>{{o.date}}</td>
-            <td>{{o.items_text}}</td>
-            <td>{{o.amount}}</td>
-            <td>{{o.payment_status}}</td>
-            <td>{{o.shipping.name}}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div v-else>
+
+        <div class="alert alert-primary d-flex flex-row justify-content-between align-items-center" role="alert">
+          Please send us an enquiry to cancel any orders.
+        </div>
+
+        <table class="table d-block d-lg-none">
+          <thead>
+            <tr>
+              <th>Order</th>
+              <th>Items & Payment</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="o in orders" v-bind:key="o.id">
+              <td class="align-middle">
+                #{{o.id}}
+                <br>{{o.date}}
+                </td>
+              <td class="align-middle">
+                {{o.items_text}}
+                <br>
+                ${{o.amount}} <span class="text-capitalize">{{o.payment_status}}</span>
+              </td>
+              <td class="align-middle">{{o.shipping.name}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="table d-none d-lg-block">
+          <thead class="bg-lights">
+            <tr>
+              <th class="p-4">Order</th>
+              <th class="p-4">Date</th>
+              <th class="p-4">Items</th>
+              <th class="p-4">Amount</th>
+              <th class="p-4">Payment</th>
+              <th class="p-4">Status</th>
+            </tr>
+          </thead>
+          <tbody class="bg-lights">
+            <tr v-for="o in orders" v-bind:key="o.id">
+              <td class="p-4">#{{o.id}}</td>
+              <td class="p-4">{{o.date}}</td>
+              <td class="p-4">{{o.items_text}}</td>
+              <td class="p-4">${{o.amount}}</td>
+              <td class="p-4">{{o.payment_status}}</td>
+              <td class="p-4">{{o.shipping.name}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
     </div>
 </template>
@@ -51,14 +80,16 @@ export default{
     this.orders = response.data.reverse();
 
     if(response.data.length === 0){
-      this.haveOrders = "no";
+      this.haveOrders = false;
     }
+
+    this.haveOrders = true;
 
   },
   data: function(){
     return{
       'orders': [],
-      'haveOrders': ''
+      'haveOrders': false
     }
   }
 }

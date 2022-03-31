@@ -1,6 +1,6 @@
 <template>
 
-  <div class="mt-lg-5">
+  <div>
 
     <a v-on:click="goBack" class="back-btn mt-3">
       <i class="fa-solid fa-arrow-left"></i> Back

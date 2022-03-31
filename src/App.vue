@@ -54,7 +54,7 @@
       </div>
     </nav>
 
-    <div class="container router-container mt-3">
+    <div class="container router-container my-5">
       <router-view v-on:cart="updateCartLength"></router-view>
     </div>
 
@@ -169,7 +169,7 @@ export default {
   min-height:100vh;
   display:flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .router-container{
@@ -216,14 +216,15 @@ footer{
   box-sizing: border-box;
   padding:50px 0;
   color:white;
+  margin-top:auto;
 }
 
-@media only screen and (min-width:992px){
+/* @media only screen and (min-width:992px){
 
   footer{
     margin-top:120px;
   }
-}
+} */
 
 
 </style>

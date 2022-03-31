@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div class="mt-lg-5">
 
       <div v-if="updateMessage">
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success mb-3" role="alert">
           Successfully updated your profile
         </div>
       </div>
@@ -14,18 +14,22 @@
       <div v-else-if="view === 'loggedin'">
         <h1>Hi, {{username}}!</h1>
 
-        <p class="mt-5">
-          <a class="btn btn-primary" v-if="tab === 'profile'">Profile</a>
-          <a class="btn" v-else v-on:click="viewProfile">Profile</a>
-          <a class="btn btn-primary" v-if="tab === 'address'">Address Book</a>
-          <a class="btn" v-else v-on:click="viewAddress">Address Book</a>
-          <a class="btn btn-primary" v-if="tab === 'orders'">Orders</a>
-          <a class="btn" v-else v-on:click="viewOrders">Orders</a>
-        </p>
+        <div class="mt-5 mb-5">
+          <div class="tab-container">
+            <a class="current-tab" v-if="tab === 'profile'">Profile</a>
+            <a class="inactive-tab" v-else v-on:click="viewProfile">Profile</a>
+            <a class="current-tab" v-if="tab === 'address'">Address Book</a>
+            <a class="inactive-tab" v-else v-on:click="viewAddress">Address Book</a>
+            <a class="current-tab" v-if="tab === 'orders'">Orders</a>
+            <a class="inactive-tab" v-else v-on:click="viewOrders">Orders</a>
+          </div>
 
-        <ProfileTab class="mb-5" v-if="tab === 'profile'" />
-        <AddressBook class="mb-5" v-if="tab === 'address'" />
-        <OrdersTab class="mb-5" v-if="tab === 'orders'" />
+        <ProfileTab class="mt-4 mb-5" v-if="tab === 'profile'" />
+        <AddressBook class="mt-4 mb-5" v-if="tab === 'address'" />
+        <OrdersTab class="mt-4 mb-5" v-if="tab === 'orders'" />
+
+        </div>
+        
       </div>
 
     </div>
@@ -144,3 +148,33 @@ export default{
   }
 }
 </script>
+
+<style scoped>
+
+
+.tab-container{
+  border-bottom: 1px solid #e3e3e3;
+  padding: 10px 0;
+}
+
+.tab-container a{
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.tab-body{
+  padding: 0 15px;
+}
+
+.current-tab{
+  border-radius:0 !important;
+  font-weight:700;
+  color:#1050ff;
+  border-bottom: 3px solid #1050ff;
+}
+
+.inactive-tab{
+  color:gray;
+}
+
+</style>

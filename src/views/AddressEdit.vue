@@ -29,9 +29,9 @@
           <input class="form-control" v-model="user.phone_number" id="phone-number"/>
         </div>
 
-        <div class="mt-4 d-flex justify-content-end">
-          <a class="btn btn-danger mx-2 col-2" v-on:click="backToProfile">Cancel</a>
-          <a class="btn btn-success col-2" v-on:click="updateProfile">Update</a>
+        <div class="mt-4 mb-5 d-flex flex-column flex-md-row justify-content-md-end">
+          <a class="btn btn-danger my-2 my-md-0 mx-md-2" v-on:click="backToProfile">Cancel</a>
+          <a class="btn btn-success" v-on:click="updateProfile">Update</a>
         </div>
 
       </div>
@@ -115,3 +115,19 @@ export default{
   }
 }
 </script>
+
+<style scoped>
+
+.btn{
+  width:100% !important;
+}
+
+@media only screen and (min-width:768px){
+ 
+  .btn{
+    width:auto !important;
+  }
+  
+}
+
+</style>

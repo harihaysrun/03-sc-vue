@@ -3,32 +3,33 @@
     <div class="row">
 
       <div>
-        <div>
+        <div class="col-12 col-md-4">
           <small>Username</small>
           <h3>{{user.username}}</h3>
         </div>
         
-        <div class="row mt-3">
-          <div class="col-6">
+        <div class="col-12 col-md-6 mt-4 d-flex flex-column flex-md-row justify-content-start">
+          <div class="me-md-5">
             <small>First Name</small>
             <h3>{{user.first_name}}</h3>
           </div>
-          <div class="col-6">
+          <div>
             <small>Last Name</small>
             <h3>{{user.last_name}}</h3>
           </div>
         </div>
 
-        <div class="mt-3">
+        <div class="col-12 col-md-4 mt-4">
           <small>Email Address</small>
           <h3>{{user.email}}</h3>
         </div>
 
-        <a class="btn btn-primary col-2 mt-3" v-on:click="editProfile">Edit</a>
+        <a class="btn btn-primary my-3 me-md-3" v-on:click="editProfile">Edit Profile</a>
+        <a class="btn btn-primary" v-on:click="editPassword">Change Password</a>
 
       </div>
 
-      <a class="btn btn-success col-3 mt-5" v-on:click="editPassword">Change Password</a>
+      <!-- <a class="btn btn-success col-3 mt-5" v-on:click="editPassword">Change Password</a> -->
 
 
     </div>
@@ -82,4 +83,17 @@ export default{
 small{
   opacity:0.5;
 }
+
+.btn{
+  width:100% !important;
+}
+
+@media only screen and (min-width:768px){
+ 
+  .btn{
+    width: auto !important;
+  }
+  
+}
+
 </style>

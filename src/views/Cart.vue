@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-3 mt-lg-4">
+    <div>
 
         <div v-if="updateMessage">
           <div class="alert alert-success d-flex flex-row justify-content-between align-items-center" role="alert">
