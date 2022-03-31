@@ -59,16 +59,17 @@ export default{
 
     // localStorage.setItem("user_id", response.data.user.id);
 
-    this.user = this.$store.state.address[0];
+    // this.user = this.$store.state.address[0];
 
   },
   data: function(){
     return{
-      'user': ''
+      'user': JSON.parse(JSON.stringify(this.$store.state.address[0]))
     }
   },
   methods:{
     backToProfile: function(){
+      this.user = JSON.parse(JSON.stringify(this.$store.state.address[0]));
       this.$router.push("/profile")
     },
     updateProfile: async function(){
