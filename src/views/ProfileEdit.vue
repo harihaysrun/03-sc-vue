@@ -73,21 +73,20 @@ export default{
     return{
       'user': JSON.parse(JSON.stringify(this.$store.state.profile[0])),
       'invalidEm': false,
-      'existingUserProfile': JSON.parse(JSON.stringify(this.$store.state.profile[0]))
+      // 'existingUserProfile': JSON.parse(JSON.stringify(this.$store.state.profile[0]))
     }
   },
   methods:{
     backToProfile: function(){
-      this.user = this.existingUserProfile;
+      this.user = JSON.parse(JSON.stringify(this.$store.state.profile[0]));
       this.$router.push("/profile")
     },
     updateProfile: async function(){
 
-      this.invalidEm = false;
+      // this.invalidEm = false;
 
       if (!this.user.email.includes("@")){
         this.invalidEm = true;
-        // this.user = this.existingUserProfile;
       } else {
 
         let user = this.user;
