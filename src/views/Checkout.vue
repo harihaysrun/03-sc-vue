@@ -1,34 +1,38 @@
 <template>
   <div>
     
-    <h1 class="text-center m-0 mt-5">Your order has been successfully placed</h1>
+    <h1 class="text-center m-0 mt-5">Your order has been placed successfully!</h1>
 
-    <div class="d-flex flex-column align-items-center mt-5">
+    <div class="d-flex flex-column align-items-center my-5">
 
-      
-      <div class="card w-75 text-center p-2">  
-        <h2 class="m-0">Order #{{order.id}}</h2>
-      </div>
+      <div class="total-box">
 
-      <div class="card w-75 d-flex flex-row align-items-center p-5" v-for="item in orderItems" v-bind:key="item.id">
-        <img v-bind:src="item.image_url" class="card-img-top w-25" alt="...">
-
-        <div class="card-body p-0">
-          <h5 class="card-title">{{item.product_brand}} {{ item.product_name }}</h5>
+        <div class="total-header text-center">  
+          <h2 class="m-0">Order #{{order.id}}</h2>
         </div>
-        <div class="card-body p-0" style="text-align:right !important;">
-          <!-- <p class="card-text"> -->
-            Cost: ${{item.total_cost}}
-            <br>
-            Quantity: {{item.quantity}}
-            <br>
-          <!-- </p> -->
-        </div>
-      </div>
 
-      <div class="card w-75 d-flex flex-row justify-content-between p-5">  
-        <span>Grand total</span>
-        <span>Grand total ${{order.amount}}</span>
+        <div class="total-body p-5 d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-md-between" v-for="item in orderItems" v-bind:key="item.id">
+          
+          <div class="d-md-flex flew-row align-items-center mb-3 mb-md-0">
+            <img v-bind:src="item.image_url" class="card-img-top mb-3 mb-md-0 me-md-3" alt="...">
+            <div>
+              <h5>{{item.product_brand}} {{ item.product_name }}</h5>
+              <small class="me-2 me-md-0 text-primary">Quantity: {{item.quantity}}</small> <small class="text-muted">(${{item.cost}} each)</small>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row flex-md-column align-items-center justify-content-center">
+            
+            <h5 class="me-2 me-md-0">${{item.total_cost}}</h5>
+          </div>
+          
+        </div>
+
+        <div class="d-flex flex-row justify-content-between p-5">  
+          <h5>Grand total</h5>
+          <h5 class="text-primary">${{order.amount}}</h5>
+        </div>
+
       </div>
     </div>
     
@@ -66,3 +70,60 @@ export default{
 }
 
 </script>
+
+<style scoped>
+
+h1,h2,h3,h4,h5{
+  margin:0;
+}
+
+.text-primary{
+  color: #1050ff !important;
+}
+
+.total-box{
+  width:100%;
+  border:2px solid #1050ff;
+  border-radius:25px;
+  overflow:hidden;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.total-header{
+  padding:30px 40px;
+  background-color: #1050ff;
+  color:white;
+  font-weight:700;
+  font-size:25px;
+}
+
+.total-body{
+  position:relative;
+  /* border-bottom: 1px solid lightgray; */
+}
+
+.total-body::after{
+  content:'';
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  margin: auto;
+  width:90%;
+  height:1px;
+  background-color:#ebebeb;
+}
+
+.card-img-top{
+  width:80px;
+}
+
+@media only screen and (min-width:992px){
+
+  .total-box{
+    width:600px;
+  }
+
+}
+
+</style>
