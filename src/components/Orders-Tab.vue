@@ -77,7 +77,7 @@ export default{
     });
 
     console.log(response.data.length)
-    this.orders = response.data.reverse();
+    this.orders = response.data;
 
     if(response.data.length === 0){
       this.haveOrders = false;

@@ -60,6 +60,8 @@ export default{
 
     this.orderItems = response.data.orderItems;
     this.order = response.data.order;
+
+    // this.$store.commit("updateCartLength", 0);
   },
   data: function(){
     return{
