@@ -24,7 +24,7 @@
           <input type="password" v-model="password" class="form-control" />
         </div>
         <div class="mt-4">
-          <button v-on:click="submit" class="btn btn-primary">Submit</button>
+          <button v-on:click="submit" class="btn btn-primary">Login</button>
         </div>
 
     </div>
@@ -40,14 +40,17 @@ export default{
   mounted: function(){
     document.title = "Login";
 
-    this.message = localStorage.getItem("danger_message");
-    console.log(this.message)
+    if (localStorage.getItem("danger_message") === "Please log in or register to add to cart"){
+      this.message = true;
+      localStorage.removeItem("danger_message");
+    }
+    
   },
   data: function(){
     return {
       'username': '',
       'password': '',
-      'message': 'Please log in or register to add to cart',
+      'message': false,
       'dangerMessage' : ''
     }
   },

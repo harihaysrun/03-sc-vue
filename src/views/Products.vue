@@ -195,7 +195,8 @@ export default{
 
       } else{
           localStorage.setItem("danger_message", "Please log in or register to add to cart");
-          window.location.href="/login"
+          // window.location.href="/login"
+          this.$router.push('/login');
       }
 
     },

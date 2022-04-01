@@ -8,7 +8,7 @@
       <div v-else>
 
         <div class="alert alert-primary d-flex flex-row justify-content-between align-items-center" role="alert">
-          Please send us an enquiry to cancel any orders.
+          Please contact us to cancel any orders.
         </div>
 
         <table class="table d-block d-lg-none">

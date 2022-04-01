@@ -1,5 +1,5 @@
 <template>
-  <div class="register-container mt-5">
+  <div class="register-container">
 
     <div v-if="message">
       <div class="alert alert-danger d-flex flex-row justify-content-between align-items-center" role="alert">
@@ -107,7 +107,7 @@
     </div>
 
     <div class="mt-4">
-      <button v-on:click="submit" class="btn btn-primary" type="submit">Submit</button>
+      <button v-on:click="submit" class="btn btn-primary" type="submit">Register</button>
     </div>
 
 
@@ -252,10 +252,10 @@ export default {
 
 <style scoped>
 
-.register-container{
+/* .register-container{
   width:80%;
   margin:auto;
-}
+} */
 
 .btn{
   width:100%;
@@ -282,6 +282,7 @@ i{
 
   .register-container{
     width:500px;
+    margin:auto;
   }
   
 }

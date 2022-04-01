@@ -12,9 +12,13 @@ nav{
     color:white !important;
 }
 
-.btn, .form-control{
-    /* min-width:100% !important; */
+.btn{
     padding:10px 40px !important;
+    border-radius: 100px !important;
+}
+
+.form-control{
+    padding:15px 30px !important;
     border-radius: 100px !important;
 }
 

@@ -28,7 +28,7 @@
           <h3>{{user.phone_number}}</h3>
         </div>
 
-        <a class="btn btn-primary my-3 me-md-3" v-on:click="editAddress">Edit</a>
+        <a class="btn btn-primary my-3 me-md-3" v-on:click="editAddress">Edit Address</a>
 
       </div>
 
