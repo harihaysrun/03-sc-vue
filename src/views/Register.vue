@@ -214,6 +214,7 @@ export default {
       
       if (this.username &&
           this.email &&
+          this.email.includes("@") &&
           !this.invalidPw &&
           this.first_name &&
           this.last_name &&
