@@ -44,16 +44,25 @@
               <th class="p-4">Amount</th>
               <th class="p-4">Payment</th>
               <th class="p-4">Status</th>
+              <th class="p-4">Tracking</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="o in orders" v-bind:key="o.id">
-              <td class="p-4"><b>#{{o.id}}</b></td>
-              <td class="p-4">{{o.date}}</td>
-              <td class="p-4">{{o.items_text}}</td>
-              <td class="p-4">${{o.amount}}</td>
-              <td class="p-4">{{o.payment_status}}</td>
-              <td class="p-4">{{o.shipping.name}}</td>
+              <td class="p-4 align-middle"><b>#{{o.id}}</b></td>
+              <td class="p-4 align-middle">{{o.date}}</td>
+              <td class="p-4 align-middle">{{o.items_text}}</td>
+              <td class="p-4 align-middle">${{o.amount}}</td>
+              <td class="p-4 align-middle">{{o.payment_status}}</td>
+              <td class="p-4 align-middle">{{o.shipping.name}}</td>
+              <!-- <td class="p-4"><i class="fa-solid fa-truck-fast"></i></td> -->
+              <td class="p-4 align-middle text-center" v-if="o.tracking">
+                  <a v-bind:href="o.tracking" target="_blank" class="icon-btns yellow edit-btn d-flex flex-column align-items-center">
+                      <i class="fa-solid fa-truck-fast"></i>
+                      Tracking
+                  </a>
+              </td>
+              <td class="p-4 align-middle" v-else></td>
             </tr>
           </tbody>
         </table>
@@ -103,6 +112,29 @@ small{
 thead{
   color:#1050ff;
   border-bottom:2px solid #1050ff;
+}
+
+.icon-btns{
+  padding:10px;
+  border-radius:15px;
+  font-size:12px;
+}    
+
+.icon-btns i{
+  font-size:15px;
+  margin-bottom:5px;
+  background-color:#e0c00b;
+  color:white;
+  padding:10px 8px;
+  border-radius:50%;
+}
+
+.yellow{
+  color:#e0c00b !important;
+}
+
+.yellow:hover{
+  background-color:rgb(255, 223, 41, 0.3) !important;
 }
 
 </style>

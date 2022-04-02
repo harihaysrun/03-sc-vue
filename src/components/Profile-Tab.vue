@@ -23,9 +23,11 @@
           <small>Email Address</small>
           <h3>{{user.email}}</h3>
         </div>
-
-        <a class="btn btn-primary my-3 me-md-3" v-on:click="editProfile">Edit Profile</a>
-        <a class="btn btn-primary" v-on:click="editPassword">Change Password</a>
+        
+        <div class="mt-4">
+          <a class="btn btn-primary mb-3 mb-md-0 me-md-3" v-on:click="editProfile">Edit Profile</a>
+          <a class="btn btn-primary" v-on:click="editPassword">Change Password</a>
+        </div>
 
       </div>
 
