@@ -78,16 +78,34 @@ export default {
   mounted: async function(){
 
     let accessToken = localStorage.getItem("access_token");
+    let refreshToken = localStorage.getItem("refresh_token");
 
     if(accessToken || localStorage.getItem("success")){
 
+      accessToken = localStorage.getItem("access_token");
       let response = await axios.get(
                                   BASE_API_URL + 'users/profile',
                                   { headers: {"Authorization" : `Bearer ${accessToken}`}}
                                   );
-      console.log(response.data.user)
+      // console.log(response.data.user)
 
       this.user = response.data.user;
+
+      if(response.data.message === "Forbidden"){
+        let refreshResponse = await axios.post(BASE_API_URL + 'users/refresh',{
+              'refreshToken': refreshToken
+            })
+              
+        console.log(refreshResponse.data)
+
+        if(refreshResponse.data.message){
+          this.logout()
+        } else {
+          localStorage.setItem("access_token", refreshResponse.data.accessToken);
+          this.stayLoggedin();
+        }
+
+      } 
 
       // get number of items in cart upon refresh
       let userId = localStorage.getItem("user_id")
@@ -121,6 +139,18 @@ export default {
     }
   },
   methods: {
+    stayLoggedin: async function(){
+
+      let accessToken = localStorage.getItem("access_token");
+      let response = await axios.get(
+                                  BASE_API_URL + 'users/profile',
+                                  { headers: {"Authorization" : `Bearer ${accessToken}`}}
+                                  );
+      console.log(response.data.user)
+
+      this.user = response.data.user;
+
+    },
     updateCartLength:function(updatedLength){
       this.cart = updatedLength;
       console.log("updatecartlength triggered: " + updatedLength)

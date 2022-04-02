@@ -58,7 +58,7 @@
         <div class="container">
           <div class="row">
 
-            <div class="col-12 col-md-6 col-lg-3 p-2" v-for="p in products" v-bind:key="p.id">
+            <div class="col-6 col-md-6 col-lg-3 p-2" v-for="p in products" v-bind:key="p.id">
 
               <div class="card h-100">
                 <a class="card-title" v-on:click="viewThisProduct(p.id)">
