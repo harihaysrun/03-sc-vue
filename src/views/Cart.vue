@@ -306,6 +306,12 @@ export default{
         this.itemName = itemName;
         this.deleteMessage = true;
 
+        if (this.cartItems.length === 0){
+          this.emptyCart = true;
+        } else{
+          this.emptyCart = false;
+        }
+
       } else{
           localStorage.setItem("danger_message", "Please log in or register to add to cart");
           window.location.href="/login"

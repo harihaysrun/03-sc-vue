@@ -13,6 +13,12 @@
         </div>
       </div>
 
+      <div v-if="successMessage">
+        <div class="alert alert-success" role="alert">
+          Your account has been created successfully.
+        </div>
+      </div>
+
         <h1 class="text-center">Login</h1>
 
         <div class="mb-3">
@@ -44,6 +50,11 @@ export default{
       this.message = true;
       localStorage.removeItem("danger_message");
     }
+
+    if (localStorage.getItem("success") === "registered"){
+      this.successMessage = true;
+      localStorage.removeItem("success");
+    }
     
   },
   data: function(){
@@ -51,7 +62,8 @@ export default{
       'username': '',
       'password': '',
       'message': false,
-      'dangerMessage' : ''
+      'dangerMessage' : false,
+      'successMessage': false
     }
   },
   methods: {

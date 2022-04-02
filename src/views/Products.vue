@@ -108,21 +108,25 @@ export default{
     // this.brands = brandsList.data;
     console.log(search.data);
 
-    this.products = search.data.products.reverse();
+    this.products = search.data.products;
     this.brands = search.data.brands;
     this.countries = search.data.countries;
     this.types = search.data.types;
-// 
-    // console.log(this.products)
 
-    // countries list
-    // let countriesList = await axios.get(BASE_API_URL + 'products/countries');
-    // this.countries = countriesList.data;
+    // let empty = [];
+    // this.$store.commit("emptyProducts", empty);
+    // console.log(this.$store.state.products)
 
-    // products list
-    // let response = await axios.get(BASE_API_URL + 'products');
-    // this.products = response.data.reverse();
-    // console.log(this.products);
+    // for (let i=0; i<this.products.length;i++){
+
+    //     let productInfo = {
+    //       'id': this.products[i].id,
+    //       'stockNo': this.products[i].stock_no
+    //     }
+
+    //     this.$store.commit("addProducts", productInfo);
+    // }
+    // console.log(this.$store.state.products)
 
   },
   data: function(){
@@ -137,7 +141,8 @@ export default{
       'products': [],
       'accessToken': 'yes',
       'user_id':'',
-      'dangerMessage':false
+      'dangerMessage':false,
+      'noOfClicks': 0
     }
   },
   methods:{
@@ -153,7 +158,6 @@ export default{
     },
     addToCart: async function(productId, stockNo){
 
-
       if(this.accessToken){
         // console.log("user is logged in")
 
@@ -168,6 +172,21 @@ export default{
           this.$store.commit("updateCartLength", 1);
           console.log('updated cart length from store: ' + this.$store.getters.getCartLength)
         }
+
+        // this.stockNo = stockNo - 1;
+        // console.log('stockNo: ' + this.stockNo)
+
+        // this.noOfClicks += 1;
+        // let thisProduct = productId;
+        // let noOfClickForThis = JSON.parse(JSON.stringify(this.noOfClicks));
+        // noOfClickForThis[i] = this.thisProduct
+        // // this.noOfClicks.id = thispr
+        // console.log('noOfClickForThis[id]: ' + noOfClickForThis[id])
+        // let thisProduct = this.noOfClicks;
+        // noOfClicks(productId) += 1;
+        // // noOfClicks++;
+        // console.log('no of clicks: ' + this.noOfClicks)
+
 
         this.$emit("cart", this.$store.getters.getCartLength)
 
@@ -201,8 +220,7 @@ export default{
 
     },
     search: async function(){
-      // console.log(this.brand, this.country, this.type)
-
+      
       let response = await axios.post(BASE_API_URL + 'products/search', {
         'name': this.name,
         'brand_id': this.brand,

@@ -6,7 +6,11 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     // data that we want to share across components must be inside here
-    customers: [
+    product:[],
+    profile: [],
+    address:[],
+    cart:'',
+    products: [
       // {
       //   id: 1,
       //   username: "Bob",
@@ -23,20 +27,8 @@ const store = new Vuex.Store({
       //   email: "eugene@bobsburgers.com"
       // }
     ],
-    product:[],
-    profile: [],
-    address:[],
-    cart:''
   },
   getters: {
-    customers: function (state) {
-      return state.customers;
-    },
-    getCustomerById: function (state, userId) {
-      return state.customers.find(function (eachCustomer) {
-        return eachCustomer.id === userId;
-      });
-    },
     getProfile: function (state) {
       return state.profile;
     },
@@ -48,17 +40,20 @@ const store = new Vuex.Store({
     },
   },
   mutations: {
-    addNewCustomer: function (state, newCustomer) {
-      state.customers.push({
-        id: Math.floor(Math.random() * 10000) + 1,
-        username: newCustomer.username
-      });
-    },
     addProductId: function (state, productId) {
       state.product.push({
         // id: Math.floor(Math.random() * 10000) + 1,
         productId: productId
       });
+    },
+    addProducts: function (state, productInfo) {
+      state.products.push({
+        'productId': productInfo.id,
+        'stockNo': productInfo.stockNo
+      });
+    },
+    emptyProducts: function (state, empty) {
+      state.products = empty;
     },
     saveProfile: function(state, profile){
       state.profile.push({

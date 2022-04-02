@@ -238,6 +238,7 @@ export default {
             'password': this.password,
           });
 
+          localStorage.setItem("success", "registered")
           this.$router.push("/login");
       } else{
         this.message = true;
