@@ -30,7 +30,17 @@
                 <br>
                 ${{o.amount}} <span class="text-capitalize">{{o.payment_status}}</span>
               </td>
-              <td class="align-middle">{{o.shipping.name}}</td>
+              <td class="align-middle">
+                {{o.shipping.name}}
+                <p v-if="o.tracking" class="mt-1">
+                  <a v-bind:href="o.tracking" target="_blank" class="yellow p-1">
+                      <!-- <small> -->
+                        <i class="fa-solid fa-truck-fast me-1" style="font-size:15px;"></i>
+                        Tracking
+                      <!-- </small> -->
+                  </a>
+                </p>
+              </td>
             </tr>
           </tbody>
         </table>
