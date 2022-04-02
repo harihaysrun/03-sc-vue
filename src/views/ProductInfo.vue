@@ -20,14 +20,16 @@
 
         <div class="mt-4">
 
-          <div class="mb-3"><i class="fa-solid fa-earth-asia me-2"></i> Imported from {{country}}</div>
+          <div class="mb-3"><i class="bi bi-brightness-high me-2"></i> <b>SPF Rating:</b> {{spf}}</div>
+
+          <div class="mb-3"><i class="fa-solid fa-earth-asia me-2"></i> <b>Imported from:</b> {{country}}</div>
           
-          <div class="mb-3"><i class="bi bi-info-circle me-2"></i> Type of sunscreen: {{type}}</div>
+          <div class="mb-3"><i class="bi bi-info-circle me-2"></i> <b>Type of sunscreen:</b> {{type}}</div>
           
-          <div class="mb-3"><i class="bi bi-calendar2-x me-2"></i> Batch expiry: {{expiry}}</div>
+          <div class="mb-3"><i class="bi bi-calendar2-x me-2"></i> <b>Batch expiry:</b> {{expiry}}</div>
           
           <div class="mb-3">
-            <i class="fa-solid fa-check me-2"></i> Suitable for:
+            <i class="fa-solid fa-check me-2"></i> <b>Suitable for:</b>
             <ul class="ms-2">
               <li v-for="type in skin_types" v-bind:key="type.id">
                 {{type.name}}
@@ -94,6 +96,7 @@ export default{
     this.id = product.id;
     this.brand = product.brand.name;
     this.name = product.name;
+    this.spf = product.spf;
     this.country = product.country.name;
     this.type = product.type.name;
     this.cost = product.cost;
@@ -104,9 +107,8 @@ export default{
     this.status = product.status.name;
     this.stock = product.stock_no;
     this.image_url = product.image_url;
-
     
-    document.title = this.product_brand + ' ' + this.product_name;
+    document.title = `${this.brand} ${this.name}`;
 
     this.accessToken = localStorage.getItem("access_token");
     console.log(this.accessToken)

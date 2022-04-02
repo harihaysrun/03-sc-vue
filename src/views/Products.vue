@@ -58,26 +58,27 @@
         <div class="container">
           <div class="row">
 
-            <div class="col-6 col-md-6 col-lg-3 p-2" v-for="p in products" v-bind:key="p.id">
+            <div class="col-12 col-md-6 col-lg-3 p-2" v-for="p in products" v-bind:key="p.id">
 
               <div class="card h-100">
                 <a class="card-title" v-on:click="viewThisProduct(p.id)">
 
                   <div class="name-cost-box d-flex flex-row justify-content-between">
-                      <h5>{{p.brand.name}}<br>{{ p.name }}</h5>
-                      <h5 class="cost">${{ p.cost }}</h5>
+                      <span>{{p.brand.name}}
+                            <h5>{{ p.name }}</h5></span>
+                      <!-- <h5 class="cost">${{ p.cost }}</h5> -->
                   </div>
 
                   <div class="image-box">
-                    <img v-bind:src="p.image_url" alt="...">
+                    <img v-bind:src="p.image_url">
                   </div>
                 
                 </a>
               
                 <div class="buttons-box mt-auto">
-                  <a class="btn btn-primary" v-on:click="addToCart(p.id, p.stock_no)" v-if="p.status_id === 1 && p.stock_no != 0">Add to cart</a>
-                  <a class="btn btn-primary" v-on:click="addToCart(p.id, p.stock_no)" v-else-if="p.status_id === 3">Pre-order</a>
-                  <a class="btn btn-danger" v-else>Out of stock</a>
+                  <a class="btn btn-primary" v-on:click="addToCart(p.id, p.stock_no)" v-if="p.status_id === 1 && p.stock_no != 0"><b>${{ p.cost }}</b> – Add to cart</a>
+                  <a class="btn btn-primary" v-on:click="addToCart(p.id, p.stock_no)" v-else-if="p.status_id === 3"><b>${{ p.cost }}</b> – Pre-order</a>
+                  <a class="btn btn-danger" v-else><b>${{ p.cost }}</b> – Out of stock</a>
                 </div>
               </div>
               
@@ -97,6 +98,8 @@ const BASE_API_URL = "https://nsy-03-sunscreen.herokuapp.com/api/";
 export default{
   name: 'Products',
   created: async function(){
+
+    document.title = "Sunscreens"
 
     this.dangerMessage = false;
 
@@ -291,6 +294,7 @@ h1{
 
 h5{
   margin:0;
+  font-weight:700;
 }
 
 .cost{
