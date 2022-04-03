@@ -27,9 +27,6 @@
           </div>
           
         </div>
-            
-        <hr>
-
         <div class="mb-4 d-flex justify-content-between px-5 py-3">
           <span>Subtotal</span>
           <span>${{order.amount - 3}}</span>
@@ -39,8 +36,10 @@
           <span>Shipping</span>
           <span>$3</span>
         </div>
+            
+        <hr>
 
-        <div class="d-flex flex-row justify-content-between px-5 py-3">  
+        <div class="mb-4 d-flex flex-row justify-content-between px-5 py-3">  
           <h5>Grand total</h5>
           <h5 class="text-primary">${{order.amount}}</h5>
         </div>
