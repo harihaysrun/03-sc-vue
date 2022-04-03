@@ -33,7 +33,7 @@
           <span>${{order.amount - 3}}</span>
         </div>
 
-        <div class="mb-4 d-flex justify-content-between">
+        <div class="mb-4 d-flex justify-content-between p-5">
           <span>Shipping</span>
           <span>$3</span>
         </div>
