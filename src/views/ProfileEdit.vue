@@ -55,6 +55,8 @@ export default{
   name: 'ProfileEdit',
   mounted: async function(){
 
+    document.title = "Edit Profile";
+
     // let accessToken = localStorage.getItem("access_token");
     // let response = await axios.get(
     //                             BASE_API_URL + 'users/profile',

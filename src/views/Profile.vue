@@ -47,6 +47,8 @@ export default{
   name: 'Profile',
   created: async function(){
 
+    document.title = "Profile";
+
     let accessToken = localStorage.getItem("access_token");
 
     if(!accessToken){

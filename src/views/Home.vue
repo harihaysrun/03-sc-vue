@@ -32,6 +32,8 @@ export default{
   name: 'Home',
   mounted: async function(){
 
+    document.title = "Sunny Central";
+
     let response = await axios.get('https://api.data.gov.sg/v1/environment/uv-index');
     console.log(response)
 

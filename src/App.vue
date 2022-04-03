@@ -77,6 +77,8 @@ export default {
   name: 'App',
   mounted: async function(){
 
+    document.title = "Sunny Central";
+
     let accessToken = localStorage.getItem("access_token");
     let refreshToken = localStorage.getItem("refresh_token");
 

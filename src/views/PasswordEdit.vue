@@ -50,6 +50,8 @@ export default{
   name: 'Password',
   mounted: function(){
 
+      document.title = "Update Password";
+
       // let passwordUpdateFail = localStorage.getItem("danger_message");
 
       // if (passwordUpdateFail === 'Password does not match'){

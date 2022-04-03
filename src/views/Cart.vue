@@ -131,6 +131,9 @@ const BASE_API_URL = "https://nsy-03-sunscreen.herokuapp.com/api/";
 export default{
   name: 'Cart',
   created: async function(){
+
+    document.title = "Cart";
+
     this.accessToken = localStorage.getItem("access_token");
     // console.log(this.accessToken)
 

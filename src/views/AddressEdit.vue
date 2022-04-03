@@ -49,6 +49,8 @@ export default{
   name: 'AddressEdit',
   mounted: async function(){
 
+    document.title = "Edit Address";
+
     // let accessToken = localStorage.getItem("access_token");
     // let response = await axios.get(
     //                             BASE_API_URL + 'users/profile',

@@ -50,6 +50,8 @@ export default{
   name: 'Checkout',
   mounted: async function(){
 
+    document.title = "Order Successfully Placed";
+
     this.user_id = localStorage.getItem("user_id"); 
 
     console.log(this.$route.params.id)
