@@ -162,6 +162,7 @@ export default{
           this.name = "";
           this.email = "";
           this.reason = 0;
+          this.title = "";
           this.message = "";
 
           this.successMessage = true;
