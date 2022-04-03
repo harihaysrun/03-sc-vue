@@ -82,6 +82,8 @@ export default {
 
     if(accessToken || localStorage.getItem("success")){
 
+      this.user = true;
+
       accessToken = localStorage.getItem("access_token");
       let response = await axios.get(
                                   BASE_API_URL + 'users/profile',
@@ -89,21 +91,33 @@ export default {
                                   );
       // console.log(response.data.user)
 
-      this.user = response.data.user;
+      // this.user = response.data.user;
 
+      // console.log(response.data)
+      
+
+
+      // get new accessToken
       if(response.data.message === "Forbidden"){
         let refreshResponse = await axios.post(BASE_API_URL + 'users/refresh',{
               'refreshToken': refreshToken
             })
-              
-        console.log(refreshResponse.data)
 
-        if(refreshResponse.data.message){
-          this.logout()
-        } else {
+        console.log(refreshResponse)
+              
+        if (refreshResponse.status === 200){
+          console.log("get new access token!")
+        }
+
+        console.log('old AT: ' + accessToken)
+
+        // if(refreshResponse.data.message){
+        // if(refreshResponse.status === 401 || refreshResponse.status === 403){
+          // this.logout()
+        // } else {
           localStorage.setItem("access_token", refreshResponse.data.accessToken);
           this.stayLoggedin();
-        }
+        // }
 
       } 
 
@@ -133,7 +147,7 @@ export default {
   data: function(){
     return{
       'hmOpen': false,
-      'user': '',
+      'user': false,
       'cart':''
       // 'username': ''
     }
@@ -147,6 +161,8 @@ export default {
                                   { headers: {"Authorization" : `Bearer ${accessToken}`}}
                                   );
       console.log(response.data.user)
+
+      console.log('new AT: ' + accessToken)
 
       this.user = response.data.user;
 
@@ -174,7 +190,15 @@ export default {
       });
       // localStorage.setItem("refresh_token", "");
       // localStorage.setItem("access_token", "");
+
+      // console.log(logoutResponse.status)
+
+      // if(logoutResponse.status === 403){
+      //   localStorage.clear();
+      // }
       localStorage.clear();
+
+      console.log("user is logged out")
       
       // window.location.reload();
       window.location.href="/"

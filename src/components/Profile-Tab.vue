@@ -45,7 +45,7 @@
 
 export default{
   name: 'ProfileTab',
-  mounted: async function(){
+  mounted: function(){
 
     // let accessToken = localStorage.getItem("access_token");
     // let response = await axios.get(
@@ -60,6 +60,8 @@ export default{
     // }
 
     this.user = this.$store.state.profile[0];
+
+    console.log(this.user)
     // console.log(this.user)
 
   },

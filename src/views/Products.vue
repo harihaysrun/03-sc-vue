@@ -223,9 +223,39 @@ export default{
 
     },
     search: async function(){
+
+      // console.log(this.name.toLowerCase())
+      
+      // console.log(this.name[0].toUpperCase())
+      // console.log(this.name.substring(1))
+      
+
+      let uppercaseName;
+      if(this.name){
+
+        if (this.name.includes(" ")){
+          let words = this.name.split(" ");
+          // console.log(words)
+          let newWords = [];
+
+          for (let i=0; i<words.length; i++){
+            uppercaseName = words[i][0].toUpperCase() + words[i].substring(1);
+            newWords.push(uppercaseName)
+            // console.log(uppercaseName)
+          }
+
+          // console.log(newWords)
+
+          uppercaseName = newWords.join(" ")
+          console.log(uppercaseName)
+        } else {
+          uppercaseName = this.name[0].toUpperCase() + this.name.substring(1);
+          console.log(uppercaseName)
+        }
+      }
       
       let response = await axios.post(BASE_API_URL + 'products/search', {
-        'name': this.name,
+        'name': uppercaseName,
         'brand_id': this.brand,
         'country_id': this.country,
         'type_id': this.type,

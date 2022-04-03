@@ -7,11 +7,11 @@
         </div>
       </div>
 
-      <div v-if="view === 'private'">
-        Please log in
+      <div v-if="!profileLoaded">
+        Retrieving profile...
       </div>
 
-      <div v-else-if="view === 'loggedin'">
+      <div v-else>
         <h1>Hi, {{username}}!</h1>
 
         <div class="mt-5 mb-5">
@@ -45,25 +45,33 @@ import OrdersTab from "@/components/Orders-Tab";
 
 export default{
   name: 'Profile',
-  mounted: async function(){
+  created: async function(){
 
     let accessToken = localStorage.getItem("access_token");
+
+    if(!accessToken){
+      // console.log("please log in")
+      localStorage.setItem("danger_message", "Please log in");
+      this.$router.push("/login")
+    } else{
+
     let response = await axios.get(
                                 BASE_API_URL + 'users/profile',
                                 { headers: {"Authorization" : `Bearer ${accessToken}`}}
                                 );
-    // console.log(response.data.user)
 
-    if(response.data.message === 'Forbidden'){
-      this.view = "private"
-      this.user = "";
-    } else{
+    // if(response.data.message === 'Forbidden'){
+    //   this.profileLoaded = false;
+    //   this.user = "";
+    // } else{
 
-      console.log(response.data.user)
-      this.view = "loggedin";
+      // console.log(response.data.user)
+      // this.view = "profileLoaded";
       this.user = response.data.user;
 
-      localStorage.setItem("user_id", response.data.user.id);
+      // console.log(response.data.user.id)
+
+      // localStorage.setItem("user_id", response.data.user.id);
 
       let profileUpdateSuccess = localStorage.getItem("success");
 
@@ -98,7 +106,7 @@ export default{
 
       console.log(this.$store.state.address[0])
 
-      this.username = this.$store.state.profile[0].username;
+      this.username = this.user.username;
 
       // get number of items in cart
       let userId = localStorage.getItem("user_id")
@@ -120,7 +128,11 @@ export default{
       console.log('cart length from store: ' + this.$store.getters.getCartLength)
       this.$emit("cart", this.$store.getters.getCartLength);
 
+      this.profileLoaded = true;
+
     }
+    // this.profileLoaded = false;
+    // this.user = "";
 
   },
   components:{
@@ -131,7 +143,7 @@ export default{
       'username': '',
       'user': [],
       'tab':'profile',
-      'view':'private',
+      'profileLoaded':false,
       'updateMessage': ''
     }
   },
@@ -151,6 +163,10 @@ export default{
 
 <style scoped>
 
+h1{
+    color:#1050ff;
+    font-weight:700;
+}
 
 .tab-container{
   border-bottom: 1px solid #e3e3e3;

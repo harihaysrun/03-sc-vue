@@ -1,9 +1,15 @@
 <template>
     <div class="login-container mt-5">
 
-      <div v-if="message">
+      <div v-if="cartMessage">
         <div class="alert alert-warning" role="alert">
           Please log in or register to add to cart
+        </div>
+      </div>
+
+      <div v-if="profileMessage">
+        <div class="alert alert-warning" role="alert">
+          Please log in to view
         </div>
       </div>
 
@@ -47,7 +53,12 @@ export default{
     document.title = "Login";
 
     if (localStorage.getItem("danger_message") === "Please log in or register to add to cart"){
-      this.message = true;
+      this.cartMessage = true;
+      localStorage.removeItem("danger_message");
+    }
+
+    if (localStorage.getItem("danger_message") === "Please log in"){
+      this.profileMessage = true;
       localStorage.removeItem("danger_message");
     }
 
@@ -61,7 +72,8 @@ export default{
     return {
       'username': '',
       'password': '',
-      'message': false,
+      'cartMessage': false,
+      'profileMessage':false,
       'dangerMessage' : false,
       'successMessage': false
     }
@@ -74,9 +86,6 @@ export default{
         'password': this.password
       });
 
-      localStorage.setItem("access_token", response.data.accessToken);
-      localStorage.setItem("refresh_token", response.data.refreshToken);
-
       // this.$router.push("/profile");
       // window.location.reload()
       console.log(response.data.error)
@@ -84,6 +93,16 @@ export default{
         // this.$router.push('/login');
         this.dangerMessage = true;
       } else{
+        localStorage.setItem("access_token", response.data.accessToken);
+        localStorage.setItem("refresh_token", response.data.refreshToken);
+        let userResponse = await axios.get(
+                          BASE_API_URL + 'users/profile',
+                            { headers: {"Authorization" : `Bearer ${response.data.accessToken}`}}
+                          );
+
+        console.log(userResponse)
+        localStorage.setItem("user_id", userResponse.data.user.id);
+
         window.location.href="/profile";
         // this.$router.push("/profile")
       }
