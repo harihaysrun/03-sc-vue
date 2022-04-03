@@ -27,12 +27,12 @@
           </div>
           
         </div>
-        <div class="mb-4 d-flex justify-content-between px-5 py-3">
+        <div class="mt-3 d-flex justify-content-between px-5 py-3">
           <span>Subtotal</span>
           <span>${{order.amount - 3}}</span>
         </div>
 
-        <div class="mb-4 d-flex justify-content-between px-5 py-3">
+        <div class="d-flex justify-content-between px-5 py-3">
           <span>Shipping</span>
           <span>$3</span>
         </div>
