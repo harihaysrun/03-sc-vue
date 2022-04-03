@@ -28,7 +28,7 @@
           
         </div>
 
-        <div class="mb-4 d-flex justify-content-between">
+        <div class="mb-4 d-flex justify-content-between p-5">
           <span>Subtotal</span>
           <span>${{order.amount - 3}}</span>
         </div>
@@ -95,6 +95,10 @@ h1,h2,h3,h4,h5{
 
 .text-primary{
   color: #1050ff !important;
+}
+
+hr{
+  background-color: #1050ff !important;
 }
 
 .total-box{
