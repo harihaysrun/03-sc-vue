@@ -50,6 +50,7 @@ const BASE_API_URL = "https://nsy-03-sunscreen.herokuapp.com/api/";
 export default{
   name: 'Login',
   mounted: function(){
+    
     document.title = "Login";
 
     if (localStorage.getItem("danger_message") === "Please log in or register to add to cart"){

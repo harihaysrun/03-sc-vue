@@ -46,8 +46,11 @@
         </div>
 
         <div class="ml-auto" v-else>
-          <a href="/register" class="btn">Register</a>
-          <a href="/login" class="btn btn-login">Login</a>
+
+          <router-link to="/register" class="btn">Register</router-link>
+          <router-link to="/login" class="btn btn-login">Login</router-link>
+          <!-- <a href="/register" class="btn">Register</a>
+          <a href="/login" class="btn btn-login">Login</a> -->
         </div>
 
 
