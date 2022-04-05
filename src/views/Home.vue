@@ -24,7 +24,7 @@
         <img src="@/assets/images/sun.png" alt="">
       </div>
 
-      <div class="main-text">
+      <div class="main-text mt-5 mt-lg-2">
         <h3>where we bring you the latest SPF products from around the world</h3>
       </div>
 
@@ -87,9 +87,17 @@ export default{
   /* right:5%; */
   margin:auto;
   width: 90%;
+  /* height:450px; */
+  /* background-color:pink !important; */
 }
 
 .sun img{
+  /* background-color:pink !important; */
+  border-radius:40%;
+  /* margin:auto; */
+}
+
+.sun img:nth-child(2){
   /* background-color:pink !important; */
   border-radius:40%;
   position:absolute;
@@ -118,7 +126,7 @@ export default{
 }
 
 .main-text{
-  margin-top:430px;
+  /* margin-top:450px; */
   width:100%;
   /* background-color:blue; */
   text-align:center;
@@ -163,7 +171,7 @@ export default{
   .main-text{
     width:60%;
     margin:auto;
-    margin-top:600px;
+    /* margin-top:670px; */
   }
 
 }
@@ -187,7 +195,7 @@ export default{
   .main-text{
     width:40%;
     margin:0;
-    margin-top:20px;
+    /* margin-top:20px; */
     margin-left:auto;
     text-align:right;
   }
