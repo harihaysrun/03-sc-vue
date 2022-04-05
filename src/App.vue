@@ -3,7 +3,6 @@
 
     <div class="hamburger-menu d-lg-none" v-if="hmOpen">
       <router-link class="hm-nav-link" to="/" v-on:click.native="closeHm">Home</router-link>
-      <router-link class="hm-nav-link" to="/about" v-on:click.native="closeHm">About Us</router-link>
       <router-link class="hm-nav-link" to="/products" v-on:click.native="closeHm">Products</router-link>
       <router-link class="hm-nav-link" to="/contact" v-on:click.native="closeHm">Contact</router-link>
     </div>
@@ -13,7 +12,6 @@
 
         <div class="navbar-nav d-block d-lg-none hm-menu-icon">
           <a v-on:click="openMenu">
-            <!-- <img src="@/assets/images/hm-menu.png" alt=""> -->
             <i class="fa-solid fa-bars" v-if="!hmOpen"></i>
             <i class="fa-solid fa-xmark" v-else></i>
           </a>
@@ -21,17 +19,9 @@
 
         <div class="navbar-nav d-none d-lg-flex">
           <router-link class="navbar-brand" to="/">Home</router-link>
-          <router-link class="nav-link" to="/about">About Us</router-link>
           <router-link class="nav-link" to="/products">Products</router-link>
           <router-link class="nav-link" to="/contact">Contact</router-link>
         </div>
-        <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button> -->
-        <!-- <div class="collapse navbar-collapse" id="navbarNavAltMarkup"> -->
-          
-          
-        <!-- </div> -->
 
 
         <div class="ml-auto d-flex flex-row align-items-center" v-if="user">
