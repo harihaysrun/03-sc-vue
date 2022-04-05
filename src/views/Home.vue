@@ -73,36 +73,21 @@ export default{
   pointer-events:none;
 }
 
-.sun{
+.sun{  
   position:absolute;
-  top:250px;
-  left:-5%;
-  right:-5%;
+  top:300px;
+  left:5%;
+  right:5%;
   margin:auto;
-  width: 110%;
+  width: 90%;
 }
 
 .sun img{
+  /* background-color:pink !important; */
+  border-radius:40%;
   position:absolute;
   top:0;
   left:0;
-  /* animation-name:sunray-popin; */
-  /* animation-duration: 1s; */
-  /* animation-iteration-count:1; */
-  /* animation-fill-mode: forwards; */
-  /* animation-timing-function: linear; */
-}
-
-/* .sunray-popin{
-  animation-name:sunray-popin;
-  animation-duration: 0.5s;
-  animation-iteration-count:once;
-  animation-timing-function: linear;
-} */
-
-@keyframes sunray-popin{
-  from{transform:scale(0)}
-  to{transform:scale(1)}
 }
 
 .sunray{
@@ -119,7 +104,7 @@ export default{
 }
 
 .main-text{
-  margin-top:450px;
+  margin-top:430px;
   width:100%;
   /* background-color:blue; */
   text-align:center;
@@ -135,7 +120,7 @@ export default{
   flex-direction: row;
   text-align:center;
   overflow:hidden;
-  margin-bottom:20px;
+  margin-bottom:35px;
 }
 
 .uv-index h4{
