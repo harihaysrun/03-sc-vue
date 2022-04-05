@@ -119,6 +119,7 @@ export default{
       'id':'',
       'brand': '',
       'name': '',
+      'spf': '',
       'country': '',
       'type': '',
       'cost': '',
@@ -215,7 +216,7 @@ button{
 }
 
 .btn-quantity{
-  width:50px !important;
+  width:56px !important;
   background-color:#1050ff;
   color:white;
   /* border:1px solid #1050ff; */

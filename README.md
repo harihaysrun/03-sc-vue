@@ -26,11 +26,9 @@ Register an account or use this dummy account:
 
 [Here's](https://www.figma.com/file/QsHGWWdaYlQrsi3Zb0LeO0/sunny-central?node-id=0%3A1) the wireframes for the front & back end.
 
+The chosen colours are very self-explanatory – blue for the sky & sea and yellow for the sun. The font used is [DM Sans](https://fonts.google.com/specimen/DM+Sans). It is a visually fun typeface.
+
 The sunny face greets you upon landing and the hourly Singapore UV index is displayed on the right.
-
-The chosen colours are very self-explanatory – blue for the sky & sea and yellow for the sun.
-
-The font used is [DM Sans](https://fonts.google.com/specimen/DM+Sans). It is a visually fun typeface.
 
 # Features
 1. Register an account

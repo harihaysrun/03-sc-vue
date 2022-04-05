@@ -46,7 +46,6 @@
               <div style="flex:2" class="d-flex flex-row align-items-center">
                 <img v-bind:src="item.product.image_url" class="me-3 card-img-top"  alt="...">
                 <div>
-                    {{item.product.brand}}
                   <h5>{{ item.product.name }}</h5>
                   ${{ item.product.cost }}
                 </div>
@@ -67,7 +66,7 @@
 
               <!-- <div style="flex:1" class="d-flex flex-row align-items-center justify-content-end"> -->
                 <div class="d-flex flex-row">
-                  <a class="mx-2 icon-btns edit-btn" v-on:click="updateQuantity(item.product.stock_no, item.product_id, item.quantity, item.product.name, item.product.cost)">
+                  <a class="mx-2 icon-btns edit-btn" v-if="item.product.stock_no != 0 || stopPayment(item.product.stock_no, item.product.name)" v-on:click="updateQuantity(item.product.stock_no, item.product_id, item.quantity, item.product.name, item.product.cost)">
                     <img src="@/assets/images/edit.svg" alt="">
                     Update
                   </a>
@@ -110,7 +109,13 @@
               <span>${{grandTotal}}</span>
             </div>
 
-            <a class="btn btn-success w-100" v-on:click="checkout">Proceed to payment</a>
+            <!-- <a class="btn btn-danger w-100" v-if="removeCheckoutBtn">Some items are out of stock. Please update your cart.</a> -->
+            <div class="text-center text-danger" v-if="removeCheckoutBtn">
+              Some items are out of stock.
+              <br>Please update your cart.
+            </div>
+            <a class="btn btn-success w-100" v-else v-on:click="checkout">Proceed to payment</a>
+            
 
           </div>
         
@@ -180,7 +185,9 @@ export default{
       'itemName':'',
       'stockNo':'',
       'total': '',
-      'grandTotal':  ''
+      'grandTotal':  '',
+      'removeCheckoutBtn': false,
+      'oosProduct': ''
     }
   },
   methods:{
@@ -318,6 +325,15 @@ export default{
       } else{
           localStorage.setItem("danger_message", "Please log in or register to add to cart");
           window.location.href="/login"
+      }
+    },
+    stopPayment(stockNo, name){
+      if(stockNo === 0){
+        this.removeCheckoutBtn = true;
+        // let oldList = JSON.parse(JSON.stringify(this.oosProduct));
+        // this.oosProduct.push(name);
+        // this.oosProduct = `${oldList}, ${name}`
+        this.oosProduct = name;
       }
     },
     checkout: async function(){

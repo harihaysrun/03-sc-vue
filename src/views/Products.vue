@@ -176,21 +176,6 @@ export default{
           console.log('updated cart length from store: ' + this.$store.getters.getCartLength)
         }
 
-        // this.stockNo = stockNo - 1;
-        // console.log('stockNo: ' + this.stockNo)
-
-        // this.noOfClicks += 1;
-        // let thisProduct = productId;
-        // let noOfClickForThis = JSON.parse(JSON.stringify(this.noOfClicks));
-        // noOfClickForThis[i] = this.thisProduct
-        // // this.noOfClicks.id = thispr
-        // console.log('noOfClickForThis[id]: ' + noOfClickForThis[id])
-        // let thisProduct = this.noOfClicks;
-        // noOfClicks(productId) += 1;
-        // // noOfClicks++;
-        // console.log('no of clicks: ' + this.noOfClicks)
-
-
         this.$emit("cart", this.$store.getters.getCartLength)
 
 
@@ -222,13 +207,7 @@ export default{
       }
 
     },
-    search: async function(){
-
-      // console.log(this.name.toLowerCase())
-      
-      // console.log(this.name[0].toUpperCase())
-      // console.log(this.name.substring(1))
-      
+    search: async function(){      
 
       let uppercaseName;
       if(this.name){
