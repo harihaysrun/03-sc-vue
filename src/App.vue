@@ -36,18 +36,15 @@
         </div>
 
         <div class="ml-auto" v-else>
-
           <router-link to="/register" class="btn">Register</router-link>
           <router-link to="/login" class="btn btn-login">Login</router-link>
-          <!-- <a href="/register" class="btn">Register</a>
-          <a href="/login" class="btn btn-login">Login</a> -->
         </div>
 
 
       </div>
     </nav>
 
-    <div class="container router-container my-5">
+    <div class="container router-container mt-4 mt-md-5 mb-5">
       <router-view v-on:cart="updateCartLength"></router-view>
     </div>
 

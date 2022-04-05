@@ -8,6 +8,13 @@
           <br>
           <b>UV Index: {{this.uv_index}}</b>
         </p>
+        <div class="d-none d-lg-block w-75 mb-3 m-auto mini-reminder">
+          <i class="fa-solid fa-circle-exclamation"></i> Always use a minimum of SPF 30
+        </div>
+      </div>
+
+      <div class="d-block d-lg-none text-center mb-3 mini-reminder">
+        <i class="fa-solid fa-circle-exclamation"></i> Always use a minimum of SPF 30
       </div>
         
       <img src="@/assets/images/home-bg.png" alt="">
@@ -74,10 +81,10 @@ export default{
 }
 
 .sun{  
-  position:absolute;
-  top:300px;
-  left:5%;
-  right:5%;
+  position:relative;
+  top:20px;
+  /* left:5%; */
+  /* right:5%; */
   margin:auto;
   width: 90%;
 }
@@ -88,6 +95,7 @@ export default{
   position:absolute;
   top:0;
   left:0;
+  margin:auto;
 }
 
 .sunray{
@@ -101,6 +109,12 @@ export default{
 @keyframes sunray{
   0%{transform:rotate(0deg)}
   100%{transform:rotate(360deg)}
+}
+
+.mini-reminder{
+  font-size:13px;
+  line-height:15px !important;
+  color:#1050ff;
 }
 
 .main-text{
@@ -120,7 +134,8 @@ export default{
   flex-direction: row;
   text-align:center;
   overflow:hidden;
-  margin-bottom:35px;
+  margin-bottom:15px;
+  line-height:24px;
 }
 
 .uv-index h4{
