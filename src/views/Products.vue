@@ -77,7 +77,8 @@
               
                 <div class="buttons-box mt-auto">
                   <a class="btn btn-primary" v-on:click="addToCart(p.id, p.stock_no)" v-if="p.status_id === 1 && p.stock_no != 0"><b>${{ p.cost }}</b> – Add to cart</a>
-                  <a class="btn btn-primary" v-on:click="addToCart(p.id, p.stock_no)" v-else-if="p.status_id === 3"><b>${{ p.cost }}</b> – Pre-order</a>
+                  <a class="btn btn-primary" v-on:click="addToCart(p.id, p.stock_no)" v-else-if="p.status_id === 3 && p.stock_no != 0"><b>${{ p.cost }}</b> – Pre-order</a>
+                  <a class="btn btn-danger" v-else-if="p.status_id === 3 && p.stock_no === 0"><b>${{ p.cost }}</b> – Out of stock</a>
                   <a class="btn btn-danger" v-else><b>${{ p.cost }}</b> – Out of stock</a>
                 </div>
               </div>

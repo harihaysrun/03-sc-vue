@@ -59,8 +59,9 @@
         </div>
         
         <div class="mt-3">
-          <div class="mb-3 text-muted" v-if="stock != 0">{{stock}} {{status}}</div>
-          <div class="mb-3 text-danger" v-else>{{status}}</div>
+          <div class="mb-3 text-danger" v-if="stock === 0">Out Of Stock</div>
+          <div class="mb-3 text-muted" v-else-if="stock != 0">{{stock}} {{status}}</div>
+          <!-- <div class="mb-3 text-danger" v-else>{{status}}</div> -->
           <div class="mb-3" v-if="stock != 0">
             <div class="d-flex flex-row">
               <button v-on:click="minus" class="btn-quantity left">-</button>

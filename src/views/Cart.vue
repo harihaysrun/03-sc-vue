@@ -112,7 +112,7 @@
             <!-- <a class="btn btn-danger w-100" v-if="removeCheckoutBtn">Some items are out of stock. Please update your cart.</a> -->
             <div class="text-center text-danger" v-if="removeCheckoutBtn">
               Some items are out of stock.
-              <br>Please update your cart.
+              <br>Remove items and refresh cart page.
             </div>
             <a class="btn btn-success w-100" v-else v-on:click="checkout">Proceed to payment</a>
             
@@ -196,6 +196,7 @@ export default{
     },
     closeDeleteMessage: function(){
       this.deleteMessage = false;
+      window.location.reload();
     },
     closeWarningMessage: function(){
       this.warningMessage = false;
