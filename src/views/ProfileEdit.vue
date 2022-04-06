@@ -4,10 +4,6 @@
 
       <h1>Edit Profile Details</h1>
 
-      <div class="alert alert-warning d-flex flex-row justify-content-between align-items-center" role="alert">
-        Please log out and in again after updating to view updated details.
-      </div>
-
       <div class="mt-3">
         <div>
           <label for="username" class="form-label">Username</label>
