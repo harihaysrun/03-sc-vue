@@ -47,12 +47,6 @@
         <label for="">Reason</label>
         <select name="reason" v-model="reason" class="form-control" id="reason">
           <option value="0" disabled>Choose one</option>
-          <!-- <option value="1">General Enquiry</option>
-          <option value="2">Product Request</option>
-          <option value="3">Ammend an order</option>
-          <option value="4">Cancel an order</option>
-          <option value="5">Feedback</option>
-          <option value="6">Others</option> -->
           <option :value="r[0]" v-for="r in reasons" v-bind:key="r.id">
               {{r[1]}}
           </option>
@@ -96,7 +90,7 @@ export default{
   mounted:async function(){
     document.title = "Contact"
     let response = await axios.get(BASE_API_URL + 'contact');
-    console.log(response.data.reasons)
+    // console.log(response.data.reasons)
 
     this.reasons = response.data.reasons;
   },
@@ -167,7 +161,7 @@ export default{
 
           this.successMessage = true;
 
-          console.log(enquiry);
+          // console.log(enquiry);
           
         } else{
         this.dangerMessage = true;

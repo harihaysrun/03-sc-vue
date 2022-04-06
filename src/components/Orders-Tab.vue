@@ -95,7 +95,7 @@ export default{
       'user_id': this.user_id
     });
 
-    console.log(response.data.length)
+    // console.log(response.data.length)
     this.orders = response.data;
 
     if(response.data.length === 0){

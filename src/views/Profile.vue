@@ -52,28 +52,17 @@ export default{
     let accessToken = localStorage.getItem("access_token");
 
     if(!accessToken){
-      // console.log("please log in")
+      // // console.log("please log in")
       localStorage.setItem("danger_message", "Please log in");
       this.$router.push("/login")
     } else{
 
-    let response = await axios.get(
-                                BASE_API_URL + 'users/profile',
-                                { headers: {"Authorization" : `Bearer ${accessToken}`}}
-                                );
+      let response = await axios.get(
+                    BASE_API_URL + 'users/profile',
+                    { headers: {"Authorization" : `Bearer ${accessToken}`}}
+                  );
 
-    // if(response.data.message === 'Forbidden'){
-    //   this.profileLoaded = false;
-    //   this.user = "";
-    // } else{
-
-      // console.log(response.data.user)
-      // this.view = "profileLoaded";
       this.user = response.data.user;
-
-      // console.log(response.data.user.id)
-
-      // localStorage.setItem("user_id", response.data.user.id);
 
       let profileUpdateSuccess = localStorage.getItem("success");
 
@@ -106,13 +95,13 @@ export default{
       this.$store.commit("saveProfile", profile);
       this.$store.commit("saveAddress", address);
 
-      console.log(this.$store.state.address[0])
+      // console.log(this.$store.state.address[0])
 
       this.username = this.user.username;
 
       // get number of items in cart
       let userId = localStorage.getItem("user_id")
-      console.log(userId)
+      // console.log(userId)
 
       let cartResponse = await axios.post(BASE_API_URL + 'cart', {
         'user_id': userId
@@ -122,20 +111,17 @@ export default{
       let totalQuantity = 0;
 
       for (let i=0; i<cartItems.length; i++){
-        console.log(cartItems[i].quantity)
+        // console.log(cartItems[i].quantity)
         totalQuantity += cartItems[i].quantity;
       }
 
       this.$store.commit("updateCartLength", totalQuantity);
-      console.log('cart length from store: ' + this.$store.getters.getCartLength)
+      // console.log('cart length from store: ' + this.$store.getters.getCartLength)
       this.$emit("cart", this.$store.getters.getCartLength);
 
       this.profileLoaded = true;
 
     }
-    // this.profileLoaded = false;
-    // this.user = "";
-
   },
   components:{
     ProfileTab, AddressBook, OrdersTab

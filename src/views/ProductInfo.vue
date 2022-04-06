@@ -88,10 +88,10 @@ export default{
   created: async function(){
 
     let productId = localStorage.getItem("product_id");
-    console.log("productId: " + productId);
+    // console.log("productId: " + productId);
 
     let response = await axios.get(BASE_API_URL + 'products/' + productId);
-    // console.log(response.data.product)
+    // // console.log(response.data.product)
 
     let product = response.data.product;
     this.id = product.id;
@@ -112,7 +112,7 @@ export default{
     document.title = `${this.brand} ${this.name}`;
 
     this.accessToken = localStorage.getItem("access_token");
-    console.log(this.accessToken)
+    // console.log(this.accessToken)
   },
   data: function(){
     return{
@@ -165,31 +165,27 @@ export default{
     addToCart: async function(productId, quantityToAdd){
       
       if(this.accessToken){
-        // console.log("user is logged in")
 
         if(this.$store.getters.getCartLength){
           let prevCartLength = parseInt(this.$store.getters.getCartLength);
           this.$store.commit("updateCartLength", prevCartLength + quantityToAdd);
-          console.log('updated cart length from store: ' + this.$store.getters.getCartLength)
         }
-        // localStorage.setItem("cart_length", prevCartLength + 1);
 
         else {
-          this.$store.commit("updateCartLength", 1);
-          console.log('updated cart length from store: ' + this.$store.getters.getCartLength)
+          this.$store.commit("updateCartLength", quantityToAdd);
         }
 
         this.$emit("cart", this.$store.getters.getCartLength)
 
 
         this.user_id = localStorage.getItem("user_id"); 
-        console.log(this.user_id)
+        // console.log(this.user_id)
 
         let response = await axios.post(BASE_API_URL + 'cart/' + productId + '/add', {
           'user_id': this.user_id,
           'quantity_to_add': quantityToAdd
         });
-        console.log(response.data)
+        // console.log(response.data)
         
       } else{
           localStorage.setItem("danger_message", "Please log in or register to add to cart");
@@ -233,19 +229,9 @@ button{
   margin-right:10px;
 }
 
-/* .left{
-  border-radius:15px 0 0 15px;
-}
-
-.right{
-  border-radius:0 15px 15px 0;
-} */
-
 .form-control{
   width:100px;
   text-align:center;
-  /* border-radius:0 !important; */
-  /* border:1px solid black !important; */
   margin: 0 5px;
 }
 

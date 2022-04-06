@@ -57,25 +57,11 @@ export default{
 
     document.title = "Edit Profile";
 
-    // let accessToken = localStorage.getItem("access_token");
-    // let response = await axios.get(
-    //                             BASE_API_URL + 'users/profile',
-    //                             { headers: {"Authorization" : `Bearer ${accessToken}`}}
-    //                             );
-    // console.log(response.data.user)
-    // this.user = response.data.user;
-
-    // localStorage.setItem("user_id", response.data.user.id);
-
-    // const existingUserProfile = JSON.parse(JSON.stringify(this.$store.state.profile[0]))
-    // this.user = this.$store.state.profile[0];
-
   },
   data: function(){
     return{
       'user': JSON.parse(JSON.stringify(this.$store.state.profile[0])),
       'invalidEm': false,
-      // 'existingUserProfile': JSON.parse(JSON.stringify(this.$store.state.profile[0]))
     }
   },
   methods:{
@@ -84,8 +70,6 @@ export default{
       this.$router.push("/profile")
     },
     updateProfile: async function(){
-
-      // this.invalidEm = false;
 
       if (!this.user.email.includes("@")){
         this.invalidEm = true;
@@ -106,11 +90,11 @@ export default{
           'phone_number': user.phone_number
         });
 
-        console.log(response);
+        // console.log(response);
 
-      // console.log(updatedProfile.data)
+      // // console.log(updatedProfile.data)
         let updatedProfile = response.data;
-        console.log(updatedProfile)
+        // console.log(updatedProfile)
 
         let profile = {
           // 'user_id': this.user_id,
@@ -125,12 +109,10 @@ export default{
         };
 
         this.$store.commit("updateProfile", profile);
-        console.log(this.$store.state.profile)
+        // console.log(this.$store.state.profile)
 
         localStorage.setItem("success", "Profile Updated");
         this.$router.push("/profile")
-        // window.location.href = "/profile"
-        // window.location.reload()
       }
 
     }

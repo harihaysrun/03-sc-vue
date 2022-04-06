@@ -51,18 +51,6 @@ export default{
 
     document.title = "Edit Address";
 
-    // let accessToken = localStorage.getItem("access_token");
-    // let response = await axios.get(
-    //                             BASE_API_URL + 'users/profile',
-    //                             { headers: {"Authorization" : `Bearer ${accessToken}`}}
-    //                             );
-    // console.log(response.data.user)
-    // this.user = response.data.user;
-
-    // localStorage.setItem("user_id", response.data.user.id);
-
-    // this.user = this.$store.state.address[0];
-
   },
   data: function(){
     return{
@@ -88,15 +76,7 @@ export default{
         'phone_number': user.phone_number,
       });
 
-      console.log(response);
-
-    // let accessToken = localStorage.getItem("access_token");
-    // let updatedResponse = await axios.get(
-    //                             BASE_API_URL + 'users/profile',
-    //                             { headers: {"Authorization" : `Bearer ${accessToken}`}}
-    //                             );
-    // // console.log(updatedProfile.data)
-    let updatedProfile = response.data;
+      let updatedProfile = response.data;
 
       let address = {
         'address_line_1': updatedProfile.address_line_1,
@@ -107,12 +87,10 @@ export default{
       };
 
       this.$store.commit("updateAddress", address);
-      console.log(this.$store.state.address)
+      // console.log(this.$store.state.address)
 
       localStorage.setItem("success", "Profile Updated");
       this.$router.push("/profile")
-      // window.location.href = "/profile"
-      // window.location.reload()
 
     }
   }

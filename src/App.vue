@@ -81,13 +81,6 @@ export default {
                                   BASE_API_URL + 'users/profile',
                                   { headers: {"Authorization" : `Bearer ${accessToken}`}}
                                   );
-      // console.log(response.data.user)
-
-      // this.user = response.data.user;
-
-      // console.log(response.data)
-      
-
 
       // get new accessToken
       if(response.data.message === "Forbidden"){
@@ -95,13 +88,11 @@ export default {
               'refreshToken': refreshToken
             })
 
-        console.log(refreshResponse)
-              
         if (refreshResponse.status === 200){
-          console.log("get new access token!")
+          // console.log("get new access token!")
         }
 
-        console.log('old AT: ' + accessToken)
+        // console.log('old AT: ' + accessToken)
 
         // if(refreshResponse.data.message){
         // if(refreshResponse.status === 401 || refreshResponse.status === 403){
@@ -109,13 +100,12 @@ export default {
         // } else {
           localStorage.setItem("access_token", refreshResponse.data.accessToken);
           this.stayLoggedin();
-        // }
 
       } 
 
       // get number of items in cart upon refresh
       let userId = localStorage.getItem("user_id")
-      console.log(userId)
+      // console.log(userId)
 
       let cartResponse = await axios.post(BASE_API_URL + 'cart', {
         'user_id': userId
@@ -125,12 +115,12 @@ export default {
       let totalQuantity = 0;
 
       for (let i=0; i<cartItems.length; i++){
-        console.log(cartItems[i].quantity)
+        // console.log(cartItems[i].quantity)
         totalQuantity += cartItems[i].quantity;
       }
 
       this.$store.commit("updateCartLength", totalQuantity);
-      console.log('cart length from store: ' + this.$store.getters.getCartLength)
+      // console.log('cart length from store: ' + this.$store.getters.getCartLength)
       this.cart = this.$store.getters.getCartLength;
       
     }
@@ -152,16 +142,16 @@ export default {
                                   BASE_API_URL + 'users/profile',
                                   { headers: {"Authorization" : `Bearer ${accessToken}`}}
                                   );
-      console.log(response.data.user)
+      // console.log(response.data.user)
 
-      console.log('new AT: ' + accessToken)
+      // console.log('new AT: ' + accessToken)
 
       this.user = response.data.user;
 
     },
     updateCartLength:function(updatedLength){
       this.cart = updatedLength;
-      console.log("updatecartlength triggered: " + updatedLength)
+      // console.log("updatecartlength triggered: " + updatedLength)
     },
     openMenu: function(){
       if(!this.hmOpen){
@@ -180,19 +170,9 @@ export default {
       await axios.post(BASE_API_URL + "users/logout", {
         refreshToken: refreshToken,
       });
-      // localStorage.setItem("refresh_token", "");
-      // localStorage.setItem("access_token", "");
 
-      // console.log(logoutResponse.status)
-
-      // if(logoutResponse.status === 403){
-      //   localStorage.clear();
-      // }
       localStorage.clear();
 
-      console.log("user is logged out")
-      
-      // window.location.reload();
       window.location.href="/"
 
     },
@@ -254,23 +234,12 @@ a{
 }
 
 footer{
-  /* position:absolute; */
-  /* top:75vh; */
-  /* width:100%; */
   background-color:black;
-  /* margin-top:50px; */
   box-sizing: border-box;
   padding:50px 0;
   color:white;
   margin-top:auto;
 }
-
-/* @media only screen and (min-width:992px){
-
-  footer{
-    margin-top:120px;
-  }
-} */
 
 
 </style>

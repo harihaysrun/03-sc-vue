@@ -26,11 +26,11 @@ export default{
   created: async function(){
 
     let accessToken = localStorage.getItem("access_token");
-    console.log(accessToken)
+    // console.log(accessToken)
 
     let response = await axios.get(BASE_API_URL + 'products');
     this.products = response.data.reverse();
-    console.log(this.products)
+    // console.log(this.products)
   },
   data: function(){
     return{
@@ -42,8 +42,8 @@ export default{
     viewThisProduct: function(productId){
       // this.$emit('view-product', productId);
       // this.$store.commit("addProductId", productId);
-      // console.log(productId)
-      // console.log(this.$store.state.product)
+      // // console.log(productId)
+      // // console.log(this.$store.state.product)
 
       // this.$router.push({ path: `/products/${productId}`,  replace: true });
 

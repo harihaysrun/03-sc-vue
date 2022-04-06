@@ -9,7 +9,8 @@ As with project 2, skincare is a big passion of mine. Having followed lots of up
 And with that in mind, I have come up with Sunny Central, a third-party retailer who brings in exclusive and not-so-accessible SPF products from all over the world to local customers.
 
 **As the end user, I want to:**
-- easily shop new sunscreens
+- get my hands on the latest sunscreens ASAP
+- easily shop them in one place
 - discover sunscreens from other brands or countries
 
 Visit the Sunny Central store [here](https://gleeful-tanuki-c97887.netlify.app/)!
@@ -24,7 +25,7 @@ You may register or log in using this account:
 
 [Here's](https://www.figma.com/file/QsHGWWdaYlQrsi3Zb0LeO0/sunny-central?node-id=0%3A1) the wireframes for the front & back end.
 
-The chosen colours are very self-explanatory – blue for the sky & sea and yellow for the sun. The font used, [DM Sans](https://fonts.google.com/specimen/DM+Sans), is a visually fun typeface.
+The chosen colours are very self-explanatory – blue for the sky & sea, yellow for the sun and black to neutralise the bright colours. The font used, [DM Sans](https://fonts.google.com/specimen/DM+Sans), is a visually fun typeface.
 
 The sunny face greets you upon landing and the hourly Singapore UV index is displayed on the right.
 
@@ -65,25 +66,25 @@ The sunny face greets you upon landing and the hourly Singapore UV index is disp
 | ----------- | ---------------- |
 | Go to the products page | List of sunsreens will appear |
 | Use search form to filter through products | Name field is not case sensitive |
-| Directly add cart to product from products page | The number of items in cart at the top left will only be updated if product stock is more than 0 <br><br> If not signed in, user will be prompted to log in or register |
+| Directly add product to cart from main products page | The number of items in cart at the top left will only be updated if product stock is more than 0 <br><br> If not signed in, user will be prompted to log in or register |
 | Click on the product to view individual detailed page | User is able to choose how many they want to add to cart, not exceeding the min and max stock |
-| Go to the cart page by clicking on the cart icon at the top right | If cart is empty, the "Your cart is empty" message will show up. Otherwise, user can update quantity and remove products from cart |
+| Go to the cart page by clicking on the cart icon at the top right | If cart is empty, the "Your cart is empty" message will show up. Otherwise, user can update quantity and remove products from cart. If an item is out of stock, user will be prompted to remove it in order to proceed with payment |
 | Upon updating or deleting products, messages will appear to alert them of the status. | The subtotal and total on the right will be automatically updated |
 
 ## Checkout
 | Description | Expected Results |
 | ----------- | ---------------- |
 | Once satisfied with the products in the cart, click on "Proceed to payment" | User will be directed to a payment page on Stripe |
-| Use any dummy card from [this list](https://stripe.com/docs/testing) to test payment. Click on "Pay" | Pay button will load and turn green if payment is successufl |
+| Use any dummy card from [this list](https://stripe.com/docs/testing) to test payment. Click on "Pay" | Pay button will load and turn green if payment is successful |
 | User will be directed to the checkout success page | A summary of the order will be displayed |
 
 ## Profile – view/update details & orders
 | Description | Expected Results |
 | ----------- | ---------------- |
-| Click on the user icon at the top right | Lead to the profile page, with profile, address & orders collapsed into separate tabs |
+| Click on the user icon at the top right | Lead user to the profile page, with profile, address & orders collapsed into separate tabs |
 | Click on the Edit button for profile, password or address | Appropriate error messages will appear if there are any error/invalid input |
 | Once done, click Update | Upon updating, changes will be reflected on profile page |
-| Click on the orders tab to view orders from newest to olders | If shop admin has updated a tracking URL, it will appear with an icon. User can click to view tracking |
+| Click on the orders tab to view orders from newest to oldest | If shop admin/manager has updated a tracking URL, it will appear with an icon. User can click on it to view tracking on separate page |
 
 ## [No log in required] Send an enquiry
 | Description | Expected Results |
@@ -92,7 +93,17 @@ The sunny face greets you upon landing and the hourly Singapore UV index is disp
 | Fill in all fields, select a reason so shop owner can filter through more easily | Error messages will appear accordingly if there are any error/invalid input |
 | Click Submit | Shop owner will see your enquiry on the admin portal and will reply via email |
 
-# This site has been tested on:
+# Deployment
+
+The Sunny Central store(frontend) is being hosted on Netlify. To deploy, simply connect Netlify to the Github account and allow access to this repository. Upon every commit, Netlify will build and push the new updates automatically.
+
+## This project has been tested on:
+| MacOS | Windows 10 | Other devices |
+| ----- | ---------- | ------------- |
+| Google Chrome | Google Chrome | iPhone 12 Mini (iOS 15) |
+| Safari | | Samsung Galaxy A22 ||
+| Microsoft Edge | | 11" iPad Pro 2018 |
+| Mozilla Firefox | | |
 
 # Credits
 1. [Fontawesome](https://fontawesome.com/)

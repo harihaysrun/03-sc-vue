@@ -254,10 +254,6 @@ export default {
 
 <style scoped>
 
-/* .register-container{
-  width:80%;
-  margin:auto;
-} */
 
 .btn{
   width:100%;

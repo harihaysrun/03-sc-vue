@@ -140,13 +140,13 @@ export default{
     document.title = "Cart";
 
     this.accessToken = localStorage.getItem("access_token");
-    // console.log(this.accessToken)
+    // // console.log(this.accessToken)
 
     this.user_id = localStorage.getItem("user_id"); 
     let response = await axios.post(BASE_API_URL + 'cart/', {
               'user_id': this.user_id
             });
-    console.log(response.data)
+    // console.log(response.data)
 
     this.cartItems = response.data.cartItems;
 
@@ -162,13 +162,13 @@ export default{
       let quantity = this.cartItems[i].quantity;
       let cost = this.cartItems[i].product.cost;
       let totalForOneProduct = quantity * cost;
-      console.log(`total for ${this.cartItems[i].product.name} is ${totalForOneProduct}`)
+      // console.log(`total for ${this.cartItems[i].product.name} is ${totalForOneProduct}`)
       total += totalForOneProduct;
       this.total = total;
     }
 
     this.grandTotal = total + 3;
-    console.log(`grand total is is ${total}`)
+    // console.log(`grand total is is ${total}`)
 
 
   },
@@ -208,7 +208,7 @@ export default{
       if(this.accessToken){
 
         newQuantity = parseInt(newQuantity);
-        console.log(newQuantity)
+        // console.log(newQuantity)
 
         if(newQuantity <= 0) {
           this.invalidQtyMessage = true;
@@ -218,7 +218,7 @@ export default{
             'quantity': stockNo,
             'newQuantity': newQuantity
           });
-          console.log(response);
+          // console.log(response);
 
           // update cart length
 
@@ -231,14 +231,14 @@ export default{
           let total = 0;
 
           for (let i=0; i<cartItems.length; i++){
-            console.log(cartItems[i].quantity)
+            // console.log(cartItems[i].quantity)
             updatedQuantity += cartItems[i].quantity;
 
             // update cart total & grandtotal
             let quantity = cartItems[i].quantity;
             let cost = cartItems[i].product.cost;
             let totalForOneProduct = quantity * cost;
-            console.log(`total for ${cartItems[i].product.name} is ${totalForOneProduct}`)
+            // console.log(`total for ${cartItems[i].product.name} is ${totalForOneProduct}`)
             total += totalForOneProduct;
             this.total = total;
 
@@ -248,7 +248,7 @@ export default{
           this.$emit("cart", this.$store.getters.getCartLength);
 
           this.grandTotal = total + 3;
-          console.log(`grand total is is ${total}`)
+          // console.log(`grand total is is ${total}`)
 
           this.deleteMessage = false;
           this.warningMessage = false;
@@ -276,7 +276,7 @@ export default{
           'user_id': this.user_id
         });
         
-        console.log(response);
+        // console.log(response);
 
         let refreshResponse = await axios.post(BASE_API_URL + 'cart/', {
                   'user_id': this.user_id
@@ -294,14 +294,14 @@ export default{
         let total = 0;
 
         for (let i=0; i<cartItems.length; i++){
-          console.log(cartItems[i].quantity)
+          // console.log(cartItems[i].quantity)
           updatedQuantity += cartItems[i].quantity;
 
           // update cart total & grandtotal
           let quantity = cartItems[i].quantity;
           let cost = cartItems[i].product.cost;
           let totalForOneProduct = quantity * cost;
-          console.log(`total for ${cartItems[i].product.name} is ${totalForOneProduct}`)
+          // console.log(`total for ${cartItems[i].product.name} is ${totalForOneProduct}`)
           total += totalForOneProduct;
           this.total = total;
         }
@@ -310,7 +310,7 @@ export default{
         this.$emit("cart", this.$store.getters.getCartLength)
 
         this.grandTotal = total + 3;
-        console.log(`grand total is is ${total}`)
+        // console.log(`grand total is is ${total}`)
 
         this.updateMessage = false;
         this.warningMessage = false;
@@ -345,11 +345,11 @@ export default{
         });
 
         // let response = await axios.get(BASE_API_URL + 'checkout');
-        console.log(response.data)
+        // console.log(response.data)
 
         let stripeSession = response.data.url;
 
-        console.log(stripeSession)
+        // console.log(stripeSession)
 
         window.location.href = response.data.url;
 

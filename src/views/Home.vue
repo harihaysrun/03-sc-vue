@@ -42,17 +42,11 @@ export default{
     document.title = "Sunny Central";
 
     let response = await axios.get('https://api.data.gov.sg/v1/environment/uv-index');
-    console.log(response)
+    // console.log(response)
 
     this.uv_index = response.data.items[0].index[0].value;
     let timestamp = new Date(response.data.items[0].index[0].timestamp)
-    // console.log(String(timestamp).split(" ", 5))
-    // let test = timestamp;
-    // let date = String(timestamp).split(" ", 3).join(" ");
-    // let time = `${timestamp.getHours()} ${timestamp.getMinutes()} ${timestamp.getSeconds()}`
-    // this.uv_timestamp = `${date} ${time}`
     this.uv_timestamp = String(timestamp).split(" ", 3).join(" ");
-    // this.uv_timestamp = `${timestamp.getDate()} ${timestamp.getMonth()} ${timestamp.getFullYear()}`
 
   },
   data:function(){
@@ -67,12 +61,7 @@ export default{
 <style scoped>
 
 .bg-container{
-  /* background-color:pink; */
   position:relative;
-  /* margin-top:100px; */
-  /* background-image:url('../assets/images/home-bg.png'); */
-  /* background-repeat:no-repeat; */
-  /* background-size:contain; */
 }
 
 .bg-container img{
@@ -83,22 +72,15 @@ export default{
 .sun{  
   position:relative;
   top:20px;
-  /* left:5%; */
-  /* right:5%; */
   margin:auto;
   width: 90%;
-  /* height:450px; */
-  /* background-color:pink !important; */
 }
 
 .sun img{
-  /* background-color:pink !important; */
   border-radius:40%;
-  /* margin:auto; */
 }
 
 .sun img:nth-child(2){
-  /* background-color:pink !important; */
   border-radius:40%;
   position:absolute;
   top:0;

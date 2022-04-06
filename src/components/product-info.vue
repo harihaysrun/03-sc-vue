@@ -33,10 +33,10 @@ const BASE_API_URL = "https://nsy-03-sunscreen.herokuapp.com/api/";
 export default{
   name: 'ProductInfo',
   created: async function(){
-    console.log("productId: " + this.productId);
+    // console.log("productId: " + this.productId);
 
     let response = await axios.get(BASE_API_URL + 'products/' + this.productId);
-    // console.log(response.data.product)
+    // // console.log(response.data.product)
 
     let product = response.data.product;
     this.brand = product.brand.name;
@@ -78,8 +78,8 @@ export default{
     viewThisProduct: function(productId){
       // this.$emit('view-product', productId);
       this.$store.commit("addProductId", productId);
-      console.log(productId)
-      console.log(this.$store.state.product)
+      // console.log(productId)
+      // console.log(this.$store.state.product)
     }
   }
 }

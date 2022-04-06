@@ -65,11 +65,11 @@ export default{
 
     this.user_id = localStorage.getItem("user_id"); 
 
-    console.log(this.$route.params.id)
+    // console.log(this.$route.params.id)
     let response = await axios.post(BASE_API_URL + 'checkout/success/' + this.$route.params.id, {
       'user_id': this.user_id
     });
-    console.log(response.data)
+    // console.log(response.data)
 
     this.orderItems = response.data.orderItems;
     this.order = response.data.order;

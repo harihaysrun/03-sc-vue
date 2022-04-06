@@ -89,7 +89,7 @@ export default{
 
       // this.$router.push("/profile");
       // window.location.reload()
-      console.log(response.data.error)
+      // console.log(response.data.error)
       if (response.data.error){
         // this.$router.push('/login');
         this.dangerMessage = true;
@@ -101,7 +101,7 @@ export default{
                             { headers: {"Authorization" : `Bearer ${response.data.accessToken}`}}
                           );
 
-        console.log(userResponse)
+        // console.log(userResponse)
         localStorage.setItem("user_id", userResponse.data.user.id);
 
         window.location.href="/profile";
@@ -123,10 +123,6 @@ export default{
 .btn{
   width:100%;
 }
-
-/* .form-control{
-  margin-bottom:15px;
-} */
 
 h1{
     color:#1050ff;

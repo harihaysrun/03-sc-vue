@@ -31,38 +31,18 @@
 
       </div>
 
-      <!-- <a class="btn btn-success col-3 mt-5" v-on:click="editPassword">Change Password</a> -->
-
 
     </div>
   </div>
 </template>
 
 <script>
-// import axios from 'axios';
-// const BASE_API_URL = "https://nsy-03-sunscreen.herokuapp.com/api/";
-
 
 export default{
   name: 'ProfileTab',
   mounted: function(){
 
-    // let accessToken = localStorage.getItem("access_token");
-    // let response = await axios.get(
-    //                             BASE_API_URL + 'users/profile',
-    //                             { headers: {"Authorization" : `Bearer ${accessToken}`}}
-    //                             );
-    // console.log(response.data.user)
-
-    // if(response.data.message != 'Forbidden'){
-    //   this.user = response.data.user;
-    //   localStorage.setItem("user_id", response.data.user.id);
-    // }
-
     this.user = this.$store.state.profile[0];
-
-    console.log(this.user)
-    // console.log(this.user)
 
   },
   data: function(){
@@ -73,11 +53,9 @@ export default{
   methods:{
     editProfile: function(){
       this.$router.push("/profile/edit")
-      // window.location.href="/profile/edit"
     },
     editPassword: function(){
       this.$router.push("/profile/password/edit")
-      // window.location.href="/profile/edit"
     }
   }
 }

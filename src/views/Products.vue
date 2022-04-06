@@ -105,32 +105,15 @@ export default{
     this.dangerMessage = false;
 
     this.accessToken = localStorage.getItem("access_token");
-    console.log(this.accessToken)
+    // console.log(this.accessToken)
 
     // brands list
     let search = await axios.get(BASE_API_URL + 'products');
-    // this.brands = brandsList.data;
-    console.log(search.data);
-
     this.products = search.data.products;
     this.brands = search.data.brands;
     this.countries = search.data.countries;
     this.types = search.data.types;
 
-    // let empty = [];
-    // this.$store.commit("emptyProducts", empty);
-    // console.log(this.$store.state.products)
-
-    // for (let i=0; i<this.products.length;i++){
-
-    //     let productInfo = {
-    //       'id': this.products[i].id,
-    //       'stockNo': this.products[i].stock_no
-    //     }
-
-    //     this.$store.commit("addProducts", productInfo);
-    // }
-    // console.log(this.$store.state.products)
 
   },
   data: function(){
@@ -151,11 +134,6 @@ export default{
   },
   methods:{
     viewThisProduct: function(productId){
-      // this.$emit('view-product', productId);
-      // this.$store.commit("addProductId", productId);
-      // console.log(productId)
-      // console.log(this.$store.state.product)
-
       localStorage.setItem("product_id", productId);
 
       this.$router.push({ path: `/products/${productId}`}); // set current route
@@ -163,47 +141,31 @@ export default{
     addToCart: async function(productId, stockNo){
 
       if(this.accessToken){
-        // console.log("user is logged in")
 
         if(this.$store.getters.getCartLength && stockNo != 0){
           let prevCartLength = parseInt(this.$store.getters.getCartLength);
           this.$store.commit("updateCartLength", prevCartLength + 1);
-          console.log('updated cart length from store: ' + this.$store.getters.getCartLength)
         }
-        // localStorage.setItem("cart_length", prevCartLength + 1);
-
         else if (stockNo != 0) {
           this.$store.commit("updateCartLength", 1);
-          console.log('updated cart length from store: ' + this.$store.getters.getCartLength)
         }
 
         this.$emit("cart", this.$store.getters.getCartLength)
 
-
-        // localStorage.setItem("stock_no", stockNo); 
         this.user_id = localStorage.getItem("user_id"); 
-        console.log(this.user_id)
-        
-        // let response = await axios.post(BASE_API_URL + productId + '/add',{
-        //   'user_id': this.user_id
-        // });
 
         if (stockNo != 0){
           let response = await axios.post(BASE_API_URL + 'cart/' + productId + '/add', {
             'user_id': this.user_id,
             'quantity_to_add': 1
           });
-          console.log("added to cart")
-          console.log(response.data)
         } else{
-          console.log("0 in stock")
           this.dangerMessage = true;
         }
 
 
       } else{
           localStorage.setItem("danger_message", "Please log in or register to add to cart");
-          // window.location.href="/login"
           this.$router.push('/login');
       }
 
@@ -215,22 +177,22 @@ export default{
 
         if (this.name.includes(" ")){
           let words = this.name.split(" ");
-          // console.log(words)
+          // // console.log(words)
           let newWords = [];
 
           for (let i=0; i<words.length; i++){
             uppercaseName = words[i][0].toUpperCase() + words[i].substring(1);
             newWords.push(uppercaseName)
-            // console.log(uppercaseName)
+            // // console.log(uppercaseName)
           }
 
-          // console.log(newWords)
+          // // console.log(newWords)
 
           uppercaseName = newWords.join(" ")
-          console.log(uppercaseName)
+          // console.log(uppercaseName)
         } else {
           uppercaseName = this.name[0].toUpperCase() + this.name.substring(1);
-          console.log(uppercaseName)
+          // console.log(uppercaseName)
         }
       }
       
@@ -241,7 +203,7 @@ export default{
         'type_id': this.type,
       })
 
-      console.log(response);
+      // console.log(response);
 
       this.products = response.data.products;
 
@@ -263,12 +225,9 @@ h1{
 }
 
 .card{
-  /* border:0; */
   padding:0;
   border:3px solid #1050ff;
   border-radius:25px;
-  /* padding:20px; */
-  /* box-shadow: 3px 3px 0 #1050ff; */
   overflow:hidden;
 }
 
@@ -279,7 +238,6 @@ h1{
 
 .card img{
   width:100%;
-  /* border:3px solid #1050ff; */
   border-radius:25px;
 }
 

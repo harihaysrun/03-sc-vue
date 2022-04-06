@@ -38,28 +38,12 @@
 </template>
 
 <script>
-// import axios from 'axios';
-// const BASE_API_URL = "https://nsy-03-sunscreen.herokuapp.com/api/";
-
 
 export default{
   name: 'ProfileTab',
   mounted: async function(){
 
-    // let accessToken = localStorage.getItem("access_token");
-    // let response = await axios.get(
-    //                             BASE_API_URL + 'users/profile',
-    //                             { headers: {"Authorization" : `Bearer ${accessToken}`}}
-    //                             );
-    // console.log(response.data.user)
-
-    // if(response.data.message != 'Forbidden'){
-    //   this.user = response.data.user;
-    //   localStorage.setItem("user_id", response.data.user.id);
-    // }
-
     this.user = this.$store.state.address[0];
-    // console.log(this.user)
 
   },
   data: function(){
@@ -70,7 +54,6 @@ export default{
   methods:{
     editAddress: function(){
       this.$router.push("/profile/address/edit")
-      // window.location.href="/profile/edit"
     }
   }
 }

@@ -52,16 +52,6 @@ export default{
 
       document.title = "Update Password";
 
-      // let passwordUpdateFail = localStorage.getItem("danger_message");
-
-      // if (passwordUpdateFail === 'Password does not match'){
-      //     this.updateMessage = true;
-      //     localStorage.removeItem("danger_message");
-      // } else{
-      //     this.updateMessage = false;
-      // }
-
-
   },
   data: function(){
     return{
@@ -93,7 +83,7 @@ export default{
             'password': this.password
           });
 
-          console.log(response);
+          // console.log(response);
 
           localStorage.setItem("success", "Profile Updated");
           this.$router.push("/profile")
