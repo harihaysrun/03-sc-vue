@@ -50,7 +50,7 @@
 
     <footer>
       <div class="container text-center">
-        Syahirah 2022
+        Sunny Central <i class="bi bi-dot"></i> Syahirah 2022 <i class="bi bi-dot"></i> Assignment 3
       </div>
     </footer>
 

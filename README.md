@@ -17,7 +17,7 @@ Visit the Sunny Central store [here](https://gleeful-tanuki-c97887.netlify.app/)
 And take a peak at the admin portal [here](https://nsy-03-sunscreen.herokuapp.com/login).
 
 You may register or log in using this account:
-> **username:** lindaa <br> **password** 12345678
+> **username:** lindaa <br> **password** abcdefghijk
 
 # UI/UX
 
