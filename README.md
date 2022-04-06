@@ -110,3 +110,13 @@ The Sunny Central store(frontend) is being hosted on Netlify. To deploy, simply 
 2. [Bootstrap Icons](https://icons.getbootstrap.com/)
 3. [Stack Overflow](https://stackoverflow.com/)
 4. [Singapore UV Index – NEA, Data.gov.sg](https://data.gov.sg/dataset/ultraviolet-index-uvi)
+5. Product photos & info:
+    - [Dr. G](https://global.oliveyoung.com/product/detail?prdtNo=GA220313889&lang=en&gclid=EAIaIQobChMIwZ_J9Lv89gIVxJ1LBR1_cwyYEAQYASABEgKVi_D_BwE),
+    [Glosser](https://www.glossier.com/products/invisible-shield)
+    [Tatcha](https://www.tatcha.com/product/the-silk-sunscreen-spf-50/CK02010T.html)
+    [Glow Recipe](https://www.glowrecipe.com/products/watermelon-glow-niacinamide-sunscreen-spf-50)
+    [Rosé All Day](https://roseallday.co/products/don-t-forget-sunscreen-default)
+    [Supergoop!](https://supergoop.com/products/every-single-face-watery-lotion-spf-50)
+    [Velvet Vanity](https://velvetvanity.co/products/never-forget-sunscreen)
+    [Ultra Violette](https://ultraviolette.com.au/products/queen-screen-spf50)
+    [Naked Sundays](https://nakedsundays.com/products/serum)
