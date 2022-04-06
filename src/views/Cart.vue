@@ -272,7 +272,7 @@ export default{
     removeItem: async function(productId, itemName){
       if(this.accessToken){
 
-        let response = await axios.post(BASE_API_URL + 'cart/' + productId + '/remove', {
+        await axios.post(BASE_API_URL + 'cart/' + productId + '/remove', {
           'user_id': this.user_id
         });
         
@@ -347,7 +347,7 @@ export default{
         // let response = await axios.get(BASE_API_URL + 'checkout');
         // console.log(response.data)
 
-        let stripeSession = response.data.url;
+        // let stripeSession = response.data.url;
 
         // console.log(stripeSession)
 

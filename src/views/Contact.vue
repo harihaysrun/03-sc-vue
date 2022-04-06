@@ -145,7 +145,7 @@ export default{
 
           this.dangerMessage = false;
 
-          let enquiry = await axios.post(BASE_API_URL + 'contact',{
+          await axios.post(BASE_API_URL + 'contact',{
             'name':this.name,
             'email': this.email,
             'reason_id': this.reason,

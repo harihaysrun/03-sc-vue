@@ -78,7 +78,7 @@ export default{
         this.user_id = localStorage.getItem("user_id"); 
 
         if (this.confirmPassword === this.password){
-          let response = await axios.post(BASE_API_URL + 'users/profile/password/edit', {
+          await axios.post(BASE_API_URL + 'users/profile/password/edit', {
             'user_id': this.user_id,
             'password': this.password
           });

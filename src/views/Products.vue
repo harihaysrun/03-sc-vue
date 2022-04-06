@@ -155,7 +155,7 @@ export default{
         this.user_id = localStorage.getItem("user_id"); 
 
         if (stockNo != 0){
-          let response = await axios.post(BASE_API_URL + 'cart/' + productId + '/add', {
+          await axios.post(BASE_API_URL + 'cart/' + productId + '/add', {
             'user_id': this.user_id,
             'quantity_to_add': 1
           });
