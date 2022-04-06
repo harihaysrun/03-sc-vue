@@ -378,13 +378,6 @@ h1{
   width:100px;
 }
 
-
-/* .icon-btns img{
-    width:20px;
-    display:block;
-    margin-right:5px;
-} */
-
 .edit-btn{
     color:#1050ff;
 }
