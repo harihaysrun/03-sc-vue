@@ -36,8 +36,6 @@
     <div class="row">
 
       <div class="float-left col-12 col-lg-8">
-        
-        <!-- <div v-else> -->
 
           <div class="d-flex flex-column">
 
@@ -55,18 +53,17 @@
                 <div class="text-center w-100 d-flex flex-column align-items-start align-items-lg-center">
                   <div>
                     <label for="">Quantity</label>
-                    <input type="text" v-model="item.quantity" class="form-control">
+                    <input type="text" v-model="item.quantity" v-if="item.quantity > item.product.stock_no " class="form-control invalid-input">
+                    <input type="text" v-model="item.quantity" v-else class="form-control">
                     
                     <div class="mt-2">
                       In stock: {{item.product.stock_no}}
                     </div>
                   </div>
                 </div>
-              <!-- </div> -->
 
-              <!-- <div style="flex:1" class="d-flex flex-row align-items-center justify-content-end"> -->
                 <div class="d-flex flex-row">
-                  <a class="mx-2 icon-btns edit-btn" v-if="item.product.stock_no != 0 || stopPayment(item.product.stock_no, item.product.name)" v-on:click="updateQuantity(item.product.stock_no, item.product_id, item.quantity, item.product.name, item.product.cost)">
+                  <a class="mx-2 icon-btns edit-btn" v-if="stopPayment(item.product.stock_no, item.quantity) || item.product.stock_no != 0" v-on:click="updateQuantity(item.product.stock_no, item.product_id, item.quantity, item.product.name, item.product.cost)">
                     <img src="@/assets/images/edit.svg" alt="">
                     Update
                   </a>
@@ -79,8 +76,6 @@
 
             </div>
           </div>
-
-        <!-- </div> -->
 
       </div>
 
@@ -109,10 +104,8 @@
               <span>${{grandTotal}}</span>
             </div>
 
-            <!-- <a class="btn btn-danger w-100" v-if="removeCheckoutBtn">Some items are out of stock. Please update your cart.</a> -->
             <div class="text-center text-danger" v-if="removeCheckoutBtn">
-              Some items are out of stock.
-              <br>Remove items and refresh cart page.
+              Some items in your cart are either low or out of stock. Remove or update items and refresh cart page.
             </div>
             <a class="btn btn-success w-100" v-else v-on:click="checkout">Proceed to payment</a>
             
@@ -186,13 +179,13 @@ export default{
       'stockNo':'',
       'total': '',
       'grandTotal':  '',
-      'removeCheckoutBtn': false,
-      'oosProduct': ''
+      'removeCheckoutBtn': false
     }
   },
   methods:{
     closeUpdateMessage: function(){
       this.updateMessage = false;
+      window.location.reload();
     },
     closeDeleteMessage: function(){
       this.deleteMessage = false;
@@ -200,9 +193,11 @@ export default{
     },
     closeWarningMessage: function(){
       this.warningMessage = false;
+      window.location.reload();
     },
     closeInvalidQtyMessage: function(){
       this.invalidQtyMessage = false;
+      window.location.reload();
     },
     updateQuantity: async function(stockNo, productId, newQuantity, itemName){
       if(this.accessToken){
@@ -328,13 +323,9 @@ export default{
           window.location.href="/login"
       }
     },
-    stopPayment(stockNo, name){
-      if(stockNo === 0){
+    stopPayment(stockNo, qty){
+      if(qty > stockNo || stockNo === 0){
         this.removeCheckoutBtn = true;
-        // let oldList = JSON.parse(JSON.stringify(this.oosProduct));
-        // this.oosProduct.push(name);
-        // this.oosProduct = `${oldList}, ${name}`
-        this.oosProduct = name;
       }
     },
     checkout: async function(){
@@ -344,16 +335,8 @@ export default{
           'user_id': this.user_id
         });
 
-        // let response = await axios.get(BASE_API_URL + 'checkout');
-        // console.log(response.data)
-
-        // let stripeSession = response.data.url;
-
-        // console.log(stripeSession)
-
         window.location.href = response.data.url;
 
-        // this.$router.push("/checkout");
       } else{
           localStorage.setItem("danger_message", "Please log in or register to add to cart");
           window.location.href="/cart"
@@ -461,6 +444,10 @@ button{
 
 .total-body{
   padding:25px;
+}
+
+.invalid-input{
+  border:1px solid red !important;
 }
 
 </style>
